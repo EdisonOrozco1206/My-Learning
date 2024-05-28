@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+
+model Category {
+  id Int @id @default(autoincrement())
+  name String
+  created_at DateTime @default(now())
+
+  @@unique([id], name: "Category_Identifier")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  role String @default("user")
+  name String
+  lastname String
+  document_type String
+  document Int @unique
+  phone String
+  email String
+  password String
+  courses Course[] @relation("Course_Owner")
+  transactions Transaction[]
+  comments Comment[]
+
+  @@unique([id], name: "User_Identifier")
+}
+
+model Course {
+  id Int @id @default(autoincrement())
+  title String
+  price Int
+  portait String
+  description String
+  category Int
+  instructor_id Int
+  instructor User @relation("Course_Owner", fields: [instructor_id], references: [id])
+  lections Lection[]
+  transactions Transaction[]
+
+  @@unique([id], name: "Course_Identifier")
+}
+
+model Lection {
+  id Int @id @default(autoincrement())
+  title String
+  position Int
+  course_id Int
+  course Course @relation(fields: [course_id], references: [id])
+  comments Comment[]
+
+  @@unique([id], name: "Lection_Identifier")
+}
+
+model Comment {
+  id Int @id @default(autoincrement())
+  content String
+  user_id Int
+  lection_id Int
+  user User @relation(fields: [user_id], references: [id])
+  lection Lection @relation(fields: [lection_id], references: [id])
+
+  @@unique([id], name: "Comment_Identifier")
+}
+
+model Transaction {
+  id Int @id @default(autoincrement())
+  user_id Int
+  course_id Int
+  amount Int
+  status String @default("in progress")
+  date DateTime @default(now())
+  user User @relation(fields: [user_id], references: [id])
+  course Course @relation(fields: [course_id], references: [id])
+
+  @@unique([id], name: "Transaction_Identifier")
+}
