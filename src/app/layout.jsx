@@ -11,13 +11,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body>
-        <img id="marikita" src="static/owl.svg" alt="Mariquita" className="absolute m-auto h-10 z-50" />
+        <img id="marikita" src="/static/owl.svg" alt="Mariquita" className="absolute m-auto h-10 z-50" />
         <Navbar></Navbar>
         {children}
         <Footer></Footer>
 
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <script src="static/js/main.js"></script>
+        <script src="/static/js/main.js"></script>
       </body>
     </html>
   );

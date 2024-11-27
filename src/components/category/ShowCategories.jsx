@@ -55,10 +55,10 @@ const CategoryClient = ({ categories }) => {
 
       <div className="bg-slate-300 mt-10 w-4/5 mx-auto p-5">
         <h2 className="text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800 uppercase">
-          Modulo administrativo de categorias
+          Administracion de categorias
         </h2>
 
-        <Link href="/category/new" className='mt-2 flex items-center justify-center w-full bg-green-500 text-center text-white p-4 hover:bg-green-600'>
+        <Link href="/admins/category/new" className='mt-2 flex items-center justify-center w-full bg-green-500 text-center text-white p-4 hover:bg-green-600'>
           Agregar Categoria
         </Link>
 
@@ -90,7 +90,7 @@ const CategoryClient = ({ categories }) => {
                           {cat.name}
                         </td>
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap flex justify-evenly border-r border-gray-300">
-                          <Link href={`/category/edit/${cat.id}`} className="cursor-pointer mx-2 px-4 py-2 border border-sky-500 rounded-sm bg-sky-500 text-white hover:bg-sky-600">
+                          <Link href={`/admins/category/edit/${cat.id}`} className="cursor-pointer mx-2 px-4 py-2 border border-sky-500 rounded-sm bg-sky-500 text-white hover:bg-sky-600">
                             Editar
                           </Link>
                           <button onClick={() => {showModal(cat.id)}} className="cursor-pointer mx-2 px-4 py-2 border border-red-500 rounded-sm bg-red-500 text-white hover:bg-red-600">

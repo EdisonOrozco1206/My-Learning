@@ -6,9 +6,9 @@ const Footer = () => {
         <div className='px-14 flex flex-row justify-between items-center my-10  mx-auto w-4/5'>
             <div className='p-4'>
                 <ul className='inline-block mx-14'>
-                    <Link href="" className='block w-full text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2'>Enseña en my learning</Link>
-                    <Link href="" className='block w-full text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2'>¿Quienes somos?</Link>
-                    <Link href="" className='block w-full text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2'>Contactenos</Link>
+                    <Link href="/teacher/new" className='block w-full text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2'>Enseña en my learning</Link>
+                    <Link href="/about" className='block w-full text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2'>¿Quienes somos?</Link>
+                    <Link href="/contact" className='block w-full text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2'>Contactenos</Link>
                 </ul>
                 <ul className='inline-block mx-14'>
                     <Link href="" className='block w-full text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2'>Condiciones</Link>
@@ -18,7 +18,7 @@ const Footer = () => {
             </div>
             <div className=''>
                 <div>
-                    <img className='w-40 mx-auto' src="static/logo.png" alt="Logo de my learning" />
+                    <img className='w-40 mx-auto' src="/static/logo.png" alt="Logo de my learning" />
                 </div>
                 <div className='flex flex-row'>
                     <Link href="">

@@ -1,51 +1,69 @@
-import React from 'react'
+'use client'
+
+import React, { useRef, useEffect } from 'react';
 
 const Carousel = () => {
-  return (
-        <div className="carousel mt-10 w-4/5 mx-auto">
+    const slidesContainerRef = useRef(null);
+    const slideRef = useRef(null);
+    var counter = 0;
 
-            <div id="default-carousel" className="relative bg-slate-300" data-carousel="static">
-                <div className="overflow-hidden relative h-56 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
-                    <div className="hidden duration-700 ease-in-out" data-carousel-item>
-                        <span className="absolute top-1/2 left-1/2 text-2xl font-semibold text-white -translate-x-1/2 -translate-y-1/2 sm:text-3xl dark:text-gray-800"></span>
-                        <img src="https://flowbite.com/docs/images/carousel/carousel-1.svg" className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="..." />
-                    </div>
-                    <div className="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg" className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="..." />
-                    </div>
-                    <div className="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="https://flowbite.com/docs/images/carousel/carousel-3.svg" className="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="..." />
-                    </div>
-                </div>
+    const handleNext = () => {
+        const slideWidth = slideRef.current.clientWidth;
+
+        if(counter == 2){
+            slidesContainerRef.current.scrollLeft = 0;
+            counter = 0;
+        } else {
+            slidesContainerRef.current.scrollLeft += slideWidth;
+            counter +=1
+        }
+    };
+
+    const handlePrev = () => {
+        const slideWidth = slideRef.current.clientWidth;
+        slidesContainerRef.current.scrollLeft -= slideWidth;
+    };
+
+    useEffect(() => {
+        const intervalID = setInterval(handleNext, 5000);
+        return () => clearInterval(intervalID);
+    }, []);
+
+    return (
+        <div className="carousel mt-10 w-4/5 mx-auto relative bg-slate-300 max-h-[73vh] overflow-y-hidden">
+            <section className="slider-wrapper">
+                <button className="slide-arrow absolute top-[50%] text-7xl bg-white border rounded-full hover:bg-slate-200 transition-all ml-2" onClick={handlePrev}>
+                    <p className="h-14 w-14 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-badge-left-filled" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#ffffff" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M17 6h-6a1 1 0 0 0 -.78 .375l-4 5a1 1 0 0 0 0 1.25l4 5a1 1 0 0 0 .78 .375h6l.112 -.006a1 1 0 0 0 .669 -1.619l-3.501 -4.375l3.5 -4.375a1 1 0 0 0 -.78 -1.625z" strokeWidth="0" fill="currentColor" />
+                        </svg>
+                    </p>
+                </button>
                 
-                <div className="flex absolute bottom-5 left-1/2 z-30 space-x-3 -translate-x-1/2">
-                    <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-                    <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-                    <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-                </div>
-
-                <button type="button" className="flex absolute top-0 left-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none" data-carousel-prev>
-                    <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                        <svg className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path></svg>
-                        <span className="hidden">Previous</span>
-                    </span>
+                <button className="slide-arrow absolute top-[50%] right-0 text-7xl bg-white border rounded-full hover:bg-slate-200 transition-all mr-2" onClick={handleNext}>
+                    <p className='h-14 w-14 flex items-center justify-center'>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-arrow-badge-right-filled" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#ffffff" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M7 6l-.112 .006a1 1 0 0 0 -.669 1.619l3.501 4.375l-3.5 4.375a1 1 0 0 0 .78 1.625h6a1 1 0 0 0 .78 -.375l4 -5a1 1 0 0 0 0 -1.25l-4 -5a1 1 0 0 0 -.78 -.375h-6z" strokeWidth="0" fill="currentColor" />
+                        </svg>
+                    </p>
                 </button>
-                <button type="button" className="flex absolute top-0 right-0 z-30 justify-center items-center px-4 h-full cursor-pointer group focus:outline-none" data-carousel-next>
-                    <span className="inline-flex justify-center items-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                        <svg className="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
-                        <span className="hidden">Next</span>
-                    </span>
-                </button>
-            </div>
-
-            {/* <p className="mt-5">This carousel slider component is part of a larger, open-source library of Tailwind CSS components. Learn
-                more
-                by going to the official <a className="text-blue-600 hover:underline"
-                    href="https://flowbite.com/docs/getting-started/introduction/" target="_blank">Flowbite Documentation</a>.
-            </p> */}
-            <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
+                
+                <ul className="slides-container overflow-y-hidden max-h-[85vh] flex flex-row" ref={slidesContainerRef}>
+                    <li className="slide min-w-full" ref={slideRef}>
+                        <img src="images/banner/banner-1.webp" alt="" className='min-w-full' />
+                    </li>
+                    <li className="slide min-w-full" ref={slideRef}>
+                        <img src="images/banner/banner-2.jpg" alt="" className='min-w-full' />
+                    </li>
+                    <li className="slide min-w-full" ref={slideRef}>
+                        <img src="images/banner/banner-3.jpg" alt="" className='min-w-full' />
+                    </li>
+                </ul>
+            </section>
         </div>
-  )
-}
+    );
+};
 
-export default Carousel
+export default Carousel;

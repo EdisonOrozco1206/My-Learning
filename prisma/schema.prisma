@@ -27,7 +27,7 @@ model User {
   document_type String
   document Int @unique
   phone String
-  email String
+  email String @unique
   password String
   courses Course[] @relation("Course_Owner")
   transactions Transaction[]

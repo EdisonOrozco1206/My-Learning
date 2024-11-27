@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation"
 
 const register = () => {
   const router = useRouter()
-  var message = ''
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -12,11 +11,7 @@ const register = () => {
     const password_verify = e.target.password_verify.value
     const password = e.target.password.value
 
-    console.log(password, password_verify)
-
     if(password == password_verify){
-      // console.log(e)
-
       const name = e.target.name.value
       const lastname = e.target.lastname.value
       const phone = e.target.phone.value
@@ -24,13 +19,17 @@ const register = () => {
       const document = parseInt(e.target.document.value)
       const email = e.target.email.value
 
-      const res = await fetch('/api/users', {
-        method: 'POST',
-        body: JSON.stringify({name, lastname, phone, document_type, document, email, password}),
-        headers: {'Contet-type': "application/json"}
-      })
+      console.log(name, lastname, phone, document_type, document, email, password);
+      
+      // const res = await fetch('/api/users', {
+      //   method: 'POST',
+      //   body: JSON.stringify({name, lastname, phone, document_type, document, email, password}),
+      //   headers: {'Contet-type': "application/json"}
+      // })
 
-      router.push("/user/login")
+      // if(res){
+      //  router.push("/user/login")
+      // }
     }
   }
 
