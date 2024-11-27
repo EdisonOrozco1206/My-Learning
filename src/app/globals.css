@@ -11,6 +11,16 @@
     font-family: Avant;
 }
 
+.slides-container {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-behavior: smooth;
+}
+.slides-container::-webkit-scrollbar { 
+    width: 0;
+    height: 0;
+}
+
 #imagen-movimiento{
     animation: show-image 3s;
 }

@@ -29,7 +29,7 @@ export async function POST(request){
         })
 
         return NextResponse.json(user)
-    } catch (error) {zzzvc
+    } catch (error) {
         return NextResponse.json(error.message)
     }
 }

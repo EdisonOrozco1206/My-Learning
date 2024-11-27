@@ -39,8 +39,6 @@ export async function DELETE(request, {params}){
                 id: Number(params.id)
             }
         })
-
-        console.log(params)
     
         return NextResponse.json(user)
     } catch (error) {

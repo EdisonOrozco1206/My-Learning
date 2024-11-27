@@ -1,6 +1,13 @@
 import { prisma } from "@/libs/prisma"
 import { NextResponse } from "next/server"
 
+
+export const config = {
+    api: {
+      bodyParser: false, 
+    },
+  };
+
 export async function GET(){
     const courses = await prisma.course.findMany()
     return NextResponse.json({
@@ -8,8 +15,8 @@ export async function GET(){
     })
 }
 
-export async function POST(request){
-    const {title, description, price, category, instructor_id} = await request.json()
+export async function POST(req){
+    const {title, price, portait, description, category, instructor_id} = await req.json()
 
     const course = await prisma.course.create({
         data: {
@@ -17,7 +24,8 @@ export async function POST(request){
             description: description,
             price: price,
             category: category,
-            instructor_id: instructor_id
+            instructor_id: instructor_id,
+            portait: portait
         }
     })
 

@@ -16,7 +16,7 @@ function girarMarikita(e){
 }
 
 function moverMarikita(e){
-  var $mouseX = e.pageX;
-  var $mouseY = e.pageY; 
-  $('#marikita').stop().animate({left:$mouseX +'px', top:$mouseY +'px'},700);
+  var $mouseX = e.pageX+5;
+  var $mouseY = e.pageY-5; 
+  $('#marikita').stop().animate({left:$mouseX +'px', top:$mouseY +'px'},500);
 } 
