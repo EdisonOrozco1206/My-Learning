@@ -1,7 +1,7 @@
 const AboutPage = () => {
-  return (
-    <div className='bg-slate-300 p-4 w-4/5 mx-auto mt-10'>
-      <div>
+  return ( //sm: md: lg: xl: 2xl:
+    <div className='bg-slate-300 p-4 w-4/5 mx-auto mt-10 ms: w-ms'>
+      <div className="">
         <h1 className="text-center text-2xl">Sobre nosotros</h1>
         <p className="text-center text-slate-500">Bienvenidos a  My Learning !!</p>
         <p className="w-[80%] mx-auto mt-4 p-4 bg-white text-justify">En un mundo en constante cambio, creemos que el aprendizaje no debe detenerse. Fundada en él 2024, nuestra misión es brindar acceso a educación de calidad desde la comodidad de tu hogar, garantizando un acompañamiento y una cantidad de estrategias para tu aprendizaje. Ofrecemos una amplia variedad de cursos virtuales diseñados para potenciar y crear nuevas habilidades y llevar tu conocimiento a otro nivel.</p>

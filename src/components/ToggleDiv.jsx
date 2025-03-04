@@ -11,7 +11,7 @@ export default function ToggleDiv() {
     return (    
         <div className="relative w-full">
             <button onClick={() => setIsVisible(!isVisible)} className="p-3 px-5 mx-2 border w-full border-slate-300 hover:bg-slate-800 flex items-center justify-evenly">
-                Acciones de usuario
+                Acciones
                 <div className="flex">
                     <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-user" width="30" height="30" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#ffffff" fill="none" strokeLinecap="round" strokeLinejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>

@@ -7,19 +7,11 @@ import HomePage from "@/components/teacher/HomePage";
 
 const teacherPage = async () => {
     const session = await getSession()
-
-    if(!session || session.userData.role != 'teacher'){redirect("/user/login")}
-
     const userData = session ? session.userData : ''
 
-    const courses = await prisma.course.findMany({
-        where: {
-            instructor_id: userData.id
-        },
-        orderBy: [{
-            id: 'desc'
-        }]
-    })
+    const coursesReq = await fetch(process.env.BASE_URL+"/api/courses/perInstructor/"+userData.id)
+    const courses = await coursesReq.json()
+
 
   return <HomePage courses={courses} userData={userData}></HomePage>
 }

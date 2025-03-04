@@ -6,6 +6,10 @@ export async function GET(request, {params}){
     const courses = await prisma.course.findUnique({
         where: {
             id: Number(params.id)
+        },
+        include: {
+            instructor: true,
+            lections: true
         }
     })
 

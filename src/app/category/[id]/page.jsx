@@ -10,17 +10,9 @@ const Category = async ({params}) => {
     }
   });
 
-  const courses = await prisma.course.findMany({
-    where: {
-      category: Number(category.id)
-    },
-    orderBy: [{
-        id: 'desc'
-    }],
-    include: {
-      instructor: true,
-    }
-  });
+  const coursesReq = await fetch(process.env.BASE_URL+"/api/courses/getperCategory/"+params.id)
+  const coursesData = await coursesReq.json()
+  const courses = coursesData.courses
 
   return (
     <div className="bg-slate-300 mt-10 w-4/5 mx-auto p-5">

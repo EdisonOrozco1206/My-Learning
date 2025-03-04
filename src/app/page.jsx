@@ -35,7 +35,7 @@ const HomePage = async () => {
 
     <div className="w-4/5 mx-auto mt-10 flex flex-row justify-between items-center">
       <div className="w-1/2">
-        <img id="imagen-movimiento" className="w-3/4 rounded-full" src="static/profesor.jpg" alt="" />
+        <img id="imagen-movimiento" className="w-3/4 rounded-full" src="/static/profesor.jpg" alt="" />
       </div>
       <div className="ml-10 w-1/2">
         <h2 className="text-2xl font-bold mb-4 border-b border-slate-800 text-slate-800 pb-1">Enseña en My Learning</h2>

@@ -1,32 +1,30 @@
-import { prisma } from "@/libs/prisma"
+import { getSession } from "@/libs/libs";
+import CourseView from "@/components/course/CourseView";
 
 const CoursDetails = async ({params}) => {
-    const course = await prisma.course.findUnique({
-        where: {
-            id: Number(params.id)
-        },
-        include: {
-            instructor: true
-        }
-    });
+    const userSession = await getSession();
+    const user = userSession ? userSession.userData : '';
+    var isBought = false;
+    
+    const res = await fetch(process.env.BASE_URL+"/api/courses/"+params.id);
+    const courses = await res.json();
+    const course = courses.courses;
+
+    if(user){
+        const isBoughtResponse = await fetch(`${process.env.BASE_URL}/api/courses/checkboughtcourse/${user.id}/${params.id}`);
+        const isBoughtCourse = await isBoughtResponse.json()
+        isBought = isBoughtCourse.course.length > 0;
+    }
+
+    const viewedClassesQuery = await fetch(process.env.BASE_URL+`/api/lection_user/course/${params.id}/${user.id}`);  
+    const viewedClasses = await viewedClassesQuery.json();
+
+    const lectionsquery = await fetch(process.env.BASE_URL+"/api/lections/course/"+params.id)
+    const courseLections = await lectionsquery.json();
 
     return (
-        <div className="bg-slate-300 p-4 w-5/6 mx-auto mt-10">
-            <div className="max-h-96 overflow-hidden hover:opacity-65">
-                <img src={"/uploads/"+course.portait} alt={"Portada curso "+course.title} className="w-full" />
-            </div>
-            <div className="p-4">
-                <h1 className="text-2xl">{course.title}</h1>
-                <h2>{course.instructor.name} {course.instructor.lastname}</h2>
-                <p>{course.description}</p>
-                <div className="flex gap-4 mt-4 items-center">
-                    <p className="bg-slate-800 text-white py-2 px-4">$ {course.price}</p>
-                    <p className="border border-slate-800 hover:bg-slate-400 hover:text-slate-90t0 py-2 px-4 cursor-pointer">Agregar al carrito</p>
-                </div>
-                
-            </div>
-        </div>
+        <CourseView course={course} courseLections={courseLections} user={user} viewedClasses={viewedClasses} isBought={isBought}/>
     )
 }
 
-export default CoursDetails
+export default CoursDetails;

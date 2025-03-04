@@ -24,7 +24,7 @@ const EditCategory = ({params}) => {
 
         if(params.id){
             try {
-                const res = await fetch(`http://localhost:3000/api/categories/${params.id}`, {
+                const res = await fetch(`/api/categories/${params.id}`, {
                     method: "PUT",
                     body: JSON.stringify({name}),
                     hader: {'Content-type': 'application/json'}
@@ -35,7 +35,7 @@ const EditCategory = ({params}) => {
             }
         }else{
             try {
-                const res = await fetch(`http://localhost:3000/api/categories/`, {
+                const res = await fetch(`/api/categories/`, {
                     method: "POST",
                     body: JSON.stringify({name}),
                     hader: {'Content-type': 'application/json'}
@@ -46,7 +46,7 @@ const EditCategory = ({params}) => {
             }
         }
     
-        router.push("/category")
+        router.push("/admins/category")
         router.refresh()
     }
 

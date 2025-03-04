@@ -33,6 +33,43 @@
     }
 }
 
+*::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 4px;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: #0F172A;
+}
+
+*::-webkit-scrollbar-button {
+    display: none;
+}
+
+* {
+    scrollbar-color: white #0F172A;
+    scrollbar-width: thin;
+}
+
+#animacion-progreso{
+    animation: progreso-barra 4s 1 ease-in-out;
+}
+
+@keyframes progreso-barra {
+    from{
+        transform: translateX(-100%);
+    }
+    to{
+        transform: translateX(0%);
+    }
+  }
+  
+
 @keyframes vertical-movement {
     0%{
         opacity: 0;

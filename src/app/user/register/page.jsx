@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 const register = () => {
   const router = useRouter()
@@ -21,15 +22,15 @@ const register = () => {
 
       console.log(name, lastname, phone, document_type, document, email, password);
       
-      // const res = await fetch('/api/users', {
-      //   method: 'POST',
-      //   body: JSON.stringify({name, lastname, phone, document_type, document, email, password}),
-      //   headers: {'Contet-type': "application/json"}
-      // })
+      const res = await fetch('/api/users', {
+        method: 'POST',
+        body: JSON.stringify({name, lastname, phone, document_type, document, email, password}),
+        headers: {'Contet-type': "application/json"}
+      })
 
-      // if(res){
-      //  router.push("/user/login")
-      // }
+      if(res){
+       router.push("/user/login")
+      }
     }
   }
 
@@ -58,6 +59,7 @@ const register = () => {
         <button type="submit" className='w-5/6 mx-auto block cursor-pointer bg-slate-800 text-white text-xl p-3 hover:bg-slate-600'>
           Registrarse
         </button>
+        <Link href={"/user/login"} className="w-5/6 mx-auto block cursor-pointer border border-slate-800 text-slate-900 text-xl p-3 hover:bg-slate-100 text-center mt-2">Iniciar sesion</Link>
       </form>
     </div>
   )

@@ -14,18 +14,18 @@ const CreateCategory = () => {
         e.preventDefault()
 
         try {
-            const res = await fetch(`http://localhost:3000/api/categories/`, {
+            const res = await fetch(`/api/categories/`, {
                 method: "POST",
                 body: JSON.stringify({name}),
                 hader: {'Content-type': 'application/json'}
             })
             const data = res.json()
+            router.push("/admins/category")
+            router.refresh()
         } catch (error) {
             console.log(error.message)    
         }
     
-        router.push("/category")
-        router.refresh()
     }
 
   return <>

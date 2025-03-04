@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const EditCourseForm = ({categories, userData, courseInfo}) => {
     const router = useRouter();
@@ -70,6 +71,7 @@ const EditCourseForm = ({categories, userData, courseInfo}) => {
           </select>
   
           <input className='w-5/6 mx-auto block cursor-pointer bg-slate-800 text-white text-xl p-3 hover:bg-slate-600' type="submit" value="Actualizar" />
+          <Link href={"/teacher"} className="w-5/6 mx-auto block cursor-pointer border border-slate-800 mb-4 text-slate-900 text-xl p-3 hover:bg-slate-100 text-center mt-2">Regresar</Link>
         </form>
       </div>
     )

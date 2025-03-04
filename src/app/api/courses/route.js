@@ -9,7 +9,11 @@ export const config = {
   };
 
 export async function GET(){
-    const courses = await prisma.course.findMany()
+    const courses = await prisma.course.findMany({
+        include: {
+            instructor: true
+        }
+    })
     return NextResponse.json({
         courses: courses
     })
