@@ -1,6 +1,6 @@
 import React from 'react'
 
-const NewTeacher = () => {
+const Page = () => {
   return (
     <div className='bg-slate-300 p-4 w-5/6 mx-auto mt-10'>
         <div>
@@ -53,4 +53,4 @@ const NewTeacher = () => {
   )
 }
 
-export default NewTeacher
+export default Page

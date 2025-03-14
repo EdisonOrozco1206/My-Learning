@@ -7,6 +7,7 @@ export async function GET(){
         include: { user: true, course: true },
         take: 10
     })
+    
     return NextResponse.json({
         transactions: transactions
     })

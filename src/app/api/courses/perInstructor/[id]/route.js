@@ -6,10 +6,11 @@ export async function GET(req, {params}) {
         where: {
             instructor_id: Number(params.id) 
         },
-        orderBy: [{
+        orderBy: {
             id: 'desc'
-        }]
+        }
     })
+    console.log(courses);
 
-    return NextResponse.json(courses)
+    return NextResponse.json({courses});
 }

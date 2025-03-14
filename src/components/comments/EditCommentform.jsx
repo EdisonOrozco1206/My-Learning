@@ -1,28 +1,40 @@
 'use client'
+import { useState } from "react";
 import { useRouter } from "next/navigation"
 import Link from "next/link";
 
-const NewCommentForm = ({comment, lection}) => {
+const EditCommentForm = ({comment}) => {
     const router = useRouter();
+    const [content, setContent] = useState('')
+    const [errors, setErrors] = useState([])
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const content = e.target.content.value.trim()
+        setErrors([])
+        let inputErrors = []
 
-        if(content != ""){
+        if(!content || content == '') inputErrors['content'] = 'Comentario no valido'
+        setErrors(inputErrors)
+
+        if(Object.keys(inputErrors).length == 0){
             try {
-                await fetch("/api/comments/"+comment.id, {
+                const res = await fetch("/api/comments/"+comment.id, {
                     method: "PUT",
                     body: JSON.stringify({content}),
                     headers: { "Content-Type": "application/json", },
                 });
-                router.push("/lections/"+comment.lection_id)
-                router.refresh()
+
+                if(res.ok){
+                    router.push("/lections/"+comment.lection_id)
+                    router.refresh()
+                }
             } catch (error) {
-                alert(error.message);
+                inputErrors['general'] = "Error al actualizar el comentario"
+                setErrors(inputErrors)
             }
         }else{
-            alert("Debes cambiar el mensaje");
+            inputErrors['general'] = "Ingresa un comentario valido"
+            setErrors(inputErrors)
         }
     }
 
@@ -33,13 +45,15 @@ const NewCommentForm = ({comment, lection}) => {
                     Edita tú comentario sobre la lección
                 </h2>
 
-                <textarea name="content" required className="w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800" defaultValue={comment.content}></textarea>
+                <textarea name="content" required className="w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800" defaultValue={comment.content} onChange={(e) => setContent(e.target.value.trim())}></textarea>
+                {errors.content && <span className="block text-xs text-red-500 w-5/6 mx-auto">{errors.content}</span>}
 
-                <input className='w-5/6 mx-auto block cursor-pointer bg-slate-800 text-white text-xl p-3 hover:bg-slate-600' type="submit" value="Modificar"/>
+                {errors.general && <span className="block text-xs text-red-500 w-5/6 mx-auto">{errors.general}</span>}
+                <input className='w-5/6 mt-4 mx-auto block cursor-pointer bg-slate-800 text-white text-xl p-3 hover:bg-slate-600' type="submit" value="Modificar"/>
                 <Link href={"/lections/"+comment.lection_id} className="w-5/6 mx-auto block cursor-pointer border border-slate-800 mb-4 text-slate-900 text-xl p-3 hover:bg-slate-100 text-center mt-2">Regresar</Link>
             </form>
       </div>
     )
 }
 
-export default NewCommentForm
+export default EditCommentForm

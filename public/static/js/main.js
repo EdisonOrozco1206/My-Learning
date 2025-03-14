@@ -19,13 +19,12 @@ function girarMarikita(e) {
 function moverMarikita(e) {
   var box = $("#marikita");
   var winWidth = $(window).width();
-  var winHeight = $(window).height();
+  var docHeight = $(document).height();
   var boxWidth = box.outerWidth();
   var boxHeight = box.outerHeight();
 
-  // Limita la posición dentro de la ventana
   var newX = Math.min(Math.max(e.pageX + 5, 0), winWidth - boxWidth);
-  var newY = Math.min(Math.max(e.pageY - 5, 0), winHeight - boxHeight);
+  var newY = Math.min(Math.max(e.pageY - 5, 0), docHeight - boxHeight);
 
   box.stop().animate({ left: newX + 'px', top: newY + 'px' }, 500);
 }

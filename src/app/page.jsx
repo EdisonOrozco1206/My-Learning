@@ -3,8 +3,15 @@ import CourseCard from "@/components/CourseCard"
 import { Suspense } from "react"
 import { prisma } from "@/libs/prisma"
 import Link from "next/link"
+import Image from "next/image";
+import { getSession } from "@/libs/libs"
 
-const HomePage = async () => {
+export const dynamic = 'force-dynamic'
+
+const Page = async () => {
+  const session = await getSession()
+  const instructor = session?.userData?.role === 'teacher' ? true : false
+  
   const courses = await prisma.course.findMany({
     orderBy: [{
         id: 'desc'
@@ -33,21 +40,30 @@ const HomePage = async () => {
       </div>
     </Suspense>
 
-    <div className="w-4/5 mx-auto mt-10 flex flex-row justify-between items-center">
-      <div className="w-1/2">
-        <img id="imagen-movimiento" className="w-3/4 rounded-full" src="/static/profesor.jpg" alt="" />
-      </div>
-      <div className="ml-10 w-1/2">
-        <h2 className="text-2xl font-bold mb-4 border-b border-slate-800 text-slate-800 pb-1">Enseña en My Learning</h2>
+    {!instructor && (
+      <div className="w-4/5 mx-auto mt-10 flex flex-row justify-between items-center">
+        <div className="w-1/2">
+          <Image 
+            id="marikita" 
+            className="w-3/4 rounded-full" 
+            src="/static/profesor.jpg" 
+            alt="Profesor enseñando" 
+            width={300} 
+            height={300} 
+          />
+        </div>
+        <div className="ml-10 w-1/2">
+          <h2 className="text-2xl font-bold mb-4 border-b border-slate-800 text-slate-800 pb-1">Enseña en My Learning</h2>
 
-        <p className="text-lg mb-10 text-justify">
-          Instructores de todo el mundo enseñan a millones de estudiantes en My Learning. Proporcionamos las herramientas y las habilidades para que enseñes lo que te apasiona.
-        </p>
+          <p className="text-lg mb-10 text-justify">
+            Instructores de todo el mundo enseñan a millones de estudiantes en My Learning. Proporcionamos las herramientas y las habilidades para que enseñes lo que te apasiona.
+          </p>
 
-        <Link href="/teacher/new" className="bg-slate-800 text-white p-4 text-2xl hover:bg-slate-600">Empieza a enseñar en My Learning</Link>
+          <Link href="/teacher/new" className="bg-slate-800 text-white p-4 text-2xl hover:bg-slate-600">Empieza a enseñar en My Learning</Link>
+        </div>
       </div>
-    </div>
+    )}
   </>
 }
 
-export default HomePage
+export default Page

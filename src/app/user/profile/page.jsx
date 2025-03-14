@@ -7,6 +7,13 @@ import { getSession, updateSession } from '@/libs/libs';
 const ProfilePage = () => {
     const router = useRouter();
     const [userInfo, setUserInfo] = useState(null);
+    const [name, setName] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [phone, setPhone] = useState('');
+    const [document_type, setDocumentType] = useState('');
+    const [email, setEmail] = useState('');
+    const [errors, setErrors] = useState([]);
+
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -23,25 +30,36 @@ const ProfilePage = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const url = `/api/users/${userInfo.id}`;
+        
+        setErrors([]);
+        let inputErrors = [];
+        if (!name) inputErrors['name'] = 'Nombre es obligatorio.';
+        if (!phone) inputErrors['phone'] = 'Telefono es obligatorio.';
+        if (!document_type) inputErrors['document_type'] = 'Tipo de documento es obligatorio.';
+        if (!lastname) inputErrors['lastname'] = 'Apellido es obligatorio.';
+        if (!email) inputErrors['email'] = 'Correo es obligatorio.';
+        setErrors(inputErrors);
 
-        const name = e.target.name.value;
-        const lastname = e.target.lastname.value;
-        const phone = e.target.phone.value;
-        const document_type = e.target.document_type.value;
-        const email = e.target.email.value;
+        if(Object.keys(inputErrors).length === 0) {
+            try {
+                const url = `/api/users/${userInfo.id}`;
 
-        const res = await fetch(url, {
-            method: 'PUT',
-            body: JSON.stringify({ name, lastname, phone, document_type, email }),
-            headers: { 'Content-Type': 'application/json' }
-        });
+                const res = await fetch(url, {
+                    method: 'PUT',
+                    body: JSON.stringify({ name, lastname, phone, document_type, email }),
+                    headers: { 'Content-Type': 'application/json' }
+                });
 
-        if (res.ok) {
-            await updateSession(JSON.stringify({ name, lastname, phone, document_type, email }));
-            router.push("/user/profile");
-        } else {
-            console.error('Failed to update user profile');
+                if (res.ok) {
+                    await updateSession(JSON.stringify({ name, lastname, phone, document_type, email }));
+                    router.push("/user/profile");
+                } else {
+                    console.error('Failed to update user profile');
+                }
+            } catch (error) {
+                inputErrors['general'] = 'Error al actualizar perfil';
+                setErrors(inputErrors);
+            }
         }
     };
 
@@ -55,11 +73,17 @@ const ProfilePage = () => {
                     Perfil | {userInfo.name} {userInfo.lastname}
                 </h2>
 
-                <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='Ingresa tus nombres:' type="text" name='name' defaultValue={userInfo.name} required />
-                <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='Ingresa tus apellidos:' type="text" name='lastname' defaultValue={userInfo.lastname} required />
-                <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='Ingresa tu telefono:' type="number" name='phone' defaultValue={userInfo.phone}/>
+                <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='Ingresa tus nombres:' type="text" name='name' defaultValue={userInfo.name} onChange={(e) => setName(e.target.value.trim())} />
+                {errors.name && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.name}</p>}
 
-                <select name="document_type" id="" className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' required defaultValue={userInfo.document_type}>
+                <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='Ingresa tus apellidos:' type="text" name='lastname' defaultValue={userInfo.lastname} onChange={(e) => setLastname(e.target.value.trim())} />
+                {errors.lastname && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.lastname}</p>}
+
+                <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='Ingresa tu telefono:' type="number" name='phone' defaultValue={userInfo.phone} onChange={(e) => setPhone(e.target.value.trim())}/>
+                {errors.phone && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.phone}</p>}
+
+                {errors.document_type && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.document_type}</p>}
+                <select name="document_type" id="" className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800'  defaultValue={userInfo.document_type} onChange={(e) => setDocumentType(e.target.value.trim())}>
                     <option value="">Selecciona tu tipo de documento</option>
                     <option value="TI">Tarjeta de identidad</option>
                     <option value="CC">Cedula de ciudadanía</option>
@@ -67,9 +91,11 @@ const ProfilePage = () => {
                     <option value="P">Pasaporte</option>
                 </select>
 
-                <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='Ingresa tu correo:' type="email" name='email' defaultValue={userInfo.email} required/>
+                <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='Ingresa tu correo:' type="email" name='email' defaultValue={userInfo.email} onChange={(e) => setEmail(e.target.value.trim())}/>
+                {errors.email && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.email}</p>}
 
-                <input className='w-5/6 mx-auto block cursor-pointer bg-slate-800 text-white text-xl p-3 hover:bg-slate-600' type="submit" value="Guardar cambios"/>
+                {errors.general && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.general}</p>}
+                <input className='w-5/6 mt-4 mx-auto block cursor-pointer bg-slate-800 text-white text-xl p-3 hover:bg-slate-600' type="submit" value="Guardar cambios"/>
             </form>
         </div>
     );

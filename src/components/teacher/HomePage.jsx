@@ -3,9 +3,9 @@
 // import React from 'react'
 import Link from "next/link"
 import { useRouter } from "next/navigation";
-import CourseCard from "../CourseCard";
+import { useEffect, useState } from "react";
 
-const HomePage = ({ courses, userData }) => {
+const HomePage = ({courses, userData}) => {
     const router = useRouter();
 
     const handleDeletion = async (e, id) => {
@@ -22,7 +22,7 @@ const HomePage = ({ courses, userData }) => {
   return (
     <div className="bg-slate-300 mt-10 w-4/5 mx-auto p-5">
         <h2 className="text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800 uppercase">
-            Tús de cursos
+            Tús cursos
         </h2>
 
         <Link href="/course/new" className='mt-2 flex items-center justify-center w-full bg-green-500 text-center text-white p-4 hover:bg-green-600'>
@@ -30,7 +30,7 @@ const HomePage = ({ courses, userData }) => {
         </Link>
 
         <div className="w-full mt-8 gap-4 grid grid-cols-3">
-            {courses.map((course) => {
+            {courses.length > 0 ? courses.map((course) => {
                 return (
                     <div className="col-span-1 bg-white flex flex-col justify-between" key={course.id}>
                         <Link href={"/course/details/"+course.id} className="max-h-44 flex justify-center">
@@ -50,7 +50,9 @@ const HomePage = ({ courses, userData }) => {
                         </div>
                     </div>  
                 )
-            })}
+            }) : (
+                <p className="text-center text-xl block col-span-3">No tienes cursos publicados</p>)
+            }
         </div>
     </div>
   )

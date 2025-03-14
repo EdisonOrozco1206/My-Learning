@@ -16,9 +16,8 @@ const Navbar = async () => {
     const user = userSession ? userSession.userData : ''
 
   return <>
-    <header className="bg-slate-900 text-slate-300 p-2">
+    <header className="bg-slate-900 text-slate-300 p-2 z-50">
         <nav className="flex flex-row items-center font-bold pl-14">
-
             <div>
                 <Link href="/">
                     <img src="/static/logo.png" alt="My learning logo" className="w-24" />
@@ -32,9 +31,6 @@ const Navbar = async () => {
                     {user.role == 'teacher' && <>
                         <li className="mx-2">
                             <Link href="/teacher" className="border-b border-slate-300 p-4 hover:bg-slate-300 hover:text-black">Mis cursos</Link>
-                        </li>
-                        <li className="mx-2">
-                            <Link href="/admins/certificates" className="border-b border-slate-300 p-4 hover:bg-slate-300 hover:text-black">Certificados</Link>
                         </li>
                     </>}
                     {user.role == 'admin' && <>
@@ -61,25 +57,19 @@ const Navbar = async () => {
 
             <SearchInput></SearchInput>
 
-            <ul className="float-right flex items-center ml-10 w-1/3">
-                {
-                    cookies().get('session') ? <>
-                    
-                        <li className="w-4/6 mr-16">
-                            <ToggleDiv></ToggleDiv>
-                        </li>
-
-                    </> : <>
-                    
-                        <li>
-                            <Link href="/user/login" className="p-3 block px-5 mx-2 border border-slate-300 hover:bg-slate-800">Acceder</Link>
-                        </li>
-                        <li>
-                            <Link href="/user/register" className="p-3 px-5 mx-2 border border-slate-300 hover:bg-slate-400 bg-slate-300 text-black">Registrarse</Link>
-                        </li>
-
-                    </>
-                }
+            <ul className="float-right flex items-center ml-10 w-1/3 z-50">
+                {cookies().get('session') ? <>
+                    <li className="w-4/6 mr-16">
+                        <ToggleDiv></ToggleDiv>
+                    </li>
+                </> : <>
+                    <li>
+                        <Link href="/user/login" className="p-3 block px-5 mx-2 border border-slate-300 hover:bg-slate-800">Acceder</Link>
+                    </li>
+                    <li>
+                        <Link href="/user/register" className="p-3 px-5 mx-2 border border-slate-300 hover:bg-slate-400 bg-slate-300 text-black">Registrarse</Link>
+                    </li>
+                </>}
                 <div className="flex justify-between w-1/3">
                     <li className="bg-slate-300 hover:bg-slate-400 p-1 rounded-md cursor-pointer flex justify-center items-center">
                         <Link href={"/cart"}>

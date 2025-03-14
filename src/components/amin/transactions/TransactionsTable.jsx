@@ -91,7 +91,7 @@ const TransactionsTable = ({transactions}) => {
                                 </thead>
                                 <tbody>
                                     <Suspense fallback={<h1>Cargando contenido</h1>}>
-                                        {transactions.map((t) => (
+                                        {transactions.length > 0  ?  transactions.map((t) => (
                                             <tr key={t.id} className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-50">
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r border-gray-300">
                                                     {t.id}
@@ -124,7 +124,9 @@ const TransactionsTable = ({transactions}) => {
                                                     {t.date}
                                                 </td>
                                             </tr>
-                                        ))}
+                                        )) : (<tr>
+                                            <td colSpan={6} className="text-center">No hay nada para mostrar</td>
+                                        </tr>)}
                                     </Suspense>
                                 </tbody>
                             </table>

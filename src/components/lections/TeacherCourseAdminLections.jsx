@@ -35,7 +35,7 @@ const TeacherCourseAdminLections = ({course, lections, courseId}) => {
             </div>
 
             <div className="mt-2">
-                {lections ? (
+                {lections.length > 0 ? (
                     lections.map((lection) => (
                         <div key={lection.id} className="bg-white border border-black px-6 py-3 flex justify-between w-full hover:bg-slate-100 items-center">
                             <Link href={"/lections/"+lection.id} className="hover:text-gray-500 capitalize text-xl w-full" title="Ver lección">#{lection.position} - {lection.title}</Link>
@@ -45,7 +45,7 @@ const TeacherCourseAdminLections = ({course, lections, courseId}) => {
                             </div>
                         </div>
                     ))
-                ) : (<h2>No hay lecciones disponibles aún</h2>)}
+                ) : (<h2 className="text-center text-xl mt-4">No hay lecciones disponibles aún</h2>)}
             </div>
         </div>
     )

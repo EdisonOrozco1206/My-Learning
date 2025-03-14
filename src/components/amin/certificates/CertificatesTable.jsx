@@ -79,7 +79,7 @@ const CertificatesTable = ({certificates, role}) => {
                             <div>{user.document_type} - {user.document}</div>
                         </div>
                         <div className="flex justify-between border-b border-slate-800">
-                            <div>Role</div>
+                            <div>Rol</div>
                             <div>{user.role}</div>
                         </div>
                         <div className="flex justify-between border-b border-slate-800">

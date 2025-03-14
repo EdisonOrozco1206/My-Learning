@@ -5,7 +5,7 @@ import { api } from "@/libs/apiMercadopago"
 import { useRouter } from "next/navigation"
 import { getSession } from "@/libs/libs"
 
-const page = () => {
+const Page = () => {
     const router = useRouter();
     const { cart, removeFromCart, clearCart } = useCartStore()
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -44,8 +44,8 @@ const page = () => {
                     </div>
                     {cart.map(item => (
                         <div key={item.id} className="grid grid-cols-5 gap-4 border-b border-slate-500">
-                            <div className="col-span-2 m-4">
-                                <img src={"/uploads/"+item.portait} alt="" />
+                            <div className="col-span-2 m-4 w-1/2 mx-auto">
+                                <img src={"/uploads/"+item.portait} alt={"Portada curso"+item.title} />
                             </div>
                             <div className="col-span-2 m-4 flex justify-between items-center">
                                 <div>
@@ -69,4 +69,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

@@ -1,13 +1,6 @@
 import { prisma } from "@/libs/prisma"
 import { NextResponse } from "next/server"
 
-
-export const config = {
-    api: {
-      bodyParser: false, 
-    },
-  };
-
 export async function GET(){
     const lections = await prisma.lection.findMany()
     return NextResponse.json({

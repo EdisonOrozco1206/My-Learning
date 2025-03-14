@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { getSession } from "@/libs/libs"
-import EditCommentForm from "@/components/comments/EditCommentForm"
+import EditCommentForm from "@/components/comments/EditCommentform";
 
 const page = async ({params}) => {
     const userData = await getSession();

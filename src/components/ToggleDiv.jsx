@@ -1,12 +1,21 @@
 "use client";
 
 import { handleLogout } from "@/libs/logout";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-
+import { getSession } from "@/libs/libs";
 
 export default function ToggleDiv() {
-  const [isVisible, setIsVisible] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
+    const [role, setRole] = useState('')
+
+    useEffect(() => {
+        async function getUserRole(){
+            let user = await getSession()
+            if(user) setRole(user.userData.role)
+        }
+        getUserRole()
+    }, [])
 
     return (    
         <div className="relative w-full">
@@ -36,9 +45,19 @@ export default function ToggleDiv() {
             {isVisible && (
                 <div className=" bg-slate-900 absolute mx-2 border border-slate-300 w-full">
                     <ul>
-                        <li onClick={() => setIsVisible(!isVisible)}>
+                        <li onClick={() => setIsVisible(false)}>
                             <Link href="/user/profile" className="p-3 px-5 block text-center w-full border-t border-slate-300 hover:bg-slate-300 text-slate-300 hover:text-black">Mí Perfil</Link>
                         </li>
+                        {role && role == "teacher" ? (
+                            <div>
+                                <li onClick={() => setIsVisible(false)}>
+                                    <Link href="/admins/certificates" className="p-3 px-5 block text-center w-full border-t border-slate-300 hover:bg-slate-300 text-slate-300 hover:text-black">Certificados</Link>
+                                </li>
+                                <li onClick={() => setIsVisible(false)}>
+                                    <Link href="/teacher/students" className="p-3 px-5 block text-center w-full border-t border-slate-300 hover:bg-slate-300 text-slate-300 hover:text-black">Estudiantes</Link>
+                                </li>
+                            </div>
+                        ): ''}
                         <li>
                             <form action={handleLogout}>
                                 <button className="p-3 px-5 w-full  hover:bg-slate-300 text-slate-300 hover:text-black border-t border-slate-300">

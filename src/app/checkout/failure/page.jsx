@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useCartStore } from "@/libs/cartLibs"
 import { useRouter } from "next/navigation"
 
-const page = () => {
+const Page = () => {
   const router = useRouter()
   const { clearCart } = useCartStore()
 
@@ -33,4 +33,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

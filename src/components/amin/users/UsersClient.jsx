@@ -4,7 +4,7 @@ import Link from 'next/link'
 import UsersTable from './UsersTable'
 import { useState } from 'react'
 
-const UsersClient = ({users}) => {
+const UsersClient = ({users, admin}) => {
   const [searchModal, setSearchModal] = useState(false)
   const [searchQuery, setSearchQuery] = useState(null)
   const [searchInfo, setSearchInfo] = useState(null)
@@ -51,19 +51,31 @@ const UsersClient = ({users}) => {
     </div>
 
     <div className="bg-slate-300 mt-10 w-4/5 mx-auto p-5">
-      <h2 className="text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800 uppercase">
-        Adminitracion de usuarios
-      </h2>
+      {admin ? (
+        <h2 className="text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800 uppercase">
+          Adminitracion de usuarios
+        </h2>
+      ) : (
+        <h2 className="text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800 uppercase">
+          Tus estudiantes
+        </h2>
+      )}
       <div className='grid grid-cols-2 gap-4'>
-        <Link href="/admins/dashboard" className='col-span-1 mt-2 flex items-center justify-center w-full bg-slate-800 text-center text-white p-4 hover:bg-slate-900'>
+        {admin ? (
+          <Link href="/admins/dashboard" className='col-span-1 mt-2 flex items-center justify-center w-full bg-slate-800 text-center text-white p-4 hover:bg-slate-900'>
             Regresar
-        </Link>
+          </Link>
+        ) : (
+          <Link href="/" className='col-span-1 mt-2 flex items-center justify-center w-full bg-slate-800 text-center text-white p-4 hover:bg-slate-900'>
+            Regresar
+          </Link>
+        )}
         <button onClick={toggleSearchModal} className='col-span-1 mt-2 flex items-center justify-center w-full bg-slate-800 text-center text-white p-4 hover:bg-slate-900'>
             <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none" stroke="currentColor"  strokeLinecap="round" strokeLinejoin="round" width={24} height={24}  strokeWidth={2}> <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path> <path d="M21 21l-6 -6"></path> </svg> 
         </button>
       </div>
 
-      <UsersTable users={users}></UsersTable>
+      <UsersTable users={users} admin={admin}></UsersTable>
     </div>
   </>
 }

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-const UsersTable = ({users}) => {
+const UsersTable = ({users, admin}) => {
     const [isModalVisible, setModalVisible] = useState(false);
     const [user, setUser] = useState('');
     const [role, setRole] = useState('');
@@ -100,33 +100,37 @@ const UsersTable = ({users}) => {
               <table className="min-w-full">
                 <thead className="bg-gray-200 border-b">
                     <tr>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
+                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
                         ID
-                    </th>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
-                        ROLE
-                    </th>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
+                      </th>
+                      {admin && (
+                        <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
+                          ROLE
+                        </th>
+                      )}
+                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
                         NOMBRE
-                    </th>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
+                      </th>
+                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
                         APELLIDOS
-                    </th>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
+                      </th>
+                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
                         TIPO DOCUMENTO
-                    </th>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
+                      </th>
+                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
                         # DOCUMENTO
-                    </th>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
+                      </th>
+                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
                         CORREO
-                    </th>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
+                      </th>
+                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
                         TELEFONO
-                    </th>
-                    <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
-                        ACCIONES
-                    </th>
+                      </th>
+                      {admin && (
+                        <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
+                          ACCIONES
+                        </th>
+                      )}
                     </tr>
                 </thead>
                 <tbody>
@@ -135,11 +139,13 @@ const UsersTable = ({users}) => {
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r border-gray-300">
                         {u.id}
                       </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r border-gray-300">
-                        <button onClick={() => {showModal(u.id, u.role)}} className='capitalize bg-slate-800 text-white p-3'>
-                          {u.role}
-                        </button>
-                      </td>
+                      {admin && (
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r border-gray-300">
+                          <button onClick={() => {showModal(u.id, u.role)}} className='capitalize bg-slate-800 text-white p-3'>
+                            {u.role}
+                          </button>
+                        </td>
+                      )}
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r border-gray-300">
                         {u.name}
                       </td>
@@ -158,11 +164,13 @@ const UsersTable = ({users}) => {
                       <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r border-gray-300">
                         {u.phone}
                       </td>
-                      <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap flex justify-evenly border-r border-gray-300">
-                        <button onClick={() => {showModal(u.id)}} className="cursor-pointer mx-2 px-4 py-2 border border-red-500 rounded-sm bg-red-500 text-white hover:bg-red-600">
-                          Eliminar
-                        </button>
-                      </td>
+                      {admin && (
+                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap flex justify-evenly border-r border-gray-300">
+                          <button onClick={() => {showModal(u.id)}} className="cursor-pointer mx-2 px-4 py-2 border border-red-500 rounded-sm bg-red-500 text-white hover:bg-red-600">
+                            Eliminar
+                          </button>
+                        </td>
+                      )}
                     </tr>
                   ))}
                 </tbody>

@@ -13,7 +13,7 @@ const CategoryTable = ({categories}) => {
         try {
           const res = await fetch(`/api/categories/${category}`, {
             method: "DELETE",
-            hader: {'Content-type': 'application/json'}
+            headers: {'Content-Type': 'application/json'}
           })
           setModalVisible(false);
           router.refresh()

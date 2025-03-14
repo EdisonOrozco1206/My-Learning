@@ -2,6 +2,7 @@ import { getSession } from "@/libs/libs"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import TransactionsTable from "@/components/amin/transactions/TransactionsTable"
+import DownloadTransactionsReport from "@/components/excel/DownloadTransactionsReport"
 
 const AdminDashboard = async () => {
   const userData = await getSession()
@@ -50,7 +51,10 @@ const AdminDashboard = async () => {
 
       <h2 className="text-center text-2xl mt-4">Ultimas transacciones</h2>
       <div>
-        <p className="bg-slate-800 text-white w-fit mx-auto my-2 px-4 py-2">Total hoy: ${total}</p>
+        <div className="flex w-2/6 mx-auto">
+          <p className="bg-slate-800 text-white w-fit mx-auto my-2 px-4 py-2">Total hoy: ${total}</p>
+          <DownloadTransactionsReport all={false}/>
+        </div>
         <TransactionsTable transactions={transactions.transactions}></TransactionsTable>
       </div>
     </div>

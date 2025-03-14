@@ -2,19 +2,23 @@ import { prisma } from "@/libs/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET(req, { params }) {
-    const dbcategories = await prisma.category.findMany();
-    console.log(dbcategories);
-    
     let categories = [];
+    const dbcategories = await prisma.category.findMany({});
 
-    categories = await Promise.all(
-        dbcategories.map(async (c) => {
-            const categoryCoursesReq = await fetch(`${process.env.BASE_URL}/api/courses/getperCategory/${c.id}`);
-            const categoryCourses = await categoryCoursesReq.json();
-
-            return { name: c.name, courses: categoryCourses };
-        })
-    );
+    for (const c of dbcategories) {
+        const courses = await prisma.course.findMany({
+            where: {
+                category: Number(c.id)
+            },
+            include:{
+                instructor: true
+            }
+        });
+        categories.push({
+            name: c.name,
+            courses: courses
+        });
+    }
 
     return NextResponse.json({ categories });
 }

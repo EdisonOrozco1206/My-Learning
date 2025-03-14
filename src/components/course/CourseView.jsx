@@ -49,12 +49,15 @@ const CourseView = ({course, user, viewedClasses, courseLections, isBought}) => 
                 <h1 className="text-2xl">{course.title}</h1>
                 <h2>{course.instructor.name} {course.instructor.lastname}</h2>
                 <p>{course.description}</p>
-                    {!isBought ? (
+                    {!isBought && (
                         <div className="flex gap-4 mt-4 items-center">
                             <p className="bg-slate-800 text-white py-2 px-4">$ {course.price}</p>
-                            <button onClick={() => handleCartAndRedirect(course)} className="border border-slate-800 hover:bg-slate-400 hover:text-slate-900 py-2 px-4 cursor-pointer">Agregar al carrito</button>
+                            {user.id != course.instructor_id &&
+                                <button onClick={() => handleCartAndRedirect(course)} className="border border-slate-800 hover:bg-slate-400 hover:text-slate-900 py-2 px-4 cursor-pointer">Agregar al carrito</button>
+                            }
                         </div>
-                    ) : (
+                    )}
+                    {isBought && user.id != course.instructor_id ?(
                         <Suspense fallback={<p>Cargando progreso...</p>}>
                             <div className="mt-4 bg-white px-4 pb-4">
                                 <h3 className="py-2 px-4 border-b border-slate-800">Tú progreso</h3>
@@ -82,7 +85,7 @@ const CourseView = ({course, user, viewedClasses, courseLections, isBought}) => 
                                 </div>
                             </div>
                         </Suspense>
-                    )}
+                    ) : ''}
             </div>
             { user.id == course.instructor_id && user.role == "teacher" || user.role == "admin" ? 
                 <div className="px-4 col-span-3 w-1/2 mx-auto mt-4">
@@ -107,19 +110,19 @@ const CourseView = ({course, user, viewedClasses, courseLections, isBought}) => 
                                 const viewed = viewedClasses && viewedClasses.lection_user ? 
                                     viewedClasses.lection_user.some(view => view.lection_id == lection.id) : false;
 
-                                if(!isBought){
+                                if(isBought || user.id == course.instructor.id){
                                     return (
                                         <div key={lection.id} className="bg-white border border-black px-6 py-3 flex justify-between items-center w-full hover:bg-slate-100">
                                             <input id="default-checkbox" disabled type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-4" checked={viewed} />
-                                            <p className="hover:text-gray-500 capitalize text-xl w-full" title="Ver lección">#{lection.position} - {lection.title}</p>
+                                            <Link href={"/lections/"+lection.id} className="hover:text-gray-500 capitalize text-xl w-full" title="Ver lección">#{lection.position} - {lection.title}</Link>
+                                            <Link href={"/lections/"+lection.id} className="hover:text-gray-500 capitalize underline">Ver</Link>
                                         </div>
                                     );
                                 }else{
                                     return (
                                         <div key={lection.id} className="bg-white border border-black px-6 py-3 flex justify-between items-center w-full hover:bg-slate-100">
                                             <input id="default-checkbox" disabled type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-4" checked={viewed} />
-                                            <Link href={"/lections/"+lection.id} className="hover:text-gray-500 capitalize text-xl w-full" title="Ver lección">#{lection.position} - {lection.title}</Link>
-                                            <Link href={"/lections/"+lection.id} className="hover:text-gray-500 capitalize underline">Ver</Link>
+                                            <p className="hover:text-gray-500 capitalize text-xl w-full" title="Ver lección">#{lection.position} - {lection.title}</p>
                                         </div>
                                     );
                                 }

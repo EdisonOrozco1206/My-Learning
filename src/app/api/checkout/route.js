@@ -2,7 +2,7 @@ import { MercadoPagoConfig, Preference } from "mercadopago";
 import { NextResponse } from "next/server";
 
 export const mercadopago = new MercadoPagoConfig({
-  accessToken: "APP_USR-1019432933134765-012819-a40c3c8b7cf1faaf86a4ff8950198d6c-2239164662"
+  accessToken: process.env.MP_ACCESS_TOKEN
 });
 
 export async function POST(req, res) {

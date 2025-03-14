@@ -18,13 +18,27 @@ const Footer = () => {
     return <>
         <div id="modal" className={`fixed top-0 left-0 h-screen w-full ${isModalVisible ? 'visible' : 'invisible'}`}>
             <div className="h-full flex justify-center items-center bg-slate-900 bg-opacity-50">
-                <div className="bg-slate-200 p-4">
+                <div className="bg-slate-200 p-10 w-1/2">
                     <h2 className="text-xl pb-1 text-slate-800 font-bold border-b border-slate-800 uppercase">
                         Mapa del sitio
                     </h2>
-                    <p className="my-4">
-                        enlaces del mapa del sitio
-                    </p>
+                    <ul className="my-4 list-disc">
+                        <li><Link onClick={toggleModal} className='text-sm underline' href="/">Inicio</Link></li>
+                        <li><Link onClick={toggleModal} className='text-sm underline' href="/about">Sobre Nosotros</Link></li>
+                        <li><Link onClick={toggleModal} className='text-sm underline' href="/courses">Cursos</Link></li>
+                        <li><Link onClick={toggleModal} className='text-sm underline' href="/user/register">Registrarse</Link></li>
+                        <li><Link onClick={toggleModal} className='text-sm underline' href="/user/login">Iniciar sesión</Link></li>
+                        <li><Link onClick={toggleModal} className='text-sm underline' href="/cart">Carrito</Link></li>
+                        <li><Link onClick={toggleModal} className='text-sm underline' href="/teacher/new">Enseñar en My learning</Link></li>
+                        <li><Link onClick={toggleModal} className='text-sm underline' href="/contact">Contáctanos</Link></li>
+                        <li><Link onClick={toggleModal} className='text-sm underline' href="/conditions">Condiciones</Link></li>
+                        <li><Link onClick={toggleModal} className='text-sm underline' href="/privacyPolicy">Política de privacidad</Link></li>
+                        <li><Link onClick={toggleModal} className='text-sm underline' href="#">Mapa del sitio</Link></li>
+                        <li><Link onClick={toggleModal} className='text-sm underline' href="https://twitter.com" target="_blank">Twitter</Link></li>
+                        <li><Link onClick={toggleModal} className='text-sm underline' href="https://instagram.com" target="_blank">Instagram</Link></li>
+                        <li><Link onClick={toggleModal} className='text-sm underline' href="https://facebook.com" target="_blank">Facebook</Link></li>
+                        <li><Link onClick={toggleModal} className='text-sm underline' href="https://linkedin.com" target="_blank">LinkedIn</Link></li>
+                    </ul>
                     <button className="mx-2 cursor-pointer float-right px-4 py-2 border border-red-500 rounded-sm bg-red-500 text-white hover:bg-red-600" onClick={toggleModal}>
                         Cerrar
                     </button>

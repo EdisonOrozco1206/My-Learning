@@ -1,32 +1,46 @@
 'use client'
+import { useState } from "react";
 import { useRouter } from "next/navigation"
 import Link from "next/link";
 
 const NewCommentForm = ({lection, userId}) => {
     const router = useRouter();
+    const [content, setContent] = useState('')
+    const [errors, setErrors] = useState([])
 
     const onSubmit = async (e) => {
         e.preventDefault();
+        setErrors([])
+        let inputErrors = []
 
-        const content = e.target.content.value.trim()
+        if(!content) inputErrors['content'] = 'Contenido no valido'
+        setErrors(inputErrors)
 
         if(content != "Déjanos saber tu opinión ;)"){
             const lection_id = Number(lection)
             const user_id = Number(userId)
 
-            try {
-                await fetch("/api/comments/", {
-                    method: "POST",
-                    body: JSON.stringify({content, user_id, lection_id})
-                });
-                router.push("/lections/"+lection)
-                router.refresh()
-            } catch (error) {
-                alert(error.message);
-            }
+            if(Object.keys(inputErrors).length == 0){
+                try {
+                    const res = await fetch("/api/comments/", {
+                        method: "POST",
+                        body: JSON.stringify({content, user_id, lection_id})
+                    });
 
+                    if(res.ok){
+                        router.push("/lections/"+lection)
+                        router.refresh()
+                    }
+
+                } catch (error) {
+                    inputErrors['general'] = "Error al publicar el comentario"
+                    setErrors(inputErrors)
+                }
+    
+            }
         }else{
-            alert("Debes cambiar el mensaje");
+            inputErrors['general'] = "Ingresa un comentario valido"
+            setErrors(inputErrors)
         }
         
     }
@@ -38,9 +52,11 @@ const NewCommentForm = ({lection, userId}) => {
                     Deja tú comentario sobre la lección
                 </h2>
 
-                <textarea name="content" required className="w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800" defaultValue={"Déjanos saber tu opinión ;)"}></textarea>
+                <textarea name="content" required className="w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800" defaultValue={"Déjanos saber tu opinión ;)"} onChange={(e) => setContent(e.target.value.trim())}></textarea>
+                {errors.content && <span className="block text-xs text-red-500 w-5/6 mx-auto">{errors.content}</span>}
 
-                <input className='w-5/6 mx-auto block cursor-pointer bg-slate-800 text-white text-xl p-3 hover:bg-slate-600' type="submit" value="Publicar comentario"/>
+                {errors.general && <span className="block text-xs text-red-500 w-5/6 mx-auto">{errors.general}</span>}
+                <input className='w-5/6 mt-4 mx-auto block cursor-pointer bg-slate-800 text-white text-xl p-3 hover:bg-slate-600' type="submit" value="Publicar comentario"/>
                 <Link href={"/lections/"+lection} className="w-5/6 mx-auto block cursor-pointer border border-slate-800 mb-4 text-slate-900 text-xl p-3 hover:bg-slate-100 text-center mt-2">Regresar</Link>
             </form>
       </div>

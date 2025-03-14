@@ -1,13 +1,6 @@
 import { prisma } from "@/libs/prisma"
 import { NextResponse } from "next/server"
 
-
-export const config = {
-    api: {
-      bodyParser: false, 
-    },
-  };
-
 export async function GET(){
     const transactions = await prisma.transaction.findMany({
         orderBy: {
@@ -53,7 +46,7 @@ export async function POST(req){
             status: status,
             date: currentDate
         }
-    })
+    }); 
 
     return NextResponse.json(transaction)
 }

@@ -1,5 +1,5 @@
 const AboutPage = () => {
-  return ( //sm: md: lg: xl: 2xl:
+  return (
     <div className='bg-slate-300 p-4 w-4/5 mx-auto mt-10 ms: w-ms'>
       <div className="">
         <h1 className="text-center text-2xl">Sobre nosotros</h1>
