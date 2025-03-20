@@ -1,25 +1,22 @@
-const { NextApiRequest } = require("next");
-const formidable = require("formidable");
-const path = require("path");
-const { promises: fs } = require("fs");
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+import { NextResponse } from "next/server";
+import formidable from "formidable";
+import path from "path";
+import { promises as fs } from "fs";
 
 const readFile = (req, saveLocally) => {
-  const options = {};
-  if (saveLocally) {
-    options.uploadDir = path.join(process.cwd(), "/public/images");
-    options.filename = (name, ext, path, form) => {
-      return Date.now().toString() + "_" + path.originalFilename;
-    };
-  }
-  options.maxFileSize = 4000 * 1024 * 1024;
-  const form = formidable(options);
   return new Promise((resolve, reject) => {
+    const options = {};
+
+    if (saveLocally) {
+      options.uploadDir = path.join(process.cwd(), "/public/images");
+      options.filename = (_name, _ext, part) => {
+        return Date.now().toString() + "_" + part.originalFilename;
+      };
+    }
+
+    options.maxFileSize = 4000 * 1024 * 1024;
+    const form = formidable(options);
+
     form.parse(req, (err, fields, files) => {
       if (err) reject(err);
       resolve({ fields, files });
@@ -27,14 +24,18 @@ const readFile = (req, saveLocally) => {
   });
 };
 
-const handler = async (req, res) => {
+export async function POST(req) {
   try {
-    await fs.readdir(path.join(process.cwd() + "/public", "/images"));
-  } catch (error) {
-    await fs.mkdir(path.join(process.cwd() + "/public", "/images"));
-  }
-  await readFile(req, true);
-  res.json({ done: "ok" });
-};
+    const dir = path.join(process.cwd(), "/public/images");
+    try {
+      await fs.readdir(dir);
+    } catch {
+      await fs.mkdir(dir);
+    }
 
-module.exports = handler;
+    await readFile(req, true);
+    return NextResponse.json({ done: "ok" });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}

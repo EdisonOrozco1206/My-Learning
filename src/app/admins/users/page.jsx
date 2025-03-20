@@ -1,7 +1,7 @@
 import { getSession } from "@/libs/libs"
 import { redirect } from "next/navigation"
 import { prisma } from "@/libs/prisma"
-import UsersRows from "@/components/amin/users/UsersRows"
+import UsersClient from "@/components/amin/users/UsersClient"
 
 const AdminUsers = async () => {
     const userData = await getSession()
@@ -10,7 +10,7 @@ const AdminUsers = async () => {
     const users = await prisma.user.findMany();
 
     return <>
-        <UsersRows users={users}></UsersRows>
+        <UsersClient users={users} admin={true}></UsersClient>
     </>
 }
 

@@ -1,19 +1,15 @@
-import fs from 'fs';
-import path from 'path';
+import { put } from '@vercel/blob';
 import { NextResponse } from 'next/server';
 
 export const POST = async (req, res) => {
+  
   const formData = await req.formData();
   const file = formData.get('file');
-  const filename = formData.get('filename');
+  const filename = file.name
 
-  const uploadsDir = path.join(process.cwd(), 'public', 'uploads');
-  const filePath = path.join(uploadsDir, filename);
+  const upload = await put(filename, file, {
+    access: "public"
+  })
 
-  fs.mkdirSync(uploadsDir, { recursive: true });
-  
-  const buffer = Buffer.from(await file.arrayBuffer());
-  fs.writeFileSync(filePath, buffer);
-
-  return NextResponse.json({ message: 'Archivo guardado exitosamente', filePath });
+  return NextResponse.json(upload);
 };

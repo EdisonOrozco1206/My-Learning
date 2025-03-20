@@ -2,109 +2,77 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import CategoryTable from './CategoryTable';
 
 const CategoryClient = ({ categories }) => {
-  const [isModalVisible, setModalVisible] = useState(false);
-  const [category, setCategory] = useState('');
-  const router = useRouter()
+  const [searchModal, setSearchModal] = useState(false)
+  const [searchQuery, setSearchQuery] = useState(null)
+  const [searchInfo, setSearchInfo] = useState(null)
 
-
-  var deleteCategory = async (id) => {
-    try {
-      const res = await fetch(`http://localhost:3000/api/categories/${category}`, {
-        method: "DELETE",
-        hader: {'Content-type': 'application/json'}
-      })
-      setModalVisible(false);
-      router.refresh()
-    } catch (error) {
-      console.error(error.message);
+  const toggleSearchModal = () => {
+    if(!searchModal){
+      setSearchModal(true)
+    }else{
+      setSearchModal(false)
+      setSearchQuery(null)
+      setSearchInfo(null)
     }
   }
 
-  function showModal(category_id) {
-    setModalVisible(true);
-    setCategory(category_id)
-  }
-  function hideModal() {
-    setModalVisible(false);
+  const fetchSearchData = async (e) => {
+    e.preventDefault()
+    let res = await fetch("/api/categories/"+searchQuery);
+    let data = await res.json();
+    setSearchInfo([data])
   }
 
 
   return (
     <>
-      <div id="modal" className={`fixed top-0 left-0 h-screen w-full ${isModalVisible ? 'visible' : 'invisible'}`}>
+      {/* Search Modal */}
+      <div id="modal" className={`fixed top-0 left-0 h-screen w-full ${searchModal ? 'visible' : 'invisible'}`}>
         <div className="h-full flex justify-center items-center bg-slate-900 bg-opacity-50">
-          <div className="bg-slate-200 p-4">
-            <h2 className="text-xl pb-1 text-slate-800 font-bold border-b border-slate-800 uppercase">
-              ¿Seguro de que deseas realizar esta acción?
-            </h2>
-            <p className="my-4">
-              Una vez eliminada esta categoria, no se puede deshacer la acción
-            </p>
-            <button onClick={deleteCategory} className="mx-2 cursor-pointer float-right px-4 py-2 border border-green-500 rounded-sm bg-green-500 text-white hover:bg-green-600">
-              Confirmar
-            </button>
-            <button className="mx-2 cursor-pointer float-right px-4 py-2 border border-red-500 rounded-sm bg-red-500 text-white hover:bg-red-600" onClick={hideModal}>
-              Cancelar
-            </button>
+          <div className="bg-slate-200 p-4 w-full lg:w-10/12">
+              <div>
+                <h2 className="text-xl pb-1 text-slate-800 font-bold border-b border-slate-800 uppercase">
+                  Buscar categoria
+                </h2>
+                <form action="" className='border flex justify-center'>
+                  <input onChange={e => setSearchQuery(e.target.value)} value={searchQuery || ''} type="number" name="searchQuery" placeholder='Buscar por ID' className='w-5/6 mx-auto my-8 p-2 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' />
+                  <input  onClick={(e) => fetchSearchData(e)} type="submit" value="Buscar" className='mx-auto cursor-pointer bg-slate-800 text-white my-8 px-3 hover:bg-slate-600'/>
+                </form>
+                {searchInfo ? (
+                  <CategoryTable categories={searchInfo}></CategoryTable>
+                ) : ''}
+                <button className="mx-2 cursor-pointer float-right px-4 py-2 border border-red-500 rounded-sm bg-red-500 text-white hover:bg-red-600" onClick={toggleSearchModal}>
+                  Cerrar
+                </button>
+              </div>
+
           </div>
         </div>
       </div>
 
-      <div className="bg-slate-300 mt-10 w-4/5 mx-auto p-5">
-        <h2 className="text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800 uppercase">
+      <div className="bg-slate-300 mt-10 w-full lg:w-4/5 mx-auto p-5">
+        <h2 className="text-2xl lg:text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800 uppercase">
           Administracion de categorias
         </h2>
 
-        <Link href="/admins/category/new" className='mt-2 flex items-center justify-center w-full bg-green-500 text-center text-white p-4 hover:bg-green-600'>
-          Agregar Categoria
-        </Link>
+        <div className='grid grid-cols-8 gap-4'>
+          <Link href="/admins/dashboard" className='col-span-4 lg:col-span-3 mt-2 flex items-center justify-center w-full bg-slate-800 text-center text-white p-4 hover:bg-slate-900'>
+            Regresar
+          </Link>
 
-        <div className="flex flex-col">
-          <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-            <div className="py-2 inline-block min-w-full">
-              <div className="overflow-hidden">
-                <table className="min-w-full">
-                  <thead className="bg-gray-200 border-b">
-                    <tr>
-                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
-                        ID
-                      </th>
-                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
-                        TITULO
-                      </th>
-                      <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
-                        ADMINISTRAR
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {categories.map(cat => (
-                      <tr key={cat.id} className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r border-gray-300">
-                          {cat.id}
-                        </td>
-                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r border-gray-300">
-                          {cat.name}
-                        </td>
-                        <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap flex justify-evenly border-r border-gray-300">
-                          <Link href={`/admins/category/edit/${cat.id}`} className="cursor-pointer mx-2 px-4 py-2 border border-sky-500 rounded-sm bg-sky-500 text-white hover:bg-sky-600">
-                            Editar
-                          </Link>
-                          <button onClick={() => {showModal(cat.id)}} className="cursor-pointer mx-2 px-4 py-2 border border-red-500 rounded-sm bg-red-500 text-white hover:bg-red-600">
-                            Eliminar
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+          <Link href="/admins/category/new" className='col-span-4 lg:col-span-3 mt-2 flex items-center justify-center w-full bg-green-500 text-center text-white p-4 hover:bg-green-600'>
+            Agregar Categoria
+          </Link>
+
+          <button onClick={toggleSearchModal} className='col-span-8 lg:col-span-2 mt-2 flex items-center justify-center w-full bg-slate-800 text-center text-white p-4 hover:bg-slate-900'>
+            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none" stroke="currentColor"  strokeLinecap="round" strokeLinejoin="round" width={24} height={24}  strokeWidth={2}> <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path> <path d="M21 21l-6 -6"></path> </svg> 
+          </button>
         </div>
+
+        <CategoryTable categories={categories}></CategoryTable>
       </div>
     </>
   );

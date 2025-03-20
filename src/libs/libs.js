@@ -24,17 +24,13 @@ export async function decrypt(input){
   return payload;
 }
 
-export async function login(formData) {
-  // Verify credentials && get the user
-  const userEmail = formData.get("email")
-  const userPassword = formData.get("password")
-
+export async function login(email, password) {
   const userData = await prisma.user.findUnique({
-    where: { email: userEmail }
+    where: { email: email }
   })
 
   const bcrypt = require("bcrypt")
-  const checkPassword = bcrypt.compare(userPassword, userData.password)
+  const checkPassword = bcrypt.compare(password, userData.password)
 
   if(checkPassword){
     // const user = { email: formData.get("email"), password: formData.get("password") };

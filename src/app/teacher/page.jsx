@@ -1,27 +1,17 @@
-'use server';
-
+import process from "process";
 import { getSession } from "@/libs/libs"
-import { prisma } from "@/libs/prisma"
 import { redirect } from "next/navigation"
 import HomePage from "@/components/teacher/HomePage";
 
-const teacherPage = async () => {
-    const session = await getSession()
+const page = async () => {
+  const session = await getSession()
+  const userData = session ? session.userData : redirect("/")
 
-    if(!session || session.userData.role != 'teacher'){redirect("/user/login")}
+  const res = await fetch(process.env.BASE_URL+"/api/courses/perInstructor/"+userData.id)
+  
+  const courses = await res.json()
 
-    const userData = session ? session.userData : ''
-
-    const courses = await prisma.course.findMany({
-        where: {
-            instructor_id: userData.id
-        },
-        orderBy: [{
-            id: 'desc'
-        }]
-    })
-
-  return <HomePage courses={courses} userData={userData}></HomePage>
+  return <HomePage courses={courses.courses} userData={userData}></HomePage>
 }
 
-export default teacherPage
+export default page

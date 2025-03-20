@@ -1,17 +1,17 @@
 import React from 'react'
 
-const NewTeacher = () => {
+const Page = () => {
   return (
-    <div className='bg-slate-300 p-4 w-5/6 mx-auto mt-10'>
+    <div className='bg-slate-300 p-4 lg:w-5/6 mx-auto mt-10'>
         <div>
             <h1 className="text-center text-2xl">Enseña en My Learning!!</h1>
             <p className='text-center text-sm'>Unete al equipo de instructores de my learning!!</p>
         </div>
         <div>
-            <img src="/static/instructors_team.webp" alt="Equipo instructores My Learning" className='block w-1/2 mx-auto my-2' />
+            <img src="/static/instructors_team.webp" alt="Equipo instructores My Learning" className='block lg:w-1/2 mx-auto my-2' />
             <div className='flex flex-col items-center'>
                 <p className='my-1'>En Colombia, contamos con </p>
-                <p className='flex justify-evenly my-2 bg-slate-800 w-full text-white'>
+                <p className='flex flex-col md:flex-row lg:flex-row justify-evenly my-2 bg-slate-800 w-full text-white'>
                     <span className='flex justify-evenly items-center p-6'>
                         <span className='flex items-center text-5xl animate-bounce'>
                             +100
@@ -35,15 +35,15 @@ const NewTeacher = () => {
             <p className='text-center text-sm'>facil!!</p>
             
             <div className='grid grid-cols-3 gap-4 mt-4'>
-                <div className='col-span1 bg-white w-full py-4'>
+                <div className='col-span-3 lg:col-span-1 bg-white w-full py-4'>
                     <h3 className='text-xl text-center'>Planifica e innova con tu curso</h3>
                     <img src="" alt="My Learning instructor setting up a course" className='block mx-auto w-5/6 mt-4' />
                 </div>
-                <div className='col-span1 bg-white w-full py-4'>
+                <div className='col-span-3 lg:col-span-1 bg-white w-full py-4'>
                     <h3 className='text-xl text-center'>Prepara el material para sus lecciónes</h3>
                     <img src="" alt="My Learning instructor preparing videos" className='block mx-auto w-5/6 mt-4' />
                 </div>
-                <div className='col-span1 bg-white w-full py-4'>
+                <div className='col-span-3 lg:col-span-1 bg-white w-full py-4'>
                     <h3 className='text-xl text-center'>Ya estás listo para dar lo mejor de tí</h3>
                     <img src="" alt="My Learning happy instructor" className='block mx-auto w-5/6 mt-4' />
                 </div>
@@ -53,4 +53,4 @@ const NewTeacher = () => {
   )
 }
 
-export default NewTeacher
+export default Page
