@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 const Footer = () => {
-    
     const [isModalVisible, setModalVisible] = useState(false);
 
     const toggleModal = () => {
@@ -18,7 +17,7 @@ const Footer = () => {
     return <>
         <div id="modal" className={`fixed top-0 left-0 h-screen w-full ${isModalVisible ? 'visible' : 'invisible'}`}>
             <div className="h-full flex justify-center items-center bg-slate-900 bg-opacity-50">
-                <div className="bg-slate-200 p-10 w-1/2">
+                <div className="bg-slate-200 p-10 w-full lg:w-1/2">
                     <h2 className="text-xl pb-1 text-slate-800 font-bold border-b border-slate-800 uppercase">
                         Mapa del sitio
                     </h2>
@@ -47,17 +46,17 @@ const Footer = () => {
         </div>
 
         <footer className='mt-10 bg-slate-900 text-slate-300 pt-2'>
-            <div className='px-14 flex flex-row justify-between items-center my-10  mx-auto w-4/5'>
-                <div className='p-4'>
-                    <ul className='inline-block mx-14'>
-                        <Link href="/teacher/new" className='block w-full text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2'>Enseña en my learning</Link>
-                        <Link href="/about" className='block w-full text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2'>¿Quienes somos?</Link>
-                        <Link href="/contact" className='block w-full text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2'>Contactenos</Link>
+            <div className='px-14 flex justify-between items-center my-10 mx-auto w-full lg:flex-row flex-col'>
+                <div className='p-4 lg:w-auto w-screen text-center lg:text-left flex flex-col lg:flex-row'>
+                    <ul className='block md:w-full lg:inline-block lg:mx-10 md:mx-0'>
+                        <Link href="/teacher/new" className='whitespace-nowrap block w-full lg:w-auto text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2 lg:text-left'>Enseña en my learning</Link>
+                        <Link href="/about" className='whitespace-nowrap block w-full lg:w-auto text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2 lg:text-left'>¿Quienes somos?</Link>
+                        <Link href="/contact" className='whitespace-nowrap block w-full lg:w-auto text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2 lg:text-left'>Contactenos</Link>
                     </ul>
-                    <ul className='inline-block mx-14'>
-                        <Link href="/conditions" className='block w-full text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2'>Condiciones</Link>
-                        <Link href="/privacyPolicy" className='block w-full text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2'>Politica de privacidad</Link>
-                        <button onClick={toggleModal} className='block w-full text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2 text-left'>Mapa del sitio</button>
+                    <ul className='block md:w-full lg:inline-block lg:mx-10 md:mx-0'>
+                        <Link href="/conditions" className='whitespace-nowrap block w-full lg:w-auto text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2 lg:text-left'>Condiciones</Link>
+                        <Link href="/privacyPolicy" className='whitespace-nowrap block w-full lg:w-auto text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2 lg:text-left'>Politica de privacidad</Link>
+                        <button onClick={toggleModal} className='whitespace-nowrap block w-full lg:w-auto text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2 lg:text-left md:text-center'>Mapa del sitio</button>
                     </ul>
                 </div>
                 <div className=''>
@@ -99,7 +98,7 @@ const Footer = () => {
                 </div>
             </div>
 
-            <div className='text-center text-xl p-4 border-t border-slate-300'>
+            <div className='text-center text-sm lg:text-xl p-4 border-t border-slate-300'>
                 Todos los derechos reservados &copy; My learning inc. 2024
             </div>
         </footer>

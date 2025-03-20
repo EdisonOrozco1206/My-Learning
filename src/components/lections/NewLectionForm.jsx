@@ -6,6 +6,7 @@ import Link from "next/link";
 
 const NewLectionForm = ({course, user}) => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [position, setPosition] = useState(null);
   const [title, setTitle] = useState(null);
   const [file, setFile] = useState(null);
@@ -54,32 +55,23 @@ const NewLectionForm = ({course, user}) => {
 
     if(Object.keys(inputErrors).length === 0){
       try {
-        const currentdate = new Date();
-        const datetime = 
-            `${currentdate.getDate()}_` +
-            `${(currentdate.getMonth() + 1).toString().padStart(2, '0')}_` +
-            `${currentdate.getFullYear()}_` +
-            `${currentdate.getHours().toString().padStart(2, '0')}-` +
-            `${currentdate.getMinutes().toString().padStart(2, '0')}-` +
-            `${currentdate.getSeconds().toString().padStart(2, '0')}`;
-  
-        setContent(`${datetime}_${file.name}`)
-        
+        setLoading(true);
+        document.body.style.cursor = "wait";
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("filename", content);
     
         const fileupload = await fetch("/api/upload", {
             method: "POST",
             body: formData
         });
+        const fileuploadData = await fileupload.json()
   
         if(fileupload.ok){
           const data = {
             title: title,
             position: position,
             course_id: course_id,
-            content: content
+            content: fileuploadData.url
           };
     
           const res = await fetch("/api/lections/", {
@@ -101,12 +93,15 @@ const NewLectionForm = ({course, user}) => {
       } catch (error) {
         inputErrors["general"] = "Error al agregar la lección.";
         setErrors(inputErrors);
+      }finally {
+        setLoading(false);
+        document.body.style.cursor = "default";
       }
     }
   }
 
   return (
-    <div className='mt-10 w-2/5 mx-auto'>
+    <div className='mt-10 w-full lg:w-2/5 mx-auto'>
       <form onSubmit={onSubmit} className='border p-6'>
         <h2 className='text-2xl text-slate-800 border-b border-slate-800 text-center pb-4 w-full'>
           Agregar Leccion
@@ -125,7 +120,7 @@ const NewLectionForm = ({course, user}) => {
         <span className="block text-xs mb-4 text-justify my-2 text-yellow-500 w-5/6 mx-auto">Nota: solo puedes mandar videos(.mp4) o archivos comprimidos(.zip) como material de apoyo para tus aprendices</span>
 
         {errors.general && <span className="block text-xs text-red-500 w-5/6 mx-auto">{errors.general}</span>}
-        <input className='w-5/6 mt-4 mx-auto block cursor-pointer bg-slate-800 text-white text-xl p-3 hover:bg-slate-600' type="submit" value="Guardar"/>
+        <input className='w-5/6 mt-4 mx-auto block cursor-pointer bg-slate-800 text-white text-xl p-3 hover:bg-slate-600' type="submit" value={loading ? "Guardando..." : "Guardar"}/>
         <Link href={"/course/lections/"+course.id} className="w-5/6 mx-auto block cursor-pointer border border-slate-800 mb-4 text-slate-900 text-xl p-3 hover:bg-slate-100 text-center mt-2">Regresar</Link>
       </form>
     </div>

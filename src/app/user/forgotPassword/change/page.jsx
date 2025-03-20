@@ -43,7 +43,7 @@ const page = () => {
     }
 
     return (
-        <div className='mt-10 w-2/5 mx-auto'>
+        <div className='mt-10 lg:w-2/5 mx-auto'>
             <form action={changePassword} className='border p-6'>
                 <h2 className='text-2xl text-slate-800 border-b border-slate-800 text-center pb-4 w-full'>Crea tu nueva contraseña</h2>
 

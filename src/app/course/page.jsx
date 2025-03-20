@@ -5,7 +5,7 @@ const Page = async () => {
     const coursesData = await coursesReq.json();
 
     return (
-        <div className='bg-slate-300 p-4 w-4/5 mx-auto mt-10'>
+        <div className='bg-slate-300 p-4 lg:w-4/5 mx-auto mt-10'>
             <h1 className="text-center text-2xl border-b border-slate-800 pb-3">Todos nuestros cursos</h1>
             <div>
                 {coursesData.categories.length > 0 ? coursesData.categories.map(element => (

@@ -6,6 +6,7 @@ import Link from "next/link"
 
 const Page = () => {
   const router = useRouter()
+  const [loading, setLoading] = useState(false);
 
   const [name, setName] = useState("")
   const [lastname, setLastname] = useState("")
@@ -34,21 +35,28 @@ const Page = () => {
     
     if(!errors || Object.keys(errors).length == 0){
       try {
+        setLoading(true);
+        document.body.style.cursor = "wait";
+
         const res = await fetch('/api/users', {
           method: 'POST',
           body: JSON.stringify({name, lastname, phone, document_type, document, email, password}),
           headers: {'Contet-type': "application/json"}
         })
-        if(res.ok) return router.push("/user/login")
+        if(res.ok) {
+          return router.push("/user/login")
+        }
       } catch (error) {
         setErrors({ general: "Error al registrar usuario" })
+      }finally {
+        setLoading(false);
+        document.body.style.cursor = "default";
       }
     }
-    
   }
 
   return (
-    <div className='mt-10 w-2/5 mx-auto'>
+    <div className='mt-10 lg:w-2/5 mx-auto'>
       <form className='border p-6' onSubmit={onSubmit}>
         <h2 className='text-2xl text-slate-800 border-b border-slate-800 text-center pb-4 w-full'>Registrarse en My Learning</h2>
 
@@ -79,8 +87,8 @@ const Page = () => {
         {errors.passwords && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.passwords}</p>}
 
         {errors.general && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.general}</p>}
-        <button type="submit" className='w-5/6 mt-4 mx-auto block cursor-pointer bg-slate-800 text-white text-xl p-3 hover:bg-slate-600'>
-          Registrarse
+        <button type="submit" disabled={loading} className='w-5/6 mt-4 mx-auto block cursor-pointer bg-slate-800 text-white text-xl p-3 hover:bg-slate-600'>
+          {loading ? "Registrandose..." : "Registrar"}
         </button>
         <Link href={"/user/login"} className="w-5/6 mx-auto block cursor-pointer border border-slate-800 text-slate-900 text-xl p-3 hover:bg-slate-100 text-center mt-2">Iniciar sesion</Link>
       </form>

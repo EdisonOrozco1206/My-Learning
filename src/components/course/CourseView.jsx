@@ -41,11 +41,11 @@ const CourseView = ({course, user, viewedClasses, courseLections, isBought}) => 
     }
 
     return (
-        <div className="bg-slate-300 p-4 w-5/6 mx-auto mt-10 grid grid-cols-3">
-            <div className="max-h-96 overflow-hidden hover:opacity-65 col-span-2">
-                <img src={"/uploads/"+course.portait} alt={"Portada curso "+course.title} className="w-full" />
+        <div className="bg-slate-300 p-4 w-full lg:w-5/6 mx-auto mt-10 grid grid-cols-3">
+            <div className="max-h-96 overflow-hidden hover:opacity-65 col-span-3 lg:col-span-2">
+                <img src={course.portait} alt={"Portada curso "+course.title} className="w-full" />
             </div>
-            <div className="p-4 flex flex-col col-span-1">
+            <div className="mt-4 lg:mt-0 lg:p-4 flex flex-col col-span-3 lg:col-span-1">
                 <h1 className="text-2xl">{course.title}</h1>
                 <h2>{course.instructor.name} {course.instructor.lastname}</h2>
                 <p>{course.description}</p>
@@ -88,7 +88,7 @@ const CourseView = ({course, user, viewedClasses, courseLections, isBought}) => 
                     ) : ''}
             </div>
             { user.id == course.instructor_id && user.role == "teacher" || user.role == "admin" ? 
-                <div className="px-4 col-span-3 w-1/2 mx-auto mt-4">
+                <div className="lg:px-4 col-span-3 w-full lg:w-1/2 mx-auto mt-4">
                     <h2>Administrar lecciones</h2>
                     <Link href={"/course/lections/"+course.id} className="flex justify-center py-2 bg-slate-900 text-white mt-2 hover:bg-slate-800">
                         Administrar

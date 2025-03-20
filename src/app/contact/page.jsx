@@ -2,14 +2,14 @@ import React from 'react'
 
 const ContactPage = () => {
   return (
-    <div className='bg-slate-300 p-4 w-4/5 mx-auto mt-10'>
+    <div className='bg-slate-300 p-4 lg:w-4/5 mx-auto mt-10'>
         <h1 className="text-center text-2xl">!Contactanos¡</h1>
         <span className='block w-full text-center text-sm '>No dudes en contactarnos ante cualquier inquietud</span>
 
         <div className='mt-4'>
             <div>
                 <h2 className='text-center text-xl'>Nuestros medios de contacto</h2>
-                <div className='mt-4 bg-white p-4 flex flex-row justify-around w-full'>
+                <div className='mt-4 bg-white p-4 flex flex-col lg:flex-row justify-around w-full gap-4'>
                     <div>
                         <svg className='mx-auto' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" width="100" height="100" strokeWidth="2"> <path d="M16 20h3a1 1 0 0 0 1 -1v-14a1 1 0 0 0 -1 -1h-3v16z"></path> <path d="M5 20h3v-16h-3a1 1 0 0 0 -1 1v14a1 1 0 0 0 1 1z"></path> <path d="M16 4l-4 4l-4 -4"></path> <path d="M4 6.5l8 7.5l8 -7.5"></path> </svg> 
                         <p className='text-center'>Puedes contactarnos a nuestro correo</p>

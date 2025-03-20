@@ -30,7 +30,7 @@ const UsersClient = ({users, admin}) => {
     {/* Search Modal */}
     <div id="modal" className={`fixed top-0 left-0 h-screen w-full ${searchModal ? 'visible' : 'invisible'}`}>
       <div className="h-full flex justify-center items-center bg-slate-900 bg-opacity-50">
-        <div className="bg-slate-200 p-4 w-10/12">
+        <div className="bg-slate-200 p-4 w-full lg:w-10/12">
           <div>
             <h2 className="text-xl pb-1 text-slate-800 font-bold border-b border-slate-800 uppercase">
               Buscar usaurio
@@ -50,9 +50,9 @@ const UsersClient = ({users, admin}) => {
       </div>
     </div>
 
-    <div className="bg-slate-300 mt-10 w-4/5 mx-auto p-5">
+    <div className="bg-slate-300 mt-10 w-full lg:w-4/5 mx-auto p-5">
       {admin ? (
-        <h2 className="text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800 uppercase">
+        <h2 className="text-2xl lg:text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800 uppercase">
           Adminitracion de usuarios
         </h2>
       ) : (

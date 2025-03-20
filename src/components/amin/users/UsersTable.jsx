@@ -55,43 +55,43 @@ const UsersTable = ({users, admin}) => {
 
     return <>
         <div id="modal" className={`fixed top-0 left-0 h-screen w-full ${isModalVisible ? 'visible' : 'invisible'}`}>
-        <div className="h-full flex justify-center items-center bg-slate-900 bg-opacity-50">
-          <div className="bg-slate-200 p-4">
-            {role || role != "" ? (
-              <div>
-                <h2 className="text-xl pb-1 text-slate-800 font-bold border-b border-slate-800 uppercase">
-                Cambiar rol del usuario
-                </h2>
-                <p className="my-4">
-                  <select name="role" className='w-full mx-auto my-8 p-4 outline-none focus:border focus:border-slate-800 block border-b border-slate-800' onChange={changeRole}>
-                    <option value="teacher" selected={role=="teacher"}>Instructor</option>
-                    <option value="user" selected={role=="user"}>Usuario</option>
-                    <option value="admin" selected={role=="admin"}>Administrador</option>
-                  </select>
-                </p>
-                <button onClick={updateRole} className="mx-2 cursor-pointer float-right px-4 py-2 border border-green-500 rounded-sm bg-green-500 text-white hover:bg-green-600">
-                  Confirmar
-                </button>
-              </div>
-            ) : (
-              <div>
-                <h2 className="text-xl pb-1 text-slate-800 font-bold border-b border-slate-800 uppercase">
-                ¿Seguro de que deseas realizar esta acción?
-                </h2>
-                <p className="my-4">
-                  Una vez eliminado este usuario, no se puede deshacer la acción
-                </p>
-                <button onClick={deleteUser} className="mx-2 cursor-pointer float-right px-4 py-2 border border-green-500 rounded-sm bg-green-500 text-white hover:bg-green-600">
-                  Confirmar
-                </button>
-              </div>
-            )}
-            <button className="mx-2 cursor-pointer float-right px-4 py-2 border border-red-500 rounded-sm bg-red-500 text-white hover:bg-red-600" onClick={hideModal}>
-              Cancelar
-            </button>
+          <div className="h-full flex justify-center items-center bg-slate-900 bg-opacity-50">
+            <div className="bg-slate-200 w-full lg:w-auto p-4">
+              {role || role != "" ? (
+                <div>
+                  <h2 className="text-xl pb-1 text-slate-800 font-bold border-b border-slate-800 uppercase">
+                  Cambiar rol del usuario
+                  </h2>
+                  <p className="my-4">
+                    <select name="role" className='w-full mx-auto my-8 p-4 outline-none focus:border focus:border-slate-800 block border-b border-slate-800' onChange={changeRole}>
+                      <option value="teacher" selected={role=="teacher"}>Instructor</option>
+                      <option value="user" selected={role=="user"}>Usuario</option>
+                      <option value="admin" selected={role=="admin"}>Administrador</option>
+                    </select>
+                  </p>
+                  <button onClick={updateRole} className="mx-2 cursor-pointer float-right px-4 py-2 border border-green-500 rounded-sm bg-green-500 text-white hover:bg-green-600">
+                    Confirmar
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <h2 className="text-xl pb-1 text-slate-800 font-bold border-b border-slate-800 uppercase">
+                  ¿Seguro de que deseas realizar esta acción?
+                  </h2>
+                  <p className="my-4">
+                    Una vez eliminado este usuario, no se puede deshacer la acción
+                  </p>
+                  <button onClick={deleteUser} className="mx-2 cursor-pointer float-right px-4 py-2 border border-green-500 rounded-sm bg-green-500 text-white hover:bg-green-600">
+                    Confirmar
+                  </button>
+                </div>
+              )}
+              <button className="mx-2 cursor-pointer float-right px-4 py-2 border border-red-500 rounded-sm bg-red-500 text-white hover:bg-red-600" onClick={hideModal}>
+                Cancelar
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
       <div className="flex flex-col">
         <div className="overflow-x-auto sm:mx-0.5 lg:mx-0.5">

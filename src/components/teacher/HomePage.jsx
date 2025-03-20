@@ -3,7 +3,6 @@
 // import React from 'react'
 import Link from "next/link"
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
 const HomePage = ({courses, userData}) => {
     const router = useRouter();
@@ -12,7 +11,10 @@ const HomePage = ({courses, userData}) => {
         e.preventDefault();
         if(id){
             await fetch("/api/courses/"+id, {
-                method: "DELETE"
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                }
             });
 
             router.refresh();
@@ -20,7 +22,7 @@ const HomePage = ({courses, userData}) => {
     }
 
   return (
-    <div className="bg-slate-300 mt-10 w-4/5 mx-auto p-5">
+    <div className="bg-slate-300 mt-10 w-full lg:w-4/5 mx-auto p-5">
         <h2 className="text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800 uppercase">
             Tús cursos
         </h2>
@@ -32,9 +34,9 @@ const HomePage = ({courses, userData}) => {
         <div className="w-full mt-8 gap-4 grid grid-cols-3">
             {courses.length > 0 ? courses.map((course) => {
                 return (
-                    <div className="col-span-1 bg-white flex flex-col justify-between" key={course.id}>
+                    <div className="col-span-3 lg:col-span-1 bg-white flex flex-col justify-between" key={course.id}>
                         <Link href={"/course/details/"+course.id} className="max-h-44 flex justify-center">
-                            <img className="h-full" src={course.portait ? `/uploads/`+course.portait : "https://www.mundodeportivo.com/urbantecno/hero/2022/01/404-1.jpg?width=1200&aspect_ratio=16:9"} alt={"Portada del courso "+course.title} />
+                            <img className="h-full" src={course.portait} alt={"Portada del courso "+course.title} />
                         </Link>
                         <div className="mt-2">
                             <div className="w-full px-4">

@@ -6,6 +6,7 @@ import Link from "next/link";
 
 const EditCourseForm = ({ categories, userData, courseInfo }) => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState(courseInfo.title || '');
   const [description, setDescription] = useState(courseInfo.description || '');
   const [price, setPrice] = useState(courseInfo.price || '');
@@ -29,27 +30,20 @@ const EditCourseForm = ({ categories, userData, courseInfo }) => {
 
     if (Object.keys(inputErrors).length === 0) {
       try {
-        let newPortait = portait;
-        if (file) {
-          const currentdate = new Date();
-          const datetime = 
-              `${currentdate.getDate()}_` +
-              `${(currentdate.getMonth() + 1).toString().padStart(2, '0')}_` +
-              `${currentdate.getFullYear()}_` +
-              `${currentdate.getHours().toString().padStart(2, '0')}-` +
-              `${currentdate.getMinutes().toString().padStart(2, '0')}-` +
-              `${currentdate.getSeconds().toString().padStart(2, '0')}`;
+        setLoading(true);
+        document.body.style.cursor = "wait";
+        let newPortait = portait || '';
 
-          newPortait = `${datetime}_${file.name}`;
-
+        if (file){
           const formData = new FormData();
           formData.append("file", file);
-          formData.append("filename", newPortait);
 
-          await fetch("/api/upload", {
-              method: "POST",
-              body: formData
+          const fileReq = await fetch("/api/upload", {
+            method: "POST",
+            body: formData
           });
+          const fileRes = await fileReq.json()
+          newPortait = fileRes.url;
         }
 
         const res = await fetch('/api/courses/' + courseInfo.id, {
@@ -66,12 +60,15 @@ const EditCourseForm = ({ categories, userData, courseInfo }) => {
         }
       } catch (error) {
         setErrors({ general: "Error al actualizar el curso" });
+      }finally{
+        setLoading(false);
+        document.body.style.cursor = "default";
       }
     }
   };
 
   return (
-    <div className='mt-10 w-2/5 mx-auto'>
+    <div className='mt-10 w-full lg:w-2/5 mx-auto'>
       <form onSubmit={onSubmit} className='border p-6' encType="multipart/form-data">
         <h2 className='text-2xl text-slate-800 border-b border-slate-800 text-center pb-4 w-full'>
           Editar curso - {courseInfo.title}
@@ -79,7 +76,7 @@ const EditCourseForm = ({ categories, userData, courseInfo }) => {
 
         <label htmlFor="portait" className="w-5/6 mx-auto mt-8 p-4 block border-b border-slate-800 text-slate-400">Imagen de portada: </label>  
         <input className='w-5/6 mx-auto mb-8 p-4 outline-none focus:border focus:border-slate-8 block border-b border-slate-800' placeholder='Selecciona la portada:' type="file" name='portait' id="portait" accept="image/*" onChange={(e) => setFile(e.target.files[0])} />
-        <img className="w-2/6 mx-auto" src={courseInfo.portait ? `/uploads/` + courseInfo.portait : "https://www.mundodeportivo.com/urbantecno/hero/2022/01/404-1.jpg?width=1200&aspect_ratio=16:9"} alt={"Portada del curso " + courseInfo.title} />
+        <img className="w-2/6 mx-auto" src={courseInfo.portait} alt={"Portada del curso " + courseInfo.title} />
 
         <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 block border-b border-slate-800' placeholder='Ingresa el titulo:' type="text" name='title' value={title} onChange={(e) => setTitle(e.target.value.trim())} />
         {errors.title && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.title}</p>}
@@ -98,7 +95,7 @@ const EditCourseForm = ({ categories, userData, courseInfo }) => {
         </select>
         {errors.category && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.category}</p>}
 
-        <input className='w-5/6 mx-auto block cursor-pointer bg-slate-800 text-white text-xl p-3 hover:bg-slate-600' type="submit" value="Actualizar" />
+        <input className='w-5/6 mx-auto block cursor-pointer bg-slate-800 text-white text-xl p-3 hover:bg-slate-600' type="submit" disabled={loading} value={loading ? "Actualizando..." : "Actualizar"} />
         <Link href={"/teacher"} className="w-5/6 mx-auto block cursor-pointer border border-slate-800 mb-4 text-slate-900 text-xl p-3 hover:bg-slate-100 text-center mt-2">Regresar</Link>
       </form>
     </div>

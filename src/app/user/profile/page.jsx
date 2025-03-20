@@ -6,6 +6,7 @@ import { getSession, updateSession } from '@/libs/libs';
 
 const ProfilePage = () => {
     const router = useRouter();
+    const [loading, setLoading] = useState(false);
     const [userInfo, setUserInfo] = useState(null);
     const [name, setName] = useState('');
     const [lastname, setLastname] = useState('');
@@ -43,6 +44,8 @@ const ProfilePage = () => {
         if(Object.keys(inputErrors).length === 0) {
             try {
                 const url = `/api/users/${userInfo.id}`;
+                setLoading(true);
+                document.body.style.cursor = "wait";
 
                 const res = await fetch(url, {
                     method: 'PUT',
@@ -59,6 +62,9 @@ const ProfilePage = () => {
             } catch (error) {
                 inputErrors['general'] = 'Error al actualizar perfil';
                 setErrors(inputErrors);
+            }finally {
+                setLoading(false);
+                document.body.style.cursor = "default";
             }
         }
     };
@@ -66,7 +72,7 @@ const ProfilePage = () => {
     if (!userInfo) return <div>Cargando informacion de usuario...</div>;
 
     return (
-        <div className='mt-10 w-2/5 mx-auto'>
+        <div className='mt-10 w-full lg:w-2/5 mx-auto'>
             <form onSubmit={onSubmit} className='border p-6'>
 
                 <h2 className='text-2xl text-slate-800 border-b border-slate-800 text-center pb-4 w-full'>
@@ -95,7 +101,7 @@ const ProfilePage = () => {
                 {errors.email && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.email}</p>}
 
                 {errors.general && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.general}</p>}
-                <input className='w-5/6 mt-4 mx-auto block cursor-pointer bg-slate-800 text-white text-xl p-3 hover:bg-slate-600' type="submit" value="Guardar cambios"/>
+                <input className='w-5/6 mt-4 mx-auto block cursor-pointer bg-slate-800 text-white text-xl p-3 hover:bg-slate-600' type="submit" disabled={loading} value={loading ? "Guardando..." : "Guardar"}/>
             </form>
         </div>
     );

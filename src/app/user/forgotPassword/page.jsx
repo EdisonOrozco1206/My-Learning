@@ -38,7 +38,7 @@ const page = () => {
   }
 
   return (
-    <div className='mt-10 w-2/5 mx-auto'>
+    <div className='mt-10 lg:w-2/5 mx-auto'>
       <form action={sendRecoveryEmail} className='border p-6'>
         <h2 className='text-2xl text-slate-800 border-b border-slate-800 text-center pb-4 w-full'>Recuperar contraseña</h2>
         <p className="text-sm block w-5/6 mx-auto mt-4">Ingresa el correo asociado a tú cuenta y allí te enviaremos un correo para la recuperacion de tu contraseña</p>

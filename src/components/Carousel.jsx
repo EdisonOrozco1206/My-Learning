@@ -30,7 +30,7 @@ const Carousel = () => {
     }, []);
 
     return (
-        <div className="carousel mt-10 w-4/5 mx-auto relative bg-slate-300 max-h-[73vh] overflow-y-hidden">
+        <div className="carousel mt-10 w-full lg:w-4/5 mx-auto relative bg-slate-300 max-h-[73vh] overflow-y-hidden">
             <section className="slider-wrapper">
                 <button className="slide-arrow absolute top-[50%] text-7xl bg-white border rounded-full hover:bg-slate-200 transition-all ml-2" onClick={handlePrev}>
                     <p className="h-14 w-14 flex items-center justify-center">
@@ -52,13 +52,13 @@ const Carousel = () => {
                 
                 <ul className="slides-container overflow-y-hidden max-h-[85vh] flex flex-row" ref={slidesContainerRef}>
                     <li className="slide min-w-full" ref={slideRef}>
-                        <img src="images/banner/banner-1.webp" alt="" className='min-w-full' />
+                        <img src="images/banner/banner-1.webp" alt="" className='min-h-full min-w-full' />
                     </li>
                     <li className="slide min-w-full" ref={slideRef}>
-                        <img src="images/banner/banner-2.jpg" alt="" className='min-w-full' />
+                        <img src="images/banner/banner-2.jpg" alt="" className='min-h-full min-w-full' />
                     </li>
                     <li className="slide min-w-full" ref={slideRef}>
-                        <img src="images/banner/banner-3.jpg" alt="" className='min-w-full' />
+                        <img src="images/banner/banner-3.jpg" alt="" className='min-h-full min-w-full' />
                     </li>
                 </ul>
             </section>

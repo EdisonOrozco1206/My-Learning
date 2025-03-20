@@ -102,11 +102,11 @@ const Page = () => {
     };
 
     return (
-        <div className='bg-slate-300 p-4 w-4/5 mx-auto mt-10'>
+        <div className='bg-slate-300 p-4 w-full lg:w-4/5 mx-auto mt-10'>
             <Suspense fallback={<h2>Cargando detalles de la compra</h2>}>
                 <PaymentHandler setCart={setCart} setUser={setUser} setSentEmail={setSentEmail} />
             </Suspense>
-            <div className='flex w-fit items-center gap-4 mx-auto'>
+            <div className='flex flex-col lg:flex-row w-fit items-center gap-4 mx-auto'>
                 <svg xmlns="http://www.w3.org/2000/svg" className='text-green-500 bg-white rounded-full mx-auto my-2' viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" width={40} height={40} strokeWidth={2}>
                     <path d="M5 7.2a2.2 2.2 0 0 1 2.2 -2.2h1a2.2 2.2 0 0 0 1.55 -.64l.7 -.7a2.2 2.2 0 0 1 3.12 0l.7 .7c.412 .41 .97 .64 1.55 .64h1a2.2 2.2 0 0 1 2.2 2.2v1c0 .58 .23 1.138 .64 1.55l.7 .7a2.2 2.2 0 0 1 0 3.12l-.7 .7a2.2 2.2 0 0 0 -.64 1.55v1a2.2 2.2 0 0 1 -2.2 2.2h-1a2.2 2.2 0 0 0 -1.55 .64l-.7 .7a2.2 2.2 0 0 1 -3.12 0l-.7 -.7a2.2 2.2 0 0 0 -1.55 -.64h-1a2.2 2.2 0 0 1 -2.2 -2.2v-1a2.2 2.2 0 0 0 -.64 -1.55l-.7 -.7a2.2 2.2 0 0 1 0 -3.12l.7 -.7a2.2 2.2 0 0 0 .64 -1.55v-1"></path>
                     <path d="M9 12l2 2l4 -4"></path>
@@ -118,11 +118,11 @@ const Page = () => {
                     <h2 className="text-lg font-bold">Detalles de compra:</h2>
                     <ul>
                         {cart.map((course) => (
-                            <li key={course.id} className="p-2 bg-white rounded-md my-2 flex items-center">
-                                <div className="w-1/2 border-r border-slate-500 max-h-44 overflow-hidden object-center">
-                                    <Image src={`/uploads/${course.portait}`} alt={course.title} width={200} height={200} className="object-cover" />
+                            <li key={course.id} className="p-2 bg-white rounded-none lg:rounded-md my-2 flex flex-col lg:flex-row items-center border-b border-slate-900 lg:border-none">
+                                <div className="w-full lg:w-1/2 lg:border-r border-slate-500 max-h-44 overflow-hidden object-center">
+                                    <Image src={`/uploads/${course.portait}`} alt={course.title} width={200} height={200} className="object-cover w-full" />
                                 </div>
-                                <div className="w-1/2 flex flex-col items-center px-3">
+                                <div className="w-full lg:w-1/2 flex flex-col items-center px-3">
                                     <p className="text-center py-2">{course.title}</p>
                                     <p className="text-center py-2">{course.description}</p>
                                     <p className="text-center py-2 bg-slate-800 text-white w-1/2">${course.price}</p>
@@ -130,10 +130,10 @@ const Page = () => {
                             </li>
                         ))}
                     </ul>
-                    <div className="flex items-center justify-between">
-                        <Link href="/mylearning" className="mx-2 bg-slate-800 p-2 text-white hover:bg-slate-900">Regresar</Link>
+                    <div className="flex flex-col lg:flex-row items-center justify-between mt-4 lg:mt-0">
+                        <Link href="/mylearning" className="mx-2 bg-slate-800 p-4 lg:p-2 text-white hover:bg-slate-900 w-full lg:w-auto text-center my-2 lg:my-0">Regresar</Link>
                         {!sentEmail ? (
-                            <button onClick={email} className="mx-2 bg-green-500 p-2 text-white hover:bg-green-600">Enviar comprobante al correo</button>
+                            <button onClick={email} className="mx-2 bg-green-500 p-4 lg:p-2 text-white hover:bg-green-600 w-full lg:w-auto text-center my-2 lg:my-0">Enviar comprobante al correo</button>
                         ) : (
                             <p className="text-green-500 text-sm block">Enviado correctamente!</p>
                         )}

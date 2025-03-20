@@ -32,7 +32,7 @@ const CategoryClient = ({ categories }) => {
       {/* Search Modal */}
       <div id="modal" className={`fixed top-0 left-0 h-screen w-full ${searchModal ? 'visible' : 'invisible'}`}>
         <div className="h-full flex justify-center items-center bg-slate-900 bg-opacity-50">
-          <div className="bg-slate-200 p-4 w-10/12">
+          <div className="bg-slate-200 p-4 w-full lg:w-10/12">
               <div>
                 <h2 className="text-xl pb-1 text-slate-800 font-bold border-b border-slate-800 uppercase">
                   Buscar categoria
@@ -53,21 +53,21 @@ const CategoryClient = ({ categories }) => {
         </div>
       </div>
 
-      <div className="bg-slate-300 mt-10 w-4/5 mx-auto p-5">
-        <h2 className="text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800 uppercase">
+      <div className="bg-slate-300 mt-10 w-full lg:w-4/5 mx-auto p-5">
+        <h2 className="text-2xl lg:text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800 uppercase">
           Administracion de categorias
         </h2>
 
-        <div className='grid grid-cols-7 gap-4'>
-          <Link href="/admins/dashboard" className='col-span-3 mt-2 flex items-center justify-center w-full bg-slate-800 text-center text-white p-4 hover:bg-slate-900'>
+        <div className='grid grid-cols-8 gap-4'>
+          <Link href="/admins/dashboard" className='col-span-4 lg:col-span-3 mt-2 flex items-center justify-center w-full bg-slate-800 text-center text-white p-4 hover:bg-slate-900'>
             Regresar
           </Link>
 
-          <Link href="/admins/category/new" className='col-span-3 mt-2 flex items-center justify-center w-full bg-green-500 text-center text-white p-4 hover:bg-green-600'>
+          <Link href="/admins/category/new" className='col-span-4 lg:col-span-3 mt-2 flex items-center justify-center w-full bg-green-500 text-center text-white p-4 hover:bg-green-600'>
             Agregar Categoria
           </Link>
 
-          <button onClick={toggleSearchModal} className='col-span-1 mt-2 flex items-center justify-center w-full bg-slate-800 text-center text-white p-4 hover:bg-slate-900'>
+          <button onClick={toggleSearchModal} className='col-span-8 lg:col-span-2 mt-2 flex items-center justify-center w-full bg-slate-800 text-center text-white p-4 hover:bg-slate-900'>
             <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none" stroke="currentColor"  strokeLinecap="round" strokeLinejoin="round" width={24} height={24}  strokeWidth={2}> <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path> <path d="M21 21l-6 -6"></path> </svg> 
           </button>
         </div>
