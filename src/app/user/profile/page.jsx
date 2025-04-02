@@ -21,6 +21,11 @@ const ProfilePage = () => {
             try {
                 const sessionCookie = await getSession()
                 setUserInfo(sessionCookie.userData);
+                setName(sessionCookie.userData.name)
+                setLastname(sessionCookie.userData.lastname)
+                setPhone(sessionCookie.userData.phone)
+                setDocumentType(sessionCookie.userData.document_type)
+                setEmail(sessionCookie.userData.email)
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
@@ -35,7 +40,7 @@ const ProfilePage = () => {
         setErrors([]);
         let inputErrors = [];
         if (!name) inputErrors['name'] = 'Nombre es obligatorio.';
-        if (!phone) inputErrors['phone'] = 'Telefono es obligatorio.';
+        if (!phone) inputErrors['phone'] = 'Tel+efono es obligatorio.';
         if (!document_type) inputErrors['document_type'] = 'Tipo de documento es obligatorio.';
         if (!lastname) inputErrors['lastname'] = 'Apellido es obligatorio.';
         if (!email) inputErrors['email'] = 'Correo es obligatorio.';
@@ -69,7 +74,7 @@ const ProfilePage = () => {
         }
     };
 
-    if (!userInfo) return <div>Cargando informacion de usuario...</div>;
+    if (!userInfo) return <div className='mt-10 w-full lg:w-2/5 mx-auto'><h2>Cargando información de usuario...</h2></div>;
 
     return (
         <div className='mt-10 w-full lg:w-2/5 mx-auto'>
@@ -85,15 +90,15 @@ const ProfilePage = () => {
                 <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='Ingresa tus apellidos:' type="text" name='lastname' defaultValue={userInfo.lastname} onChange={(e) => setLastname(e.target.value.trim())} />
                 {errors.lastname && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.lastname}</p>}
 
-                <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='Ingresa tu telefono:' type="number" name='phone' defaultValue={userInfo.phone} onChange={(e) => setPhone(e.target.value.trim())}/>
+                <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='Ingresa tu teléfono:' type="number" name='phone' defaultValue={userInfo.phone} onChange={(e) => setPhone(e.target.value.trim())}/>
                 {errors.phone && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.phone}</p>}
 
                 {errors.document_type && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.document_type}</p>}
                 <select name="document_type" id="" className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800'  defaultValue={userInfo.document_type} onChange={(e) => setDocumentType(e.target.value.trim())}>
                     <option value="">Selecciona tu tipo de documento</option>
                     <option value="TI">Tarjeta de identidad</option>
-                    <option value="CC">Cedula de ciudadanía</option>
-                    <option value="CE">Cedula de extranjeria</option>
+                    <option value="CC">Cédula de ciudadanía</option>
+                    <option value="CE">Cédula de extranjería</option>
                     <option value="P">Pasaporte</option>
                 </select>
 

@@ -21,8 +21,8 @@ const page = () => {
     const changePassword = async () => {
         setErrors([])
         let inputErrors = []
-        if(!newPassword) inputErrors['password'] = "Contraseña no valida"
-        if(!verifyNewPassword) inputErrors['password_verify'] = "Contraseña no valida"
+        if(!newPassword) inputErrors['password'] = "Contraseña no válida"
+        if(!verifyNewPassword) inputErrors['password_verify'] = "Contraseña no válida"
         if(newPassword != verifyNewPassword) inputErrors['general'] = "Las contraseñas no coinciden"    
         setErrors(inputErrors)
 
@@ -47,7 +47,7 @@ const page = () => {
             <form action={changePassword} className='border p-6'>
                 <h2 className='text-2xl text-slate-800 border-b border-slate-800 text-center pb-4 w-full'>Crea tu nueva contraseña</h2>
 
-                <input className='w-5/6 mx-auto mt-8 mb-2 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='Nueca contraseña:' type="password" name='new_password' onChange={(e) => setNewPassword(e.target.value)} />
+                <input className='w-5/6 mx-auto mt-8 mb-2 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='Nueva contraseña:' type="password" name='new_password' onChange={(e) => setNewPassword(e.target.value)} />
                 {errors.password && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.password}</p>}
 
                 <input className='w-5/6 mx-auto mt-8 mb-2 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='Confirmar contraseña:' type="password" name='verify_new_password' onChange={(e) => setVerifyNewPassword(e.target.value)} />

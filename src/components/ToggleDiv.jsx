@@ -55,7 +55,7 @@ export default function ToggleDiv({ setMenuOpen }) {
                     <ul>
                         <li onClick={closeMenus}>
                             <Link href="/user/profile" className="p-3 block text-center w-full border-t border-slate-300 hover:bg-slate-300 text-slate-300 hover:text-black">
-                                Mi Perfil
+                                Mi Perfíl
                             </Link>
                         </li>
                         {role === "teacher" && (

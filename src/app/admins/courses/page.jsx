@@ -57,7 +57,7 @@ const AdminCoursesPage = () => {
     return <>
 
         {/* Search Modal */}
-        <div id="modal" className={`fixed top-0 left-0 h-screen w-full ${searchModal ? 'visible' : 'invisible'}`}>
+        <div id="modal" className={`fixed top-0 left-0 z-50 h-screen w-full ${searchModal ? 'visible' : 'invisible'}`}>
             <div className="h-full flex justify-center items-center bg-slate-900 bg-opacity-50">
                 <div className="bg-slate-200 p-4 w-full lg:w-10/12">
                     <div>
@@ -69,7 +69,9 @@ const AdminCoursesPage = () => {
                         <input onClick={(e) => fetchSearchData(e)} type="submit" value="Buscar" className='mx-auto cursor-pointer bg-slate-800 text-white my-8 px-3 hover:bg-slate-600'/>
                     </form>
                     {searchInfo ? (
-                        <CourseCard courses={searchInfo} userData={userData}></CourseCard>
+                        searchInfo != '' ? (
+                            <CourseCard courses={searchInfo} userData={userData}></CourseCard>
+                        ) : (<p className='text-center block mx-auto'>Curso no encontrado.</p>)
                     ) : ''}
                     <button className="mx-2 cursor-pointer float-right px-4 py-2 border border-red-500 rounded-sm bg-red-500 text-white hover:bg-red-600" onClick={toggleSearchModal}>
                         Cerrar

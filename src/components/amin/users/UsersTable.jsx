@@ -105,7 +105,7 @@ const UsersTable = ({users, admin}) => {
                       </th>
                       {admin && (
                         <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
-                          ROLE
+                          ROL
                         </th>
                       )}
                       <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
@@ -124,7 +124,7 @@ const UsersTable = ({users, admin}) => {
                         CORREO
                       </th>
                       <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
-                        TELEFONO
+                        TELÉFONO
                       </th>
                       {admin && (
                         <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">

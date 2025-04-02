@@ -27,16 +27,24 @@ export async function PUT(request, {params}){
     return NextResponse.json(lection)
 }
 
-export async function DELETE(request, {params}){
+export async function DELETE(request, { params }) {
     try {
-        const lection = await prisma.lection.delete({
-            where: {
-                id: Number(params.id)
-            }
-        })
+        const lectionId = Number(params.id);
 
-        return NextResponse.json(lection)
+        await prisma.lection_User.deleteMany({
+            where: { lection_id: lectionId }
+        });
+
+        await prisma.comment.deleteMany({
+            where: { lection_id: lectionId }
+        });
+
+        const lection = await prisma.lection.delete({
+            where: { id: lectionId }
+        });
+
+        return NextResponse.json(lection);
     } catch (error) {
-        return NextResponse.json(error.message)
+        return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }

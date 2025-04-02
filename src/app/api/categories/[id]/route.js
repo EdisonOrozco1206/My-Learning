@@ -28,16 +28,50 @@ export async function PUT(request, {params}){
     }
 }
 
-export async function DELETE (request, {params}){
+export async function DELETE(request, {params}) {
     try {
+        await prisma.comment.deleteMany({
+            where: {
+                lection: {
+                    course: {
+                        category: Number(params.id)
+                    }
+                }
+            }
+        });
+
+        await prisma.lection_User.deleteMany({
+            where: {
+                lection: {
+                    course: {
+                        category: Number(params.id)
+                    }
+                }
+            }
+        });
+
+        await prisma.lection.deleteMany({
+            where: {
+                course: {
+                    category: Number(params.id)
+                }
+            }
+        });
+
+        await prisma.course.deleteMany({
+            where: {
+                category: Number(params.id)
+            }
+        });
+
         const category = await prisma.category.delete({
             where: {
                 id: Number(params.id)
             }
-        })
+        });
     
-        return NextResponse.json(category)
+        return NextResponse.json(category);
     } catch (error) {
-        return NextResponse.json(error.message)
+        return NextResponse.json(error.message);
     }
 }

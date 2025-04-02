@@ -58,7 +58,7 @@ const Page = ({params}) => {
 
     return (
         <div className="bg-slate-300 mt-10 w-full lg:w-4/5 mx-auto p-5">
-            <h2 className="text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800">Modificar Certificacion</h2>
+            <h2 className="text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800">Modificar Certificación</h2>
 
             <form action="" className='border p-6 pb-12 w-full lg:w-1/2 mx-auto mt-10' onSubmit={onSubmit}>
                 <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='ID de usuario' type="number" name='user'

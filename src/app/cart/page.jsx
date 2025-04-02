@@ -4,6 +4,8 @@ import { useCartStore } from "@/libs/cartLibs"
 import { api } from "@/libs/apiMercadopago"
 import { useRouter } from "next/navigation"
 import { getSession } from "@/libs/libs"
+import Image from "next/image"
+import Link from "next/link"
 
 const Page = () => {
     const router = useRouter();
@@ -16,7 +18,7 @@ const Page = () => {
         if(!userData){
             router.push("/user/login");
         }
-        
+
         const url = await api.message.submit(cart, userData.userData);
         router.push(url);
     };
@@ -29,19 +31,19 @@ const Page = () => {
 
             {cart.length == 0 ? (
                 <div>
-                    <p>Parece que aún no hay nada en tú carrito de compras</p>
+                    <p>Parece que aún no hay nada en tu carrito de compras</p>
                 </div>
             ) : (
                 <div className="flex flex-col-reverse lg:flex-row justify-evenly">
                     <div className="w-full lg:w-9/12">
                         {cart.map(item => (
                             <div key={item.id} className="grid grid-cols-5 gap-4 border-b border-slate-500">
-                                <div className="col-span-2 m-4 w-full lg:w-1/2 mx-auto">
-                                    <img src={item.portait} alt={"Portada curso"+item.title} />
+                                <div className="col-span-1 m-4 w-full mx-auto">
+                                    <Image quality={100} src={item.portait} alt={"Portada curso "+item.title} width={300} height={300}></Image>
                                 </div>
-                                <div className="col-span-2 m-4 flex flex-col lg:flex-row justify-center lg:justify-between items-center">
+                                <div className="col-span-3 w-full m-4 flex flex-col lg:flex-row justify-center lg:justify-between items-center">
                                     <div>
-                                        <p className="whitespace-nowrap ">{item.title}</p>
+                                        <Link href={"/course/details/"+item.id} className="whitespace-nowrap hover:underline">{item.title.slice(0, 30)}...</Link>
                                     </div>
                                     <div>
                                         <p className="whitespace-nowrap  border border-slate-900 px-4 py-2 mt-4 lg:mt-0">$ {item.price}</p>

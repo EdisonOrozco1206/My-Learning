@@ -8,7 +8,7 @@ export const ForgotPasswordTemplate = ({ userName, userId }) => (
       </div>
       
       <div style={styles.details}>
-        <p style={styles.detail}>Haz click en el siguiente botón para cambiar tu contraseña de my learning</p>
+        <p style={styles.detail}>Haz click en el siguiente botón para cambiar tu contraseña de My Learning</p>
         <p style={styles.button}>
           <a href={`${process.env.BASE_URL}/user/forgotPassword/change?id=${userId}`}>Cambiar tu contraseña</a>
         </p>

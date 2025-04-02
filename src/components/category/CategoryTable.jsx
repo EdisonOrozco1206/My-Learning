@@ -40,7 +40,7 @@ const CategoryTable = ({categories}) => {
             ¿Seguro de que deseas realizar esta acción?
           </h2>
           <p className="my-4">
-            Una vez eliminada esta categoria, no se puede deshacer la acción
+            Una vez eliminada esta categoría, no se puede deshacer la acción
           </p>
           <button onClick={deleteCategory} className="mx-2 cursor-pointer float-right px-4 py-2 border border-green-500 rounded-sm bg-green-500 text-white hover:bg-green-600">
             Confirmar
@@ -63,7 +63,7 @@ const CategoryTable = ({categories}) => {
                         ID
                       </th>
                       <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
-                        TITULO
+                        TÍTULO
                       </th>
                       <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
                         ADMINISTRAR

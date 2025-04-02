@@ -120,7 +120,7 @@ const Page = () => {
                         {cart.map((course) => (
                             <li key={course.id} className="p-2 bg-white rounded-none lg:rounded-md my-2 flex flex-col lg:flex-row items-center border-b border-slate-900 lg:border-none">
                                 <div className="w-full lg:w-1/2 lg:border-r border-slate-500 max-h-44 overflow-hidden object-center">
-                                    <Image src={`/uploads/${course.portait}`} alt={course.title} width={200} height={200} className="object-cover w-full" />
+                                    <Image quality={100} src={course.portait} alt={course.title} width={200} height={200} className="object-cover w-full" />
                                 </div>
                                 <div className="w-full lg:w-1/2 flex flex-col items-center px-3">
                                     <p className="text-center py-2">{course.title}</p>
@@ -135,7 +135,7 @@ const Page = () => {
                         {!sentEmail ? (
                             <button onClick={email} className="mx-2 bg-green-500 p-4 lg:p-2 text-white hover:bg-green-600 w-full lg:w-auto text-center my-2 lg:my-0">Enviar comprobante al correo</button>
                         ) : (
-                            <p className="text-green-500 text-sm block">Enviado correctamente!</p>
+                            <p className="text-green-500 text-sm block">¡Enviado correctamente!</p>
                         )}
                         <p className="font-bold text-lg mt-4">Total: ${cart.reduce((total, course) => total + course.price, 0)}</p>
                     </div>

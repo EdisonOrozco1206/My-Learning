@@ -80,16 +80,16 @@ const CreateCourseForm = ({ categories, userData }) => {
                 <label htmlFor="portait" className="w-5/6 mx-auto mt-8 p-4 block border-b border-slate-800 text-slate-400">Imagen de portada: </label>  
                 <input className='w-5/6 mx-auto mb-8 p-4 outline-none focus:border focus:border-slate-8 block border-b border-slate-800' placeholder='Selecciona la portada:' type="file" name='portait' id="portait" accept="image/*" onChange={(e) => setFile(e.target.files[0])} />
                 {errors.file && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.file}</p>}
-                <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 block border-b border-slate-800' placeholder='Ingresa el titulo:' type="text" name='title' onChange={(e) => setTitle(e.target.value.trim())} />
+                <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 block border-b border-slate-800' placeholder='Ingresa el título:' type="text" name='title' onChange={(e) => setTitle(e.target.value.trim())} />
                 {errors.title && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.title}</p>}
 
-                <textarea className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 block border-b border-slate-800' placeholder='Ingresa la descripcion:' name='description'  onChange={(e) => setDescription(e.target.value.trim())}></textarea>
+                <textarea className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 block border-b border-slate-800' placeholder='Ingresa la descripción:' name='description'  onChange={(e) => setDescription(e.target.value.trim())}></textarea>
                 {errors.description && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.description}</p>}
                 <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 block border-b border-slate-800' placeholder='Ingresa el precio:' type="number" name='price'  onChange={(e) => setPrice(Number(e.target.value.trim()))}/>
                 {errors.price && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.price}</p>}
 
                 <select className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 block border-b border-slate-800' name='category' onChange={(e) => setCategory(Number(e.target.value.trim()))}>
-                    <option value="">Selecciona categoría del curso</option>
+                    <option value="">Selecciona la categoría del curso</option>
                     {categories.map((cat) => (
                         <option key={cat.id} value={cat.id}>{cat.name}</option>
                     ))}

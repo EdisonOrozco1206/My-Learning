@@ -1,11 +1,24 @@
 'use client'
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useState, useEffect } from "react"
+import { redirect, useRouter } from "next/navigation"
 import Link from "next/link"
+import { getSession } from "@/libs/libs"
 
 const Page = () => {
   const router = useRouter()
+  
+  useEffect(() => {
+    async function checkUser() {
+      let session = await getSession();
+  
+      if (session?.userData) {
+        router.push("/");
+      }
+    }
+    checkUser();
+  }, [router]);
+
   const [loading, setLoading] = useState(false);
 
   const [name, setName] = useState("")
@@ -25,7 +38,7 @@ const Page = () => {
     let inputErrors = []
     if(!name) inputErrors["name"] = "Nombre es obligatorio."
     if(!lastname) inputErrors["lastname"] = "Apellido es obligatorio."
-    if(!phone) inputErrors["phone"] = "Telefono es obligatorio."
+    if(!phone) inputErrors["phone"] = "Teléfono es obligatorio."
     if(!document_type) inputErrors["document_type"] = "Tipo doc. es obligatorio."
     if(!document) inputErrors["document"] = "Documento es obligatorio."
     if(!email) inputErrors["email"] = "Correo es obligatorio."
@@ -36,21 +49,20 @@ const Page = () => {
     if(!errors || Object.keys(errors).length == 0){
       try {
         setLoading(true);
-        document.body.style.cursor = "wait";
 
         const res = await fetch('/api/users', {
           method: 'POST',
           body: JSON.stringify({name, lastname, phone, document_type, document, email, password}),
-          headers: {'Contet-type': "application/json"}
+          headers: { "Content-Type": "application/json" }
         })
+
         if(res.ok) {
-          return router.push("/user/login")
+          return router.push("/user/login");
         }
       } catch (error) {
-        setErrors({ general: "Error al registrar usuario" })
-      }finally {
+        setErrors({ general: "Error al registrar el usuario." });
+      } finally {
         setLoading(false);
-        document.body.style.cursor = "default";
       }
     }
   }
@@ -64,19 +76,19 @@ const Page = () => {
         {errors.name && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.name}</p>}
         <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800 ' placeholder='Ingresa tus apellidos:' type="text" name='lastname' onChange={(e) => setLastname(e.target.value.trim())} />
         {errors.lastname && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.lastname}</p>}
-        <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800 ' placeholder='Ingresa tu telefono:' type="number" name='phone' onChange={(e) => setPhone(e.target.value.trim())}/>
+        <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800 ' placeholder='Ingresa tu teléfono:' type="number" name='phone' onChange={(e) => setPhone(e.target.value.trim())}/>
         {errors.phone && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.phone}</p>}
 
         <select name="document_type" id="" className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' onChange={(e) => setDocument_type(e.target.value.trim())}>
             <option value="">Selecciona tu tipo de documento</option>
             <option value="TI">Tarjeta de identidad</option>
-            <option value="CC">Cedula de ciudadanía</option>
-            <option value="CE">Cedula de extranjeria</option>
+            <option value="CC">Cédula de ciudadanía</option>
+            <option value="CE">Cédula de extranjería</option>
             <option value="P">Pasaporte</option>
         </select>
         {errors.document_type && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.document_type}</p>}
 
-        <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800 ' placeholder='Ingresa tu numero de documento:' type="number" name='document' onChange={(e) => setDocument(e.target.value.trim())} />
+        <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800 ' placeholder='Ingresar número de documento:' type="number" name='document' onChange={(e) => setDocument(e.target.value.trim())} />
         {errors.document && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.document}</p>}
         <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800 ' placeholder='Ingresa tu correo:' type="email" name='email' onChange={(e) => setEmail(e.target.value.trim())} />
         {errors.email && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.email}</p>}
@@ -90,7 +102,7 @@ const Page = () => {
         <button type="submit" disabled={loading} className='w-5/6 mt-4 mx-auto block cursor-pointer bg-slate-800 text-white text-xl p-3 hover:bg-slate-600'>
           {loading ? "Registrandose..." : "Registrar"}
         </button>
-        <Link href={"/user/login"} className="w-5/6 mx-auto block cursor-pointer border border-slate-800 text-slate-900 text-xl p-3 hover:bg-slate-100 text-center mt-2">Iniciar sesion</Link>
+        <Link href={"/user/login"} className="w-5/6 mx-auto block cursor-pointer border border-slate-800 text-slate-900 text-xl p-3 hover:bg-slate-100 text-center mt-2">Iniciar sesión</Link>
       </form>
     </div>
   )

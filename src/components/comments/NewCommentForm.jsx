@@ -14,7 +14,7 @@ const NewCommentForm = ({lection, userId}) => {
         setErrors([])
         let inputErrors = []
 
-        if(!content) inputErrors['content'] = 'Contenido no valido'
+        if(!content) inputErrors['content'] = 'Contenido no válido'
         setErrors(inputErrors)
 
         if(content != "Déjanos saber tu opinión ;)"){
@@ -45,7 +45,7 @@ const NewCommentForm = ({lection, userId}) => {
     
             }
         }else{
-            inputErrors['general'] = "Ingresa un comentario valido"
+            inputErrors['general'] = "Ingresa un comentario válido"
             setErrors(inputErrors)
         }
         
@@ -55,7 +55,7 @@ const NewCommentForm = ({lection, userId}) => {
         <div className='mt-10 w-full lg:w-2/5 mx-auto'>
             <form onSubmit={onSubmit} className='border p-6'>
                 <h2 className='text-2xl text-slate-800 border-b border-slate-800 text-center pb-4 w-full'>
-                    Deja tú comentario sobre la lección
+                    Deja tu comentario sobre la lección
                 </h2>
 
                 <textarea name="content" required className="w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800" defaultValue={"Déjanos saber tu opinión ;)"} onChange={(e) => setContent(e.target.value.trim())}></textarea>

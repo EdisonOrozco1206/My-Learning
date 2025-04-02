@@ -3,8 +3,8 @@ import React from 'react'
 const ContactPage = () => {
   return (
     <div className='bg-slate-300 p-4 lg:w-4/5 mx-auto mt-10'>
-        <h1 className="text-center text-2xl">!Contactanos¡</h1>
-        <span className='block w-full text-center text-sm '>No dudes en contactarnos ante cualquier inquietud</span>
+        <h1 className="text-center text-2xl">¡Contáctanos!</h1>
+        <span className='block w-full text-center text-sm '>No dudes en contactarnos ante cualquier inquietud.</span>
 
         <div className='mt-4'>
             <div>
@@ -23,7 +23,7 @@ const ContactPage = () => {
                 </div>
             </div>
             <div className='mt-4'>
-                <h2 className='text-center text-xl'>Tambien puedes visitarnos en nuestra sede</h2>
+                <h2 className='text-center text-xl'>También puedes visitarnos en nuestra sede.</h2>
                 <iframe className='w-full mt-2' src="https://www.google.com/maps/embed?pb=!4v1731598176412!6m8!1m7!1suQayFZTLqeAaWoRuOd7UzA!2m2!1d6.206313941251327!2d-75.6016182838289!3f22.748774425908532!4f-3.1634283876095566!5f1.8703224209882943" width="600" height="450" style={{ border: "0" }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>

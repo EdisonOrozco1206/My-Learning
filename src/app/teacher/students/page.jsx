@@ -1,16 +1,25 @@
+'use client'
+
+import { useState, useEffect } from "react"
 import UsersClient from "@/components/amin/users/UsersClient"
 import { getSession } from "@/libs/libs"
 
-const page = async  () => {
-    const session = await getSession()
+const page = () => {
+    const [users, setUsers] = useState([])
 
-    const res = await fetch(`${process.env.BASE_URL}/api/users/getTeacherStudents/${session.userData.id}`)
-    const users = await res.json()
-
-    console.log(users);
+    useEffect(() => {
+        async function fetchData() {
+            let session = await getSession()
+            let res = await fetch(`/api/users/getTeacherStudents/${session.userData.id}`)
+            let users = await res.json()
+            setUsers(Array.from(users.users))
+        }
+        fetchData()
+    })
 
     return (
-        <UsersClient users={users.users} admin={false}></UsersClient>
+        // <p>Hola</p>
+        <UsersClient users={users} admin={false} ></UsersClient>
     )
 }
 

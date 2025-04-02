@@ -4,8 +4,8 @@ const Page = () => {
   return (
     <div className='bg-slate-300 p-4 lg:w-5/6 mx-auto mt-10'>
         <div>
-            <h1 className="text-center text-2xl">Enseña en My Learning!!</h1>
-            <p className='text-center text-sm'>Unete al equipo de instructores de my learning!!</p>
+            <h1 className="text-center text-2xl">¡Enseña en My Learning!</h1>
+            <p className='text-center text-sm'>Únete al equipo de instructores de My Learning</p>
         </div>
         <div>
             <img src="/static/instructors_team.webp" alt="Equipo instructores My Learning" className='block lg:w-1/2 mx-auto my-2' />
@@ -32,7 +32,7 @@ const Page = () => {
         </div>
         <div className='mt-4'>
             <h2 className="text-center text-2xl">Nuestra metodología de trabajo</h2>
-            <p className='text-center text-sm'>facil!!</p>
+            <p className='text-center text-sm'>¡Fácil!</p>
             
             <div className='grid grid-cols-3 gap-4 mt-4'>
                 <div className='col-span-3 lg:col-span-1 bg-white w-full py-4'>
@@ -40,11 +40,11 @@ const Page = () => {
                     <img src="" alt="My Learning instructor setting up a course" className='block mx-auto w-5/6 mt-4' />
                 </div>
                 <div className='col-span-3 lg:col-span-1 bg-white w-full py-4'>
-                    <h3 className='text-xl text-center'>Prepara el material para sus lecciónes</h3>
+                    <h3 className='text-xl text-center'>Prepara el material para sus lecciones</h3>
                     <img src="" alt="My Learning instructor preparing videos" className='block mx-auto w-5/6 mt-4' />
                 </div>
                 <div className='col-span-3 lg:col-span-1 bg-white w-full py-4'>
-                    <h3 className='text-xl text-center'>Ya estás listo para dar lo mejor de tí</h3>
+                    <h3 className='text-xl text-center'>Ya estás listo para dar lo mejor de ti</h3>
                     <img src="" alt="My Learning happy instructor" className='block mx-auto w-5/6 mt-4' />
                 </div>
             </div>

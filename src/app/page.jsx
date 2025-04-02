@@ -25,7 +25,7 @@ const Page = async () => {
   return <>
     <div className="bg-slate-800 text-white dynamic-text flex items-center justify-center text-center mt-10 h-32 overflow-hidden relative">
       <p className="text-1 text-2xl">
-        !! Bienvenido a my learning c: ¡¡
+        ¡Bienvenido a My Learning c:!
         <span className="block text-sm">
           Donde el conocimiento empieza
         </span>
@@ -36,7 +36,7 @@ const Page = async () => {
 
     <Suspense>
       <div className="bg-slate-300 mt-10 lg:w-4/5 mx-auto p-5">
-        <h2 className="text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800">ULTIMOS CURSOS</h2>
+        <h2 className="text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800">ÚLTIMOS CURSOS</h2>
         <CourseCard courses={courses}></CourseCard>
       </div>
     </Suspense>
@@ -44,7 +44,7 @@ const Page = async () => {
     {!instructor && (
       <div className="lg:w-4/5 mx-auto mt-10 flex flex-col lg:flex-row justify-between items-center gap-4">
         <div className="lg:w-1/2">
-          <Image className="lg:w-3/4 rounded-full"  src="/static/profesor.jpg"  alt="Profesor enseñando"  width={300}  height={300}  />
+          <Image className="lg:w-3/4 rounded-full" src="/static/profesor.jpg" alt="Profesor enseñando" width={300} height={300} />
         </div>
         <div className="lg:ml-10 lg:w-1/2 p-4 lg:p-0">
           <h2 className="text-xl lg:text-2xl font-bold mb-4 border-b border-slate-800 text-slate-800 pb-1">Enseña en My Learning</h2>

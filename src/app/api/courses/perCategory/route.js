@@ -6,7 +6,7 @@ export async function GET(req, { params }) {
     const dbcategories = await prisma.category.findMany({});
 
     for (const c of dbcategories) {
-        const courses = await prisma.course.findMany({
+        let courses = await prisma.course.findMany({
             where: {
                 category: Number(c.id)
             },

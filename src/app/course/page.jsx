@@ -1,7 +1,7 @@
 import CourseCard from "@/components/CourseCard";
 
 const Page = async () => {
-    const coursesReq = await fetch(process.env.BASE_URL+"/api/courses/perCategory");
+    const coursesReq = await fetch(process.env.BASE_URL+"/api/courses/perCategory", {cache: "no-cache" });
     const coursesData = await coursesReq.json();
 
     return (

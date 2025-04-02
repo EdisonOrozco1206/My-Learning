@@ -1,17 +1,27 @@
 import { prisma } from "@/libs/prisma";
 import { NextResponse } from "next/server";
 
-export async function GET(req, {params}){
+export async function GET(req, { params }) {
     try {
-        const id = Number(params.id)
+        const id = Number(params.id);
+
+        console.log(id);
 
         const users = await prisma.user.findMany({
-            include: {courses: true},
-            where: { courses: { some: {instructor_id: id} }}
-        })
+            where: {
+                courses: {
+                    some: {
+                        instructor_id: id
+                    }
+                },
+                NOT: {
+                    id: id
+                }
+            }
+        });
 
-        return NextResponse.json({users})
+        return NextResponse.json({ users });
     } catch (error) {
-        return NextResponse.json({error: error.message})
+        return NextResponse.json({ error: error.message });
     }
 }

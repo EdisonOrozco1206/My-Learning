@@ -28,8 +28,8 @@ const LectionCommentsList = ({comments, userData}) => {
                     <div key={c.div} className='grid grid-cols-2 w-full p-2 bg-slate-100 border-b border-slate-300'>
                         <div className='col-span-2 lg:col-span-1 w-full lg:w-auto whitespace-pre-line'>
                             <h2 className='text-slate-500 text-sm'>
-                                <span className="block w-full lg:w-auto border-b border-slate-500 p-2 lg:p-0 lg:border-none">{c.user.name} {c.user.lastname}</span> 
-                                <span className="w-full lg:w-auto hidden lg:flex">-</span> 
+                                <span className="block w-full lg:w-auto border-b border-slate-500 p-2 lg:p-0 lg:border-none capitalize">{c.user.name} {c.user.lastname}</span> 
+                                <span className="w-full lg:w-auto hidden lg:hidden">-</span> 
                                 <span className="hidden lg:block w-full lg:w-auto text-sm">{c.user.email}</span></h2>
                             <p className="p-2">{c.content}</p>
                         </div>

@@ -66,47 +66,49 @@ const CourseCard = ({ courses, userData, showId }) => {
                 const isBought = boughtCourses.some((bought) => bought.id === course.id);
 
                 return (
-                    <Suspense fallback={<p>Cargando...</p>}>
-                        <div className="col-span-6 md:col-span-3 lg:col-span-2 bg-white flex flex-col justify-between" key={course.id}>
+                    <Suspense key={course.id} fallback={<p>Cargando...</p>}>
+                        <div key={course.id} className="col-span-6 md:col-span-3 lg:col-span-2 bg-white">
                             <Link href={`/course/details/${course.id}`} className="max-h-40 flex justify-center">
-                                <Image  className="object-cover" src={course.portait} alt={`Portada del curso ${course.title}`} layout="instrinsic" width={300} height={400} />
+                                <Image className="object-cover w-full" src={course.portait} quality={100} alt={`Portada del curso ${course.title}`} layout="instrinsic" width={300} height={400} />
                             </Link>
                             <div className="mt-2">
-                                <div className="w-full px-4">
-                                    <Link href={`/course/details/${course.id}`} className="hover:underline">
+                                <div className="w-full flex flex-col justify-between">
+                                    <Link href={`/course/details/${course.id}`} className="hover:underline px-3">
                                         {showId ? <p>ID: {course.id}</p> : ''}
-                                        <h3 className="text-xl font-bold capitalize">{course.title}</h3>
-                                        <p className="w-full pb-2">{course.description}</p>
+                                        <h3 className="text-lg font-bold capitalize" title={course.title}>{course.title.slice(0, 28)}...</h3>
+                                        <p className="w-full pb-2" title={course.description}>{course.description.slice(0, 28)}...</p>
+                                        <p className="pt-2 border-t border-slate-900">{course.instructor.name} {course.instructor.lastname}</p>
                                     </Link>
-                                    <p className="pt-2 border-t border-slate-900">{course.instructor.name} {course.instructor.lastname}</p>
+                                    {!isBought ? (
+                                    // {userData.id == course.instructor.id ? ('') : (
+                                        <button onClick={() => handleCartAndRedirect(course)} className="bg-slate-800 text-slate-300 w-full text-lg text-center mt-2 p-2 hover:bg-slate-900 flex justify-between">
+                                            <span></span>
+                                            <span>$ {course.price}</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" width="30" height="30" strokeWidth="2"> 
+                                                <path d="M10 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path> 
+                                                <path d="M5.001 8h13.999a2 2 0 0 1 1.977 2.304l-1.255 7.152a3 3 0 0 1 -2.966 2.544h-9.512a3 3 0 0 1 -2.965 -2.544l-1.255 -7.152a2 2 0 0 1 1.977 -2.304z"></path> 
+                                                <path d="M17 10l-2 -6"></path> 
+                                                <path d="M7 10l2 -6"></path> 
+                                            </svg>
+                                        </button>
+                                    // )}
+                                    ) : (
+                                        <Link href={`/course/details/${course.id}`} className="bg-slate-800 text-slate-300 w-full text-lg text-center mt-2 p-2 hover:bg-slate-900 flex justify-center">
+                                            {course.instructor.id == user.id ? 'Ver curso' : 'Continuar curso'}
+                                        </Link>
+                                    )}
+                                    {userData && userData.userData.role === "admin" && (
+                                        <button className="bg-red-800 text-slate-300 w-full text-lg text-center p-2 hover:bg-red-900 flex justify-center" onClick={() => deleteCourse(course.id)}>
+                                            Eliminar
+                                        </button>
+                                    )} 
                                 </div>
-                                {!isBought ? (
-                                    <button onClick={() => handleCartAndRedirect(course)} className="bg-slate-800 text-slate-300 w-full text-lg text-center mt-2 p-2 hover:bg-slate-900 flex justify-between">
-                                        <span></span>
-                                        <span>$ {course.price}</span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" width="30" height="30" strokeWidth="2"> 
-                                            <path d="M10 14a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path> 
-                                            <path d="M5.001 8h13.999a2 2 0 0 1 1.977 2.304l-1.255 7.152a3 3 0 0 1 -2.966 2.544h-9.512a3 3 0 0 1 -2.965 -2.544l-1.255 -7.152a2 2 0 0 1 1.977 -2.304z"></path> 
-                                            <path d="M17 10l-2 -6"></path> 
-                                            <path d="M7 10l2 -6"></path> 
-                                        </svg>
-                                    </button>
-                                ) : (
-                                    <Link href={`/course/details/${course.id}`} className="bg-slate-800 text-slate-300 w-full text-lg text-center mt-2 p-2 hover:bg-slate-900 flex justify-center">
-                                        {course.instructor.id == user.id ? 'Ver curso' : 'Continuar curso'}
-                                    </Link>
-                                )}
-                                {userData && userData.userData.role === "admin" && (
-                                    <button className="bg-red-800 text-slate-300 w-full text-lg text-center p-2 hover:bg-red-900 flex justify-center" onClick={() => deleteCourse(course.id)}>
-                                        Eliminar
-                                    </button>
-                                )} 
                             </div>
                         </div>
                     </Suspense>
                 );
             }) : (
-                <p className="col-span-6 text-center text-xl">Upss!!, parece que no hay elementos disponibles para mostrar :c</p>
+                <p className="col-span-6 text-center text-xl pb-4">¡Upss! Parece que no hay elementos disponibles para mostrar :c</p>
             )}
         </div>
     );

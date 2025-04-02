@@ -24,7 +24,7 @@ const AdminDashboard = async () => {
 
   return (
     <div className="bg-slate-300 p-4 lg:w-4/5 mx-auto mt-10">
-      <h1 className="text-center text-2xl">Bienvenido a administración!!</h1>
+      <h1 className="text-center text-2xl">¡Bienvenido a administración!</h1>
 
       <div className="grid grid-cols-10 gap-4 mt-4">
         <Link  href={"/admins/transactions"} className="col-span-5 lg:col-span-2 border flex justify-center items-center bg-green-500 p-4 hover:bg-green-600 transition-all">
@@ -37,7 +37,7 @@ const AdminDashboard = async () => {
         </Link>
         <Link  href={"/admins/category"} className="col-span-5 lg:col-span-2 border flex justify-center items-center bg-purple-500 p-4 hover:bg-purple-600 transition-all">
           <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" width="40" height="40" strokeWidth="2"> <path d="M4 6l16 0"></path> <path d="M4 12l16 0"></path> <path d="M4 18l12 0"></path> </svg> </span>
-          <span>Categorias</span>
+          <span>Categorías</span>
         </Link>
         <Link  href={"/admins/courses"} className="col-span-5 lg:col-span-2 border flex justify-center items-center bg-yellow-500 p-4 hover:bg-yellow-600 transition-all">
           <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" width="40" height="40" strokeWidth="2"> <path d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"></path> <path d="M16 3l-4 4l-4 -4"></path> </svg> </span>
@@ -49,7 +49,7 @@ const AdminDashboard = async () => {
         </Link>
       </div>
 
-      <h2 className="text-center text-2xl mt-4">Ultimas transacciones</h2>
+      <h2 className="text-center text-2xl mt-4">Últimas transacciones</h2>
       <div>
         <div className="flex w-full lg:w-2/6 mx-auto justify-center gap-4 whitespace-nowrap">
           <p className="bg-slate-800 text-white w-fit my-2 px-4 py-2">Total hoy: ${total}</p>

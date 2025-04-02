@@ -33,9 +33,32 @@ export async function PUT(request, {params}){
 
 export async function DELETE(request, {params}){
     try {
+        const courseId = Number(params.id);
+
+        const lections = await prisma.lection.findMany({
+            where: { course_id: courseId },
+            select: { id: true }
+        });
+
+        const lectionIds = lections.map(lection => lection.id);
+
+        if (lectionIds.length > 0) {
+            await prisma.lection_User.deleteMany({
+                where: { lection_id: { in: lectionIds } }
+            });
+
+            await prisma.comment.deleteMany({
+                where: { lection_id: { in: lectionIds } }
+            });
+
+            await prisma.lection.deleteMany({
+                where: { id: { in: lectionIds } }
+            });
+        }
+
         const course = await prisma.course.delete({
             where: {
-                id: Number(params.id)
+                id: courseId
             }
         })
 

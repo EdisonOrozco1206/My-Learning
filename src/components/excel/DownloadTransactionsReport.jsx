@@ -35,7 +35,7 @@ const DownloadTransactionsReport = ({all}) => {
     return (
         <div>
             {downloaded ? (
-                <p className="border border-green-500 text-green-500 w-fit mx-auto my-2 px-4 py-2">Reporte descargado!</p>
+                <p className="border border-green-500 text-green-500 w-fit mx-auto my-2 px-4 py-2">¡Reporte descargado!</p>
             ) : (
                 <button onClick={downloadReport} className="border border-slate-800 hover:bg-slate-400 w-fit mx-auto my-2 px-4 py-2">Descargar reporte</button>
             )}

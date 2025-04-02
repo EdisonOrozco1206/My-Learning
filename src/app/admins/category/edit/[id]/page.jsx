@@ -45,7 +45,7 @@ const EditCategory = ({params}) => {
                     router.refresh()
                 }
             } catch (error) {
-                inputErrors["general"] = "Error al editar la categoria."
+                inputErrors["general"] = "Error al editar la categoría."
                 setErrors(inputErrors)
             }finally {
                 setLoading(false);
@@ -64,7 +64,7 @@ const EditCategory = ({params}) => {
     </Link>
 
     <div className="bg-slate-300 mt-10 w-full lg:w-4/5 mx-auto p-5">
-        <h2 className="text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800">Editar categoria({name})</h2>
+        <h2 className="text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800">Editar categoría({name})</h2>
 
         <form action="" className='border p-6 pb-12 w-full lg:w-1/2 mx-auto mt-10' onSubmit={onSubmit}>
             <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='Nuevo titulo de la categoria' type="text" name='name' onChange={(e) => { setName(e.target.value.trim()) }} value={name} />

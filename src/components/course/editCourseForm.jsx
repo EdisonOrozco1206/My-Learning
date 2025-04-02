@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 const EditCourseForm = ({ categories, userData, courseInfo }) => {
   const router = useRouter();
@@ -76,12 +77,12 @@ const EditCourseForm = ({ categories, userData, courseInfo }) => {
 
         <label htmlFor="portait" className="w-5/6 mx-auto mt-8 p-4 block border-b border-slate-800 text-slate-400">Imagen de portada: </label>  
         <input className='w-5/6 mx-auto mb-8 p-4 outline-none focus:border focus:border-slate-8 block border-b border-slate-800' placeholder='Selecciona la portada:' type="file" name='portait' id="portait" accept="image/*" onChange={(e) => setFile(e.target.files[0])} />
-        <img className="w-2/6 mx-auto" src={courseInfo.portait} alt={"Portada del curso " + courseInfo.title} />
+        <Image className="w-2/6 mx-auto" src={courseInfo.portait} alt={"Portada del curso " + courseInfo.title} width={100} height={100} />
 
-        <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 block border-b border-slate-800' placeholder='Ingresa el titulo:' type="text" name='title' value={title} onChange={(e) => setTitle(e.target.value.trim())} />
+        <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 block border-b border-slate-800' placeholder='Ingresa el título:' type="text" name='title' value={title} onChange={(e) => setTitle(e.target.value.trim())} />
         {errors.title && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.title}</p>}
 
-        <textarea className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 block border-b border-slate-800' placeholder='Ingresa la descripcion:' name='description' value={description} onChange={(e) => setDescription(e.target.value.trim())}></textarea>
+        <textarea className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 block border-b border-slate-800' placeholder='Ingresa la descripción:' name='description' value={description} onChange={(e) => setDescription(e.target.value.trim())}></textarea>
         {errors.description && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.description}</p>}
 
         <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 block border-b border-slate-800' placeholder='Ingresa el precio:' type="number" name='price' value={price} onChange={(e) => setPrice(Number(e.target.value.trim()))} />

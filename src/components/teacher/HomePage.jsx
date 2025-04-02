@@ -1,6 +1,7 @@
 'use client';
 
-// import React from 'react'
+import Image from "next/image";
+import React from 'react'
 import Link from "next/link"
 import { useRouter } from "next/navigation";
 
@@ -24,7 +25,7 @@ const HomePage = ({courses, userData}) => {
   return (
     <div className="bg-slate-300 mt-10 w-full lg:w-4/5 mx-auto p-5">
         <h2 className="text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800 uppercase">
-            Tús cursos
+            Tus cursos
         </h2>
 
         <Link href="/course/new" className='mt-2 flex items-center justify-center w-full bg-green-500 text-center text-white p-4 hover:bg-green-600'>
@@ -36,13 +37,13 @@ const HomePage = ({courses, userData}) => {
                 return (
                     <div className="col-span-3 lg:col-span-1 bg-white flex flex-col justify-between" key={course.id}>
                         <Link href={"/course/details/"+course.id} className="max-h-44 flex justify-center">
-                            <img className="h-full" src={course.portait} alt={"Portada del courso "+course.title} />
+                            <Image quality={100} className="w-full" src={course.portait} height={100} width={100} alt={"Portada del curso "+course.title} />
                         </Link>
                         <div className="mt-2">
                             <div className="w-full px-4">
                                 <p>ID: {course.id}</p>
-                                <h3 className="text-xl font-bold capitalize">{course.title}</h3>
-                                <p className="w-full">{course.description}</p>
+                                <h3 className="text-xl font-bold capitalize">{course.title.slice(0, 30)}...</h3>
+                                <p className="w-full">{course.description.slice(0, 30)}...</p>
                             </div>
                             <span className="bg-slate-800 text-slate-300 block w-full text-lg text-center p-2 mt-2">$ {course.price}</span>
                         </div>

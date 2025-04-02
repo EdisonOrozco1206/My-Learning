@@ -107,7 +107,7 @@ const NewLectionForm = ({course, user}) => {
           Agregar Leccion
         </h2>
 
-        <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='Titulo:' type="text" name='title' onChange={(e) => setTitle(e.target.value.trim())} />
+        <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='Título:' type="text" name='title' onChange={(e) => setTitle(e.target.value.trim())} />
         {errors.title && <span className="block text-xs text-red-500 w-5/6 mx-auto">{errors.title}</span>}
 
         <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='Posición:' type="number" name='position' onChange={(e) => setPosition(parseInt(e.target.value.trim()))} />
@@ -117,7 +117,7 @@ const NewLectionForm = ({course, user}) => {
         <input className='w-5/6 mx-auto mb-8 p-4 outline-none focus:border focus:border-slate-8 block border-b border-slate-800' placeholder='Contenido de la lección:' type="file" name='content' accept="video/*, .zip" onChange={(e) => setFile(e.target.files[0])} />
         {errors.file && <span className="block text-xs text-red-500 w-5/6 mx-auto">{errors.file}</span>}
 
-        <span className="block text-xs mb-4 text-justify my-2 text-yellow-500 w-5/6 mx-auto">Nota: solo puedes mandar videos(.mp4) o archivos comprimidos(.zip) como material de apoyo para tus aprendices</span>
+        <span className="block text-xs mb-4 text-justify my-2 text-yellow-500 w-5/6 mx-auto">Nota: solo puedes mandar videos(.mp4) o archivos comprimidos(.zip) como material de apoyo para tus aprendices(tamaño max. 5mb)</span>
 
         {errors.general && <span className="block text-xs text-red-500 w-5/6 mx-auto">{errors.general}</span>}
         <input className='w-5/6 mt-4 mx-auto block cursor-pointer bg-slate-800 text-white text-xl p-3 hover:bg-slate-600' type="submit" value={loading ? "Guardando..." : "Guardar"}/>
