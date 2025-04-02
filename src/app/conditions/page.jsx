@@ -14,7 +14,7 @@ const Page = () => {
                 <div className="col-span-4 lg:col-span-2 bg-white">
                     <h2 className="capitalize font-bold text-center my-1 text-lg border-b border-slate-400">Requisitos de registro</h2>
                     <p className="py-2 px-4 text-justify">
-                        Para acceder a ciertos servicios de la Plataforma, es necesario registrarse proporcionando informaci&oacute;n veraz, completa y actualizada.
+                        Para acceder a ciertos servicios de la plataforma, es necesario registrarse proporcionando informaci&oacute;n veraz, completa y actualizada.
                     </p>
                     <p className="py-2 px-4 text-justify">
                         Cada usuario es responsable de mantener la confidencialidad de sus credenciales de acceso.
@@ -23,7 +23,7 @@ const Page = () => {
                 <div className="col-span-4 lg:col-span-2 bg-white">
                     <h2 className="capitalize font-bold text-center my-1 text-lg border-b border-slate-400">Uso aceptable</h2>
                     <p className="py-2 px-4 text-justify">
-                        Los usuarios deben utilizar la Plataforma exclusivamente para fines educativos y de acuerdo con las leyes vigentes.
+                        Los usuarios deben utilizar la plataforma exclusivamente para fines educativos y de acuerdo con las leyes vigentes.
                     </p>
                     <p className="py-2 px-4 text-justify">
                         Est&aacute; prohibido compartir el acceso a los cursos con terceros, as&iacute; como distribuir o comercializar el contenido de los cursos sin autorizaci&oacute;n.
@@ -41,7 +41,7 @@ const Page = () => {
                 <div className="col-span-4 lg:col-span-2 bg-white">
                     <h2 className="capitalize font-bold text-center my-1 text-lg border-b border-slate-400">Propiedad intelectual</h2>
                     <p className="py-2 px-4 text-justify">
-                        Todo el contenido de la Plataforma (textos, videos, im&aacute;genes, etc.) est&aacute; protegido por derechos de propiedad intelectual.
+                        Todo el contenido de la plataforma (textos, videos, im&aacute;genes, etc.) est&aacute; protegido por derechos de propiedad intelectual.
                     </p>
                     <p className="py-2 px-4">
                         Queda prohibida la reproducci&oacute;n, distribuci&oacute;n o modificaci&oacute;n del contenido sin autorizaci&oacute;n expresa.
@@ -50,13 +50,13 @@ const Page = () => {
                 <div className="col-span-4 lg:col-span-2 bg-white">
                     <h2 className="capitalize font-bold text-center my-1 text-lg border-b border-slate-400">Suspensi&oacute;n o cancelaci&oacute;n de la cuenta</h2>
                     <p className="py-2 px-4 text-justify">
-                        Nos reservamos el derecho de suspender o cancelar cuentas en caso de incumplimiento de estas Condiciones.
+                        Nos reservamos el derecho de suspender o cancelar cuentas en caso de incumplimiento de estas condiciones.
                     </p>
                 </div>
                 <div className="col-span-4 bg-white">
                     <h2 className="capitalize font-bold text-center my-1 text-lg border-b border-slate-400">Modificaciones</h2>
                     <p className="py-2 px-4 text-justify">
-                        Nos reservamos el derecho de modificar estas Condiciones en cualquier momento. Los cambios se notificar&aacute;n a trav&eacute;s de la Plataforma.
+                        Nos reservamos el derecho de modificar estas condiciones en cualquier momento. Los cambios se notificar&aacute;n a trav&eacute;s de la plataforma.
                     </p>
                 </div>
             </div>

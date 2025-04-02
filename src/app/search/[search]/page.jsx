@@ -19,11 +19,11 @@ const SearchPage = async ({params}) => {
 
     return (
         <div className="bg-slate-300 p-4 lg:w-4/5 mx-auto mt-10">
-            <h1 className="text-center text-2xl">Resultados de busqueda...</h1>
+            <h1 className="text-center text-2xl">Resultados de búsqueda...</h1>
 
             {courses && courses.length > 0 ? (
                 <CourseCard courses={courses}></CourseCard>
-            ) : (<p>No se ha encontrado nada...</p>)}
+            ) : (<p>No se ha encontrado nada.</p>)}
         </div>
     )
 }

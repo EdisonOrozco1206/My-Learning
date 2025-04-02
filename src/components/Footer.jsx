@@ -23,16 +23,15 @@ const Footer = () => {
                     </h2>
                     <ul className="my-4 list-disc">
                         <li><Link onClick={toggleModal} className='text-sm underline' href="/">Inicio</Link></li>
-                        <li><Link onClick={toggleModal} className='text-sm underline' href="/about">Sobre Nosotros</Link></li>
-                        <li><Link onClick={toggleModal} className='text-sm underline' href="/courses">Cursos</Link></li>
+                        <li><Link onClick={toggleModal} className='text-sm underline' href="/about">Sobre nosotros</Link></li>
+                        <li><Link onClick={toggleModal} className='text-sm underline' href="/course">Cursos</Link></li>
                         <li><Link onClick={toggleModal} className='text-sm underline' href="/user/register">Registrarse</Link></li>
                         <li><Link onClick={toggleModal} className='text-sm underline' href="/user/login">Iniciar sesión</Link></li>
                         <li><Link onClick={toggleModal} className='text-sm underline' href="/cart">Carrito</Link></li>
-                        <li><Link onClick={toggleModal} className='text-sm underline' href="/teacher/new">Enseñar en My learning</Link></li>
+                        <li><Link onClick={toggleModal} className='text-sm underline' href="/teacher/new">Enseñar en My Learning</Link></li>
                         <li><Link onClick={toggleModal} className='text-sm underline' href="/contact">Contáctanos</Link></li>
-                        <li><Link onClick={toggleModal} className='text-sm underline' href="/conditions">Condiciones</Link></li>
+                        <li><Link onClick={toggleModal} className='text-sm underline' href="/conditions">Términos y condiciones</Link></li>
                         <li><Link onClick={toggleModal} className='text-sm underline' href="/privacyPolicy">Política de privacidad</Link></li>
-                        <li><Link onClick={toggleModal} className='text-sm underline' href="#">Mapa del sitio</Link></li>
                         <li><Link onClick={toggleModal} className='text-sm underline' href="https://twitter.com" target="_blank">Twitter</Link></li>
                         <li><Link onClick={toggleModal} className='text-sm underline' href="https://instagram.com" target="_blank">Instagram</Link></li>
                         <li><Link onClick={toggleModal} className='text-sm underline' href="https://facebook.com" target="_blank">Facebook</Link></li>
@@ -49,14 +48,14 @@ const Footer = () => {
             <div className='px-14 flex justify-between items-center my-10 mx-auto w-full lg:flex-row flex-col'>
                 <div className='p-4 lg:w-auto w-screen text-center lg:text-left flex flex-col lg:flex-row'>
                     <ul className='block md:w-full lg:inline-block lg:mx-10 md:mx-0'>
-                        <Link href="/teacher/new" className='whitespace-nowrap block w-full lg:w-auto text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2 lg:text-left'>Enseña en my learning</Link>
-                        <Link href="/about" className='whitespace-nowrap block w-full lg:w-auto text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2 lg:text-left'>¿Quienes somos?</Link>
-                        <Link href="/contact" className='whitespace-nowrap block w-full lg:w-auto text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2 lg:text-left'>Contactenos</Link>
+                        <Link href="/teacher/new" className='whitespace-nowrap block w-full lg:w-auto text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2 lg:text-left'>Enseña en My Learning</Link>
+                        <Link href="/about" className='whitespace-nowrap block w-full lg:w-auto text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2 lg:text-left'>¿Quiénes somos?</Link>
+                        <Link href="/contact" className='whitespace-nowrap block w-full lg:w-auto text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2 lg:text-left'>Contáctenos</Link>
                     </ul>
                     <ul className='block md:w-full lg:inline-block lg:mx-10 md:mx-0'>
-                        <Link href="/conditions" className='whitespace-nowrap block w-full lg:w-auto text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2 lg:text-left'>Condiciones</Link>
-                        <Link href="/privacyPolicy" className='whitespace-nowrap block w-full lg:w-auto text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2 lg:text-left'>Politica de privacidad</Link>
-                        <button onClick={toggleModal} className='whitespace-nowrap block w-full lg:w-auto text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2 lg:text-left md:text-center'>Mapa del sitio</button>
+                        <Link href="/conditions" className='whitespace-nowrap block w-full lg:w-auto text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2 lg:text-left'>Términos y condiciones</Link>
+                        <Link href="/privacyPolicy" className='whitespace-nowrap block w-full lg:w-auto text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2 lg:text-left'>Política de privacidad</Link>
+                        <button onClick={toggleModal} className='whitespace-nowrap block w-full lg:w-full text-lg border-b border-slate-300 hover:bg-slate-300 hover:text-slate-800 p-2 lg:text-left md:text-center'>Mapa del sitio</button>
                     </ul>
                 </div>
                 <div className=''>
@@ -99,7 +98,7 @@ const Footer = () => {
             </div>
 
             <div className='text-center text-sm lg:text-xl p-4 border-t border-slate-300'>
-                Todos los derechos reservados &copy; My learning inc. 2024
+                Todos los derechos reservados &copy; My learning Inc. 2025.
             </div>
         </footer>
     </>

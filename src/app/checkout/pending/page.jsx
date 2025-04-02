@@ -1,3 +1,5 @@
+'use client'
+
 import Link from "next/link"
 
 const page = () => {
@@ -12,7 +14,7 @@ const page = () => {
         <h1 className='text-center text-xl'>Tu transacción está pendiente</h1>
       </div>
       <div>
-        <h2 className="text-center text-sm text-slate-500 w-full lg:w-1/2 mx-auto">Una vez seamos notificados de la transaccion, haremos el resto del trabajo, no te preocupes ;), mientras tanto puedes...</h2>
+        <h2 className="text-center text-sm text-slate-500 w-full lg:w-1/2 mx-auto">Una vez seamos notificados de la transacción, haremos el resto del trabajo, no te preocupes ;), mientras tanto puedes...</h2>
         <div className="w-full lg:w-1/2 flex justify-center mx-auto mt-4">
           <Link href={"/"} className=" bg-slate-800 hover:bg-slate-900 text-center p-4 lg:p-2 text-white">Volver al inicio</Link>
         </div>

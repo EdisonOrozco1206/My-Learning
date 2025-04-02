@@ -33,6 +33,7 @@ const NavbarClient = ({ categories, user, sessionCookie }) => {
                         {sessionCookie ? (
                             <>
                                 <li><Link href="/mylearning" className="p-4 hover:bg-slate-300 hover:text-black border-b border-slate-300">Mi aprendizaje</Link></li>
+                                {user.role === 'user' && <li><Link href="/course" className="p-4 hover:bg-slate-300 hover:text-black border-b border-slate-300">Cursos</Link></li>}
                                 {user.role === 'teacher' && <li><Link href="/teacher" className="p-4 hover:bg-slate-300 hover:text-black border-b border-slate-300">Mis cursos</Link></li>}
                                 {user.role === 'admin' && <li><Link href="/admins/dashboard/" className="p-4 hover:bg-slate-300 hover:text-black border-b border-slate-300">Administración</Link></li>}
                             </>

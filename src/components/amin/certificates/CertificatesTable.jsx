@@ -51,7 +51,7 @@ const CertificatesTable = ({certificates, role}) => {
                         ¿Seguro de que deseas realizar esta acción?
                     </h2>
                     <p className="my-4">
-                        Una vez eliminada esta categoria, no se puede deshacer la acción
+                        Una vez eliminado este registro, no se puede deshacer la acción
                     </p>
                     <button onClick={deleteCertificate} className="mx-2 cursor-pointer float-right px-4 py-2 border border-green-500 rounded-sm bg-green-500 text-white hover:bg-green-600">
                         Confirmar
@@ -67,7 +67,7 @@ const CertificatesTable = ({certificates, role}) => {
             <div className="h-full flex justify-center items-center bg-slate-900 bg-opacity-50">
                 <div className="bg-slate-200 p-4 w-full lg:w-2/6">
                     <h2 className="text-xl pb-1 text-slate-800 font-bold border-b border-slate-800 uppercase">
-                        Informacion del usuario
+                        Información del usuario
                     </h2>
                     <div className="mb-4">
                         <div className="flex justify-between border-b border-slate-800">
@@ -95,7 +95,7 @@ const CertificatesTable = ({certificates, role}) => {
                             <div>{user.email}</div>
                         </div>
                         <div className="flex justify-between border-b border-slate-800">
-                            <div>Telefono</div>
+                            <div>Teléfono</div>
                             <div>{user.phone}</div>
                         </div>
                     </div>
@@ -126,7 +126,7 @@ const CertificatesTable = ({certificates, role}) => {
                                         FECHA VALI.
                                     </th>
                                     <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
-                                        Opciones
+                                        OPCIONES
                                     </th>
                                 </tr>
                             </thead>

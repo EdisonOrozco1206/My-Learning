@@ -13,39 +13,39 @@ const Page = () => {
                     </p>
                 </div>
                 <div className="col-span-4 lg:col-span-2 bg-white">
-                    <h2 className="capitalize font-bold text-center my-1 text-lg border-b border-slate-400">Información que Recopilamos</h2>
+                    <h2 className="capitalize font-bold text-center my-1 text-lg border-b border-slate-400">Información que recopilamos</h2>
                     <p className="py-2 px-4 text-justify">
-                        Información proporcionada directamente por el usuario al registrarse, como nombre, correo electrónico, y datos de pago.
+                        Información proporcionada directamente por el usuario al registrarse, como nombre, correo electrónico y datos de pago.
                     </p>
                     <p className="py-2 px-4 text-justify">
                         Información recopilada automáticamente, como la dirección IP y datos de uso de la Plataforma.
                     </p>
                 </div>
                 <div className="col-span-4 lg:col-span-2 bg-white">
-                    <h2 className="capitalize font-bold text-center my-1 text-lg border-b border-slate-400">Uso de la Información</h2>
+                    <h2 className="capitalize font-bold text-center my-1 text-lg border-b border-slate-400">Uso de la información</h2>
                     <p className="py-2 px-4 text-justify">Para proporcionar acceso a los cursos adquiridos.</p>
                     <p className="py-2 px-4 text-justify">Para personalizar la experiencia del usuario y mejorar nuestros servicios.</p>
                     <p className="py-2 px-4 text-justify">Para procesar transacciones y enviar notificaciones relacionadas con los cursos.</p>
                 </div>
                 <div className="col-span-4 lg:col-span-2 bg-white">
-                    <h2 className="capitalize font-bold text-center my-1 text-lg border-b border-slate-400">Compartición de la Información</h2>
+                    <h2 className="capitalize font-bold text-center my-1 text-lg border-b border-slate-400">Compartición de la información</h2>
                     <p className="py-2 px-4 text-justify">No compartiremos tu información personal con terceros, salvo en los siguientes casos:</p>
-                    <ul className="text-slate-500 mx-4 my-2 list-disc list-inside">
+                    <ul className="mx-4 my-2 list-disc list-inside">
                         <li>Para cumplir con la ley o solicitudes legales.</li>
                         <li>Con proveedores de servicios que nos ayuden a operar la Plataforma (por ejemplo, procesadores de pago).</li>
                     </ul>
                 </div>
                 <div className="col-span-4 lg:col-span-2 bg-white">
-                    <h2 className="capitalize font-bold text-center my-1 text-lg border-b border-slate-400">Seguridad de la Información</h2>
+                    <h2 className="capitalize font-bold text-center my-1 text-lg border-b border-slate-400">Seguridad de la información</h2>
                     <p className="py-2 px-4 text-justify">
                         Implementamos medidas de seguridad técnicas y organizativas para proteger tu información contra accesos no autorizados.
                     </p>
                 </div>
                 <div className="col-span-4 lg:col-span-2 bg-white">
-                    <h2 className="capitalize font-bold text-center my-1 text-lg border-b border-slate-400">Tus Derechos</h2>
+                    <h2 className="capitalize font-bold text-center my-1 text-lg border-b border-slate-400">Tus derechos</h2>
                     <p className="py-2 px-4 text-justify">Derecho a acceder, rectificar o eliminar tus datos personales.</p>
                     <p className="py-2 px-4 text-justify">Derecho a restringir el procesamiento o a oponerte a ciertos usos de tu información.</p>
-                    <p className="py-2 px-4 text-justify">Para ejercer estos derechos, contacta con nosotros a través del correo electrónico proporcionado en la Plataforma.</p>
+                    <p className="py-2 px-4 text-justify">Para ejercer estos derechos, contacta con nosotros a través del correo electrónico proporcionado en la plataforma.</p>
                 </div>
                 <div className="col-span-4 lg:col-span-2 bg-white">
                     <h2 className="capitalize font-bold text-center my-1 text-lg border-b border-slate-400">Cookies</h2>
@@ -54,9 +54,9 @@ const Page = () => {
                     </p>
                 </div>
                 <div className="col-span-4 lg:col-span-2 bg-white">
-                    <h2 className="capitalize font-bold text-center my-1 text-lg border-b border-slate-400">Cambios en esta Política</h2>
+                    <h2 className="capitalize font-bold text-center my-1 text-lg border-b border-slate-400">Cambios en esta política</h2>
                     <p className="py-2 px-4 text-justify">
-                        Podemos actualizar esta Política de Privacidad ocasionalmente. Te notificaremos sobre cualquier cambio a través de la Plataforma.
+                        Podemos actualizar esta Política de Privacidad ocasionalmente. Te notificaremos sobre cualquier cambio a través de la plataforma.
                     </p>
                 </div>
             </div>

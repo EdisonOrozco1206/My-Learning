@@ -36,11 +36,13 @@ const CertificatesClient = ({certificates, role}) => {
                             Buscar certificaciones
                         </h2>
                         <form action="" className='border flex justify-center'>
-                            <input onChange={e => setSearchQuery(e.target.value)} value={searchQuery || ''} type="number" name="searchQuery" placeholder='Buscar por ID usuario' className='w-5/6 mx-auto my-8 p-2 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' />
+                            <input onChange={e => setSearchQuery(e.target.value)} value={searchQuery || ''} type="number" name="searchQuery" placeholder='Buscar por ID certificado' className='w-5/6 mx-auto my-8 p-2 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' />
                             <input onClick={(e) => fetchSearchData(e)} type="submit" value="Buscar" className='mx-auto cursor-pointer bg-slate-800 text-white my-8 px-3 hover:bg-slate-600'/>
                         </form>
                         {searchInfo ? (
-                            <CertificatesTable certificates={searchInfo} role={role}></CertificatesTable>
+                            searchInfo != '' ? (
+                                <CertificatesTable certificates={searchInfo} role={role}></CertificatesTable>
+                            ) : (<p className="text-center block mx-auto">Certificado no encontrado.</p>)
                         ) : ''}
                         <button className="mx-2 mt-4 cursor-pointer float-right px-4 py-2 border border-red-500 rounded-sm bg-red-500 text-white hover:bg-red-600" onClick={toggleSearchModal}>
                             Cerrar
@@ -52,7 +54,7 @@ const CertificatesClient = ({certificates, role}) => {
 
         <div className="bg-slate-300 mt-10 w-full lg:w-4/5 mx-auto p-5">
             <h2 className="text-2xl lg:text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800 uppercase">
-                Adminitracion de certificados
+                Administración de certificados
             </h2>
             <div className='grid grid-cols-8 gap-4'>
                 {role == "admin"  ? (

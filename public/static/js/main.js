@@ -1,6 +1,6 @@
 $(document).ready(function() {
   $(document).mousemove(girarMarikita);
-});  
+});
 
 function girarMarikita(e) { 
   var box = $("#marikita");

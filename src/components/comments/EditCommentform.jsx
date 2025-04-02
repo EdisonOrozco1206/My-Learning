@@ -48,7 +48,7 @@ const EditCommentForm = ({comment}) => {
         <div className='mt-10 w-full lg:w-2/5 mx-auto'>
             <form onSubmit={(e) => onSubmit(e)} className='border p-6'>
                 <h2 className='text-2xl text-slate-800 border-b border-slate-800 text-center pb-4 w-full'>
-                    Edita tú comentario sobre la lección
+                    Edita tu comentario sobre la lección
                 </h2>
 
                 <textarea name="content" required className="w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800" defaultValue={comment.content} onChange={(e) => setContent(e.target.value.trim())}></textarea>

@@ -5,34 +5,47 @@ import { useRouter } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { useCartStore } from "@/libs/cartLibs";
 import PDF from "../certificate/PDF";
-import { PDFDownloadLink } from "@react-pdf/renderer";
+import { pdf } from "@react-pdf/renderer";
+import Image from "next/image";
 
 const CourseView = ({course, user, viewedClasses, courseLections, isBought}) => {
     const router = useRouter();
-    const [isClient, setIsClient] = useState(false);
     const [progress, setProgress] = useState(null)
     const [certificate, setCertificate] = useState(null)
 
     useEffect(()=>{
-        const loadData = async () =>{
-            let total = courseLections.lections.length;
-            let viewed = viewedClasses.lection_user.length;
-            let progress = ((viewed/total)*100)
-            setProgress(parseInt(progress))
-            setIsClient(true);
-
-            if(progress == 100){
-                try {
-                    let res = await fetch(`/api/certificates/search/${user.id}/${course.id}`)
-                    let certificate = await res.json()
-                    setCertificate(certificate[0])
-                } catch (error) {
-                    console.log(error.message);
+        if(isBought){
+            const loadData = async () =>{
+                let total = courseLections.lections.length;
+                let viewed = viewedClasses.lection_user.length;
+                let progress = ((viewed/total)*100)
+                setProgress(parseInt(progress))
+    
+                if(progress == 100){
+                    try {
+                        let res = await fetch(`/api/certificates/search/${user.id}/${course.id}`)
+                        let certificate = await res.json()
+                        setCertificate(certificate[0])
+                    } catch (error) {
+                        console.log(error.message);
+                    }
                 }
-            }
-        }  
-        loadData()
+            }  
+            loadData()
+        }
     }, [])
+
+    const downloadPDF = async () => {
+        const blob = await pdf(<PDF user={user} course={course} />).toBlob();
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `my_learning_${user.document}_certificate.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    };
 
     const addToCart = useCartStore((state) => state.addToCart);
     const handleCartAndRedirect = (course) => {
@@ -43,12 +56,12 @@ const CourseView = ({course, user, viewedClasses, courseLections, isBought}) => 
     return (
         <div className="bg-slate-300 p-4 w-full lg:w-5/6 mx-auto mt-10 grid grid-cols-3">
             <div className="max-h-96 overflow-hidden hover:opacity-65 col-span-3 lg:col-span-2">
-                <img src={course.portait} alt={"Portada curso "+course.title} className="w-full" />
+                <Image src={course.portait} quality={100} alt={"Portada curso "+course.title} className="w-full" width={100} height={100} />
             </div>
             <div className="mt-4 lg:mt-0 lg:p-4 flex flex-col col-span-3 lg:col-span-1">
-                <h1 className="text-2xl">{course.title}</h1>
-                <h2>{course.instructor.name} {course.instructor.lastname}</h2>
-                <p>{course.description}</p>
+                <h1 className="text-2xl border-b border-slate-900 pb-2">{course.title}</h1>
+                <p className="mt-2">{course.description}</p>
+                <h2 className="mt-2">{course.instructor.name} {course.instructor.lastname}</h2>
                     {!isBought && (
                         <div className="flex gap-4 mt-4 items-center">
                             <p className="bg-slate-800 text-white py-2 px-4">$ {course.price}</p>
@@ -60,7 +73,7 @@ const CourseView = ({course, user, viewedClasses, courseLections, isBought}) => 
                     {isBought && user.id != course.instructor_id ?(
                         <Suspense fallback={<p>Cargando progreso...</p>}>
                             <div className="mt-4 bg-white px-4 pb-4">
-                                <h3 className="py-2 px-4 border-b border-slate-800">Tú progreso</h3>
+                                <h3 className="py-2 px-4 border-b border-slate-800">Tu progreso</h3>
 
                                 <div className="mt-4">
                                     <div className="flex justify-between text-xs">
@@ -72,14 +85,10 @@ const CourseView = ({course, user, viewedClasses, courseLections, isBought}) => 
                                     </div>
                                     {certificate && (
                                         <div className="mt-4">
-                                            <p className="text-xs text-center">Felicitaciones has completado el curso!!, ahora puedes....</p>
-                                            <PDFDownloadLink document={<PDF user={user} course={course}></PDF>} fileName={"my_learning_"+user.document+"_certificate.pdf"}>
-                                                {({loading, url, error, blob}) => loading ? 
-                                                    <button className="w-full py-2 bg-slate-900 text-white mt-2 hover:bg-slate-800">Cargando documento</button>
-                                                :
-                                                    <button className="w-full py-2 bg-slate-900 text-white mt-2 hover:bg-slate-800">Descargar tu certificado</button>
-                                                }
-                                            </PDFDownloadLink>
+                                            <p className="text-xs text-center">¡Felicitaciones has completado el curso!, ahora puedes....</p>
+                                            <button onClick={downloadPDF} className="w-full py-2 bg-slate-900 text-white mt-2 hover:bg-slate-800">
+                                                Descargar tu certificado
+                                            </button>
                                         </div>
                                     )}
                                 </div>
@@ -87,7 +96,7 @@ const CourseView = ({course, user, viewedClasses, courseLections, isBought}) => 
                         </Suspense>
                     ) : ''}
             </div>
-            { user.id == course.instructor_id && user.role == "teacher" || user.role == "admin" ? 
+            { user.id == course.instructor_id && user.role == "teacher" ? 
                 <div className="lg:px-4 col-span-3 w-full lg:w-1/2 mx-auto mt-4">
                     <h2>Administrar lecciones</h2>
                     <Link href={"/course/lections/"+course.id} className="flex justify-center py-2 bg-slate-900 text-white mt-2 hover:bg-slate-800">
@@ -137,4 +146,4 @@ const CourseView = ({course, user, viewedClasses, courseLections, isBought}) => 
     )
 }
 
-export default CourseView
+export default CourseView;

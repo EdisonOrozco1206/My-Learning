@@ -21,7 +21,7 @@ export async function POST(request){
                 name: name,
                 lastname: lastname,
                 document_type: document_type,
-                document: document,
+                document: Number(document),
                 phone: phone,
                 email: email,                                                                                                                                                                     
                 password: secure_password

@@ -3,18 +3,14 @@ import { persist } from "zustand/middleware";
 
 export const useCartStore = create(
   persist(
-    (set) => ({
+    (set, get) => ({
       cart: [],
 
       addToCart: (course) => set((state) => {
-        const existingCourse = state.cart.find((item) => item.id === course.id);
-        if (existingCourse) {
-          return {
-            cart: state.cart.map((item) =>
-              item.id === course.id ? { ...item, quantity: item.quantity + 1 } : item
-            ),
-          };
-        }
+        // Si el curso ya está en el carrito, no lo agregamos nuevamente
+        const exists = state.cart.some((item) => item.id === course.id);
+        if (exists) return state; // No hacer nada
+
         return { cart: [...state.cart, { ...course, quantity: 1 }] };
       }),
 

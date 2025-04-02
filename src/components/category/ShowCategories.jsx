@@ -35,14 +35,18 @@ const CategoryClient = ({ categories }) => {
           <div className="bg-slate-200 p-4 w-full lg:w-10/12">
               <div>
                 <h2 className="text-xl pb-1 text-slate-800 font-bold border-b border-slate-800 uppercase">
-                  Buscar categoria
+                  Buscar categoría
                 </h2>
                 <form action="" className='border flex justify-center'>
-                  <input onChange={e => setSearchQuery(e.target.value)} value={searchQuery || ''} type="number" name="searchQuery" placeholder='Buscar por ID' className='w-5/6 mx-auto my-8 p-2 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' />
+                  <input onChange={e => setSearchQuery(e.target.value)} value={searchQuery || ''} type="number" name="searchQuery" placeholder='Buscar por ID categoría' className='w-5/6 mx-auto my-8 p-2 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' />
                   <input  onClick={(e) => fetchSearchData(e)} type="submit" value="Buscar" className='mx-auto cursor-pointer bg-slate-800 text-white my-8 px-3 hover:bg-slate-600'/>
                 </form>
                 {searchInfo ? (
-                  <CategoryTable categories={searchInfo}></CategoryTable>
+                  searchInfo != '' ? (
+                    <CategoryTable categories={searchInfo}></CategoryTable>
+                  ) : (
+                    <p className='text-center block mx-auto'>Categoría no encontrada.</p>
+                  )
                 ) : ''}
                 <button className="mx-2 cursor-pointer float-right px-4 py-2 border border-red-500 rounded-sm bg-red-500 text-white hover:bg-red-600" onClick={toggleSearchModal}>
                   Cerrar
@@ -55,7 +59,7 @@ const CategoryClient = ({ categories }) => {
 
       <div className="bg-slate-300 mt-10 w-full lg:w-4/5 mx-auto p-5">
         <h2 className="text-2xl lg:text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800 uppercase">
-          Administracion de categorias
+          Administración de categorías
         </h2>
 
         <div className='grid grid-cols-8 gap-4'>

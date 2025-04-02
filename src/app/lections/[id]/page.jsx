@@ -71,7 +71,7 @@ const page = async ({params}) => {
                         <div className="bg-slate-200">
                             <div className="w-1/2 mx-auto flex-row items-center py-8">
                                 <h3 className="capitelize text-center my-2">Tu tutor te ha dejado este material de apoyo para que lo descargues ;)</h3>
-                                <p className="text-center my-2">Descargalo haciendo click en el enlace</p>
+                                <p className="text-center my-2">Descárgalo haciendo clic en el enlace</p>
                                 <a href={"/uploads/"+lection.content} download={lection.content} className="block text-center text-sky-950 my-2 underline hover:text-sky-700">{lection.content}</a>
                             </div>
                         </div>
@@ -90,7 +90,7 @@ const page = async ({params}) => {
             </div>
 
             <div className="bg-slate-50 mt-4 p-4 w-full">
-                <h3 className="capitalize lg:px-4">lista de comentarios</h3>
+                <h3 className="capitalize lg:px-4">Lista de comentarios</h3>
                 {userData.userData && (
                     <div className="w-full lg:w-5/6 mx-auto mt-4">
                         <Link href={"/comments/new/"+params.id} className="cursor-pointer px-4 py-2 border border-green-500 rounded-sm bg-green-500 text-white hover:bg-green-600">Añadir comentario</Link>

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 export const EmailTemplate = ({ id, cart, date, userName }) => (
     <div style={styles.container}>
         <div style={styles.header}>
-            <p style={styles.greeting}>¡Hola, {userName}!</p>
+            <p style={styles.greeting}>¡Hola!, {userName}!</p>
             <p style={styles.subheading}>Factura de tu orden #{id}</p>
         </div>
         
@@ -16,7 +16,7 @@ export const EmailTemplate = ({ id, cart, date, userName }) => (
                 <div>
                     {cart.map(c => <>
                         <div key={c.id}>
-                            <img src={"/uploads/"+c.portait} alt="Imgen de portata del curso" />
+                            <img src={"/uploads/"+c.portait} alt="Imagen de portada del curso" />
                             <h3>{c.title}</h3>
                             <p>{c.description}</p>
                             <p>$ {c.price}</p>

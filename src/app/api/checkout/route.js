@@ -37,8 +37,7 @@ export async function POST(req, res) {
                     success: `${process.env.BASE_URL}/checkout/success`,
                     failure: `${process.env.BASE_URL}/checkout/failure`,
                     pending: `${process.env.BASE_URL}/checkout/pending`,
-                },
-                auto_return: true
+                }
             }
         });
 
