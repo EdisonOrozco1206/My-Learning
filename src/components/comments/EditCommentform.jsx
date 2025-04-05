@@ -11,10 +11,20 @@ const EditCommentForm = ({comment}) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+
+        const validateTextAndNumbersLong = (text) => {
+            const textRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s]{1,200}$/;
+            return textRegex.test(text);
+        };
+
         setErrors([])
         let inputErrors = []
 
-        if(!content || content == '') inputErrors['content'] = 'Comentario no valido'
+        if(!content) {
+            inputErrors['content'] = 'Contenido no válido';
+        }else if(!validateTextAndNumbersLong(content)){
+            inputErrors['content'] = 'Contenido demasiado largo, max. 200 caracteres';
+        }
         setErrors(inputErrors)
 
         if(Object.keys(inputErrors).length == 0){
@@ -38,9 +48,6 @@ const EditCommentForm = ({comment}) => {
                 setLoading(false);
                 document.body.style.cursor = "default";
             }
-        }else{
-            inputErrors['general'] = "Ingresa un comentario valido"
-            setErrors(inputErrors)
         }
     }
 
@@ -51,7 +58,7 @@ const EditCommentForm = ({comment}) => {
                     Edita tu comentario sobre la lección
                 </h2>
 
-                <textarea name="content" required className="w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800" defaultValue={comment.content} onChange={(e) => setContent(e.target.value.trim())}></textarea>
+                <textarea name="content" className="w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800" defaultValue={comment.content} onChange={(e) => setContent(e.target.value.trim())}></textarea>
                 {errors.content && <span className="block text-xs text-red-500 w-5/6 mx-auto">{errors.content}</span>}
 
                 {errors.general && <span className="block text-xs text-red-500 w-5/6 mx-auto">{errors.general}</span>}

@@ -11,9 +11,19 @@ const page = () => {
 
   const sendRecoveryEmail = async () => {
     setErrors([])
+
+    const validateEmail = (email) => {
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return emailRegex.test(email);
+    }
+
     let inputErrors = []
     let successEmail = []
-    if(!email) inputErrors['email'] = "Correo no válido"
+    if(!email) {
+      inputErrors['email'] = "Correo no válido";
+    }else if(!validateEmail(email)){
+      inputErrors['email'] = "Correo no válido";
+    }
     setErrors(inputErrors)
 
     if(Object.keys(inputErrors).length == 0){

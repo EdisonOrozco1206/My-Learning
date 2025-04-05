@@ -18,14 +18,20 @@ export async function GET(){
 }
 
 export async function POST(req){
-    const { user_id, course_id } = await req.json()
+    const { document, course_id } = await req.json()
 
     const date = new Date();
     const currentDate = date.toISOString();
 
+    const user = await prisma.user.findUnique({
+        where: {
+            document: Number(document)
+        }
+    })
+
     const certificate = await prisma.certificates.create({
         data: {
-            user_id: user_id,
+            user_id: user.id,
             course_id: course_id,
             validated_at: currentDate
         }

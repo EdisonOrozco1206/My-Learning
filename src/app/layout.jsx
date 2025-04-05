@@ -30,8 +30,8 @@ export default function RootLayout({ children }) {
         {children}
         <Footer />
 
-        <Script src="https://code.jquery.com/jquery-3.7.1.min.js" strategy="beforeInteractive" nonce={nonce} />
-        <Script src="/static/js/main.js" strategy="lazyOnload" nonce={nonce} />
+        <Script src="https://code.jquery.com/jquery-3.7.1.min.js" strategy="afterInteractive" nonce={nonce} />
+        <Script src="/static/js/main.js" strategy="afterInteractive" nonce={nonce} />
       </body>
     </html>
   );

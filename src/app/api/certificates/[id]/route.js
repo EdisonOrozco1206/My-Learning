@@ -18,18 +18,28 @@ export async function GET(request, {params}){
     })
 }
 
-export async function PUT(request, {params}){
-    const data = await request.json()
+export async function PUT(request, { params }) {
+    const { document, course_id } = await request.json();
+
+    const user = await prisma.user.findUnique({
+        where: { document: Number(document) }
+    });
+
+    if (!user) {
+        return NextResponse.json({ error: "Usuario no encontrado" }, { status: 404 });
+    }
 
     const certificate = await prisma.certificates.update({
-        where: {
-            id: Number(params.id)
-        },
-        data: data
-    })
+        where: { id: Number(params.id) },
+        data: {
+            user_id: user.id,
+            course_id: course_id
+        }
+    });
 
-    return NextResponse.json(certificate)
+    return NextResponse.json(certificate);
 }
+
 
 export async function DELETE(request, {params}){
     try {

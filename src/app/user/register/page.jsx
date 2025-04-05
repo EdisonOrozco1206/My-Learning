@@ -34,17 +34,71 @@ const Page = () => {
   const onSubmit = async (e) => {
     e.preventDefault()
 
+    const validateEmail = (email) => {
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return emailRegex.test(email);
+    }
+  
+    const validatePassword = (password) => {
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+      return passwordRegex.test(password);
+    }
+
+    const validateNumber = (number) => {
+      const numberRegex = /^\d{7,15}$/;
+      return numberRegex.test(number);
+    };
+
+    const validateTextOnly = (text) => {
+      const textRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{1,50}$/;
+      return textRegex.test(text);
+    };
+
     setErrors([])
     let inputErrors = []
-    if(!name) inputErrors["name"] = "Nombre es obligatorio."
-    if(!lastname) inputErrors["lastname"] = "Apellido es obligatorio."
-    if(!phone) inputErrors["phone"] = "Teléfono es obligatorio."
+    if(!name){
+      inputErrors["name"] = "Nombre es obligatorio."
+    } else if(!validateTextOnly(name)){
+      inputErrors["name"] = "Nombre no valido."
+    }
+      
+    if(!lastname){
+      inputErrors["lastname"] = "Apellido es obligatorio."
+    } else if(!validateTextOnly(lastname)){
+      inputErrors["lastname"] = "Apellido no valido."
+    }
+
+    if(!phone){
+       inputErrors["phone"] = "Teléfono es obligatorio."
+    }else if(!validateNumber(phone)){
+      inputErrors["phone"] = "Teléfono no valido."
+    }
+
     if(!document_type) inputErrors["document_type"] = "Tipo doc. es obligatorio."
-    if(!document) inputErrors["document"] = "Documento es obligatorio."
-    if(!email) inputErrors["email"] = "Correo es obligatorio."
-    if(!password) inputErrors["password"] = "Contraseña es obligatoria."
+
+    if(!document){
+       inputErrors["document"] = "Documento es obligatorio."
+    }else if(!validateNumber(document)){
+      inputErrors["document"] = "Documento no valido."
+    }
+
+    if(!email) {
+      inputErrors["email"] = "Correo es obligatorio.";
+    }else if(!validateEmail(email)){
+      inputErrors["email"] = "Email no valido.";
+    }
+    if(!password) {
+      inputErrors["password"] = "Contraseña es obligatoria.";
+    }else if(!validatePassword(password)){
+      inputErrors["password"] = "Contraseña no valida - min 1M, 1m, 1# y 8 digitos.";
+    }
     if(password != password_verify) inputErrors["passwords"] = "Las contraseñas no coinciden."
     setErrors(inputErrors) 
+
+    if (Object.keys(inputErrors).length > 0) {
+      setErrors(inputErrors);
+      return;
+    }
     
     if(!errors || Object.keys(errors).length == 0){
       try {
@@ -56,7 +110,7 @@ const Page = () => {
           headers: { "Content-Type": "application/json" }
         })
 
-        if(res.ok) {
+        if(res.status == 200) {
           return router.push("/user/login");
         }
       } catch (error) {

@@ -32,29 +32,31 @@ const HomePage = ({courses, userData}) => {
             Publicar curso
         </Link>
 
-        <div className="w-full mt-8 gap-4 grid grid-cols-3">
+        <div className="w-full mt-8 gap-4 grid grid-cols-12">
             {courses.length > 0 ? courses.map((course) => {
                 return (
-                    <div className="col-span-3 lg:col-span-1 bg-white flex flex-col justify-between" key={course.id}>
+                    <div className="col-span-12 md:col-span-6 lg:col-span-4 bg-white flex flex-col justify-between" key={course.id}>
                         <Link href={"/course/details/"+course.id} className="max-h-44 flex justify-center">
                             <Image quality={100} className="w-full" src={course.portait} height={100} width={100} alt={"Portada del curso "+course.title} />
                         </Link>
-                        <div className="mt-2">
-                            <div className="w-full px-4">
-                                <p>ID: {course.id}</p>
-                                <h3 className="text-xl font-bold capitalize">{course.title.slice(0, 30)}...</h3>
-                                <p className="w-full">{course.description.slice(0, 30)}...</p>
+                        <div className="flex-col justify-between">
+                            <div className="mt-2">
+                                <div className="w-full px-4">
+                                    <p>ID: {course.id}</p>
+                                    <h3 className="text-xl font-bold capitalize">{course.title.slice(0, 30)}...</h3>
+                                    <p className="w-full">{course.description.slice(0, 30)}...</p>
+                                </div>
+                                <span className="bg-slate-800 text-slate-300 block w-full text-lg text-center p-2 mt-2">$ {course.price}</span>
                             </div>
-                            <span className="bg-slate-800 text-slate-300 block w-full text-lg text-center p-2 mt-2">$ {course.price}</span>
-                        </div>
-                        <div>
-                            <Link href={"/course/edit/"+course.id} className="bg-indigo-800 text-slate-300 w-1/2 text-lg text-center inline-block p-2 hover:bg-indigo-700">Editar</Link>
-                            <a href="" onClick={(e) => handleDeletion(e, course.id)} className="bg-red-800 text-slate-300 w-1/2 text-lg text-center inline-block p-2 hover:bg-red-700">Eliminar</a>
+                            <div>
+                                <Link href={"/course/edit/"+course.id} className="bg-indigo-800 text-slate-300 w-1/2 text-lg text-center inline-block p-2 hover:bg-indigo-700">Editar</Link>
+                                <a href="" onClick={(e) => handleDeletion(e, course.id)} className="bg-red-800 text-slate-300 w-1/2 text-lg text-center inline-block p-2 hover:bg-red-700">Eliminar</a>
+                            </div>
                         </div>
                     </div>  
                 )
             }) : (
-                <p className="text-center text-xl block col-span-3">No tienes cursos publicados</p>)
+                <p className="text-center text-xl block col-span-12">No tienes cursos publicados</p>)
             }
         </div>
     </div>

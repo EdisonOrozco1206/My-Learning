@@ -35,6 +35,19 @@ export async function DELETE(request, {params}){
     try {
         const courseId = Number(params.id);
 
+        await prisma.transaction.deleteMany({
+            where:{
+                course_id: Number(params.id)
+            }
+        });
+
+        await prisma.certificates.deleteMany({
+            where:{
+                course_id: Number(params.id)
+            }
+        });
+
+
         const lections = await prisma.lection.findMany({
             where: { course_id: courseId },
             select: { id: true }

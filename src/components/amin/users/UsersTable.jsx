@@ -65,7 +65,7 @@ const UsersTable = ({users, admin}) => {
                   <p className="my-4">
                     <select name="role" className='w-full mx-auto my-8 p-4 outline-none focus:border focus:border-slate-800 block border-b border-slate-800' onChange={changeRole}>
                       <option value="teacher" selected={role=="teacher"}>Instructor</option>
-                      <option value="user" selected={role=="user"}>Usuario</option>
+                      <option value="user" selected={role=="user"}>Aprendíz</option>
                       <option value="admin" selected={role=="admin"}>Administrador</option>
                     </select>
                   </p>
@@ -141,8 +141,10 @@ const UsersTable = ({users, admin}) => {
                       </td>
                       {admin && (
                         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r border-gray-300">
-                          <button onClick={() => {showModal(u.id, u.role)}} className='capitalize bg-slate-800 text-white p-3'>
-                            {u.role}
+                          <button onClick={() => {showModal(u.id, u.role)}} className='w-full text-center capitalize bg-slate-800 text-white p-3'>
+                            {u.role == 'admin' && (<span>Admin</span>)}
+                            {u.role == 'teacher' && (<span>instructor</span>)}
+                            {u.role == 'user' && (<span>aprendíz</span>)}
                           </button>
                         </td>
                       )}

@@ -67,7 +67,7 @@ export default function ToggleDiv({ setMenuOpen }) {
                                 </li>
                                 <li onClick={closeMenus}>
                                     <Link href="/teacher/students" className="p-3 block text-center w-full border-t border-slate-300 hover:bg-slate-300 text-slate-300 hover:text-black">
-                                        Estudiantes
+                                        Aprendices
                                     </Link>
                                 </li>
                             </>

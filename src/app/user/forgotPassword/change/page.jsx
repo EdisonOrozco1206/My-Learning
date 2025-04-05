@@ -20,9 +20,18 @@ const page = () => {
 
     const changePassword = async () => {
         setErrors([])
+
+        const validatePassword = (password) => {
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+            return passwordRegex.test(password);
+        }
+
         let inputErrors = []
-        if(!newPassword) inputErrors['password'] = "Contraseña no válida"
-        if(!verifyNewPassword) inputErrors['password_verify'] = "Contraseña no válida"
+        if(!newPassword){
+            inputErrors['password'] = "Contraseña no válida"
+        }else if(!validatePassword(newPassword)){
+            inputErrors['password'] = "Contraseña no valida - min 1M, 1m, 1# y 8 digitos"
+        }
         if(newPassword != verifyNewPassword) inputErrors['general'] = "Las contraseñas no coinciden"    
         setErrors(inputErrors)
 

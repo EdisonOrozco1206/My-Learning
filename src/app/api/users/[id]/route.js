@@ -32,16 +32,38 @@ export async function PUT(request, {params}){
     }
 }
 
-export async function DELETE(request, {params}){
+export async function DELETE(request, { params }) {
     try {
-        const user = await prisma.user.delete({
-            where: {
-                id: Number(params.id)
-            }
-        })
-    
-        return NextResponse.json(user)
+        const userId = Number(params.id);
+
+        await prisma.$transaction([
+            prisma.comment.deleteMany({ where: { user_id: userId } }),
+            prisma.lection_User.deleteMany({ where: { user_id: userId } }),
+            prisma.certificates.deleteMany({ where: { user_id: userId } }),
+            prisma.transaction.deleteMany({ where: { user_id: userId } }),
+
+            prisma.comment.deleteMany({
+                where: { lection: { course: { instructor_id: userId } } },
+            }),
+            prisma.lection_User.deleteMany({
+                where: { lection: { course: { instructor_id: userId } } },
+            }),
+            prisma.certificates.deleteMany({
+                where: { course: { instructor_id: userId } },
+            }),
+            prisma.transaction.deleteMany({
+                where: { course: { instructor_id: userId } },
+            }),
+            prisma.lection.deleteMany({
+                where: { course: { instructor_id: userId } },
+            }),
+            prisma.course.deleteMany({ where: { instructor_id: userId } }),
+
+            prisma.user.delete({ where: { id: userId } }),
+        ]);
+
+        return NextResponse.json({ message: "Usuario eliminado correctamente" });
     } catch (error) {
-        return NextResponse.json(error.message)
+        return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }

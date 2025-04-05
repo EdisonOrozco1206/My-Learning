@@ -8,7 +8,7 @@ export async function GET(){
         },
         include: {
             user: true,
-            course: true
+            course: true,
         }
     })
     
