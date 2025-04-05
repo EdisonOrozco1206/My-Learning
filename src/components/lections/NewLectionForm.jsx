@@ -37,10 +37,28 @@ const NewLectionForm = ({course, user}) => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    const validatePhoneNumber = (phoneNumber) => {
+      const phoneRegex = /^\+?\d{1,15}$/;
+      return phoneRegex.test(phoneNumber);
+    };
+    const validateTextAndNumbers = (text) => {
+      const textRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s]{1,100}$/;
+      return textRegex.test(text);
+    };
+
     setErrors([]);
     let inputErrors = [];
-    if(!position) inputErrors["position"] = "Posición es obligatoria.";
-    if(!title) inputErrors["title"] = "Titulo es obligatorio.";
+    if(!position){
+      inputErrors["position"] = "Posición es obligatoria.";
+    }else if(!validatePhoneNumber(position)){
+      inputErrors["position"] = "Posición no valida.";
+    }
+
+    if(!title) {
+      inputErrors["title"] = "Titulo es obligatorio.";
+    }else if(!validateTextAndNumbers(title)){
+      inputErrors["title"] = "Titulo demasiado largo max. 100 caracteres.";
+    }
     if(!file) inputErrors["file"] = "Contenido es obligatorio.";
     setErrors(inputErrors);
 

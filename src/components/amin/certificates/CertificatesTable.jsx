@@ -123,7 +123,7 @@ const CertificatesTable = ({certificates, role}) => {
                                         CURSO
                                     </th>
                                     <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
-                                        FECHA VALI.
+                                        FECHA APROBACIÓN
                                     </th>
                                     <th scope="col" className="text-sm font-medium text-gray-900 px-6 py-4 text-left border-r border-gray-300">
                                         OPCIONES
@@ -143,8 +143,8 @@ const CertificatesTable = ({certificates, role}) => {
                                                 </button>
                                             </td>
                                             <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r border-gray-300">
-                                                <Link href={"/course/details/"+c.course_id}  title="Ver detalles del curso" className="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 block mx-auto text-center">
-                                                    ID: {c.course_id}
+                                                <Link href={"/course/details/"+c.course_id}  title="Ver detalles del curso" className="hover:underline bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 block mx-auto text-center">
+                                                    {c.course.title.slice(0, 40)}...
                                                 </Link>
                                             </td>
                                             <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r border-gray-300">

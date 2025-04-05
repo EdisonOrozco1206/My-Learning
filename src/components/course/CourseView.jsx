@@ -12,6 +12,19 @@ const CourseView = ({course, user, viewedClasses, courseLections, isBought}) => 
     const router = useRouter();
     const [progress, setProgress] = useState(null)
     const [certificate, setCertificate] = useState(null)
+    const [previousPage, setPreviousPage] = useState("");
+
+    useEffect(() => {
+        setPreviousPage(document.referrer);
+    }, []);
+
+    const goBack = () => {
+        if (previousPage) {
+          router.back();
+        } else {
+          router.push("/");
+        }
+    };
 
     useEffect(()=>{
         if(isBought){
@@ -56,24 +69,25 @@ const CourseView = ({course, user, viewedClasses, courseLections, isBought}) => 
     return (
         <div className="bg-slate-300 p-4 w-full lg:w-5/6 mx-auto mt-10 grid grid-cols-3">
             <div className="max-h-96 overflow-hidden hover:opacity-65 col-span-3 lg:col-span-2">
-                <Image src={course.portait} quality={100} alt={"Portada curso "+course.title} className="w-full" width={100} height={100} />
+                <Image src={course.portait} priority  quality={100} alt={"Portada curso "+course.title} className="w-full" width={100} height={100} />
             </div>
             <div className="mt-4 lg:mt-0 lg:p-4 flex flex-col col-span-3 lg:col-span-1">
                 <h1 className="text-2xl border-b border-slate-900 pb-2">{course.title}</h1>
                 <p className="mt-2">{course.description}</p>
                 <h2 className="mt-2">{course.instructor.name} {course.instructor.lastname}</h2>
+                <button onClick={goBack} className="w-full bg-slate-800 text-white py-2 px-4 mt-2">Regresar</button>
                     {!isBought && (
-                        <div className="flex gap-4 mt-4 items-center">
-                            <p className="bg-slate-800 text-white py-2 px-4">$ {course.price}</p>
+                        <div className="flex flex-row mt-4 items-center justify-between">
+                            <button onClick={() => handleCartAndRedirect(course)} className="bg-slate-800 text-white py-2 px-4 w-fit text-center border border-slate-800">$ {course.price}</button>
                             {user.id != course.instructor_id &&
-                                <button onClick={() => handleCartAndRedirect(course)} className="border border-slate-800 hover:bg-slate-400 hover:text-slate-900 py-2 px-4 cursor-pointer">Agregar al carrito</button>
+                                <button onClick={() => handleCartAndRedirect(course)} className="border border-slate-800 hover:bg-slate-400 hover:text-slate-900 py-2 px-4 cursor-pointer" title="Agregar al carrito">Agregar al carrito</button>
                             }
                         </div>
                     )}
                     {isBought && user.id != course.instructor_id ?(
                         <Suspense fallback={<p>Cargando progreso...</p>}>
                             <div className="mt-4 bg-white px-4 pb-4">
-                                <h3 className="py-2 px-4 border-b border-slate-800">Tu progreso</h3>
+                                <h3 className="py-2 px-4 border-b border-slate-800 text-center">Tu progreso</h3>
 
                                 <div className="mt-4">
                                     <div className="flex justify-between text-xs">

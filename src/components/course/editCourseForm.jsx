@@ -19,12 +19,38 @@ const EditCourseForm = ({ categories, userData, courseInfo }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    const validatePhoneNumber = (phoneNumber) => {
+        const phoneRegex = /^\+?\d{1,15}$/;
+        return phoneRegex.test(phoneNumber);
+    };
+    const validateTextAndNumbers = (text) => {
+        const textRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s]{1,100}$/;
+        return textRegex.test(text);
+    };
+    const validateTextAndNumbersLong = (text) => {
+        const textRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s]{1,200}$/;
+        return textRegex.test(text);
+    };
     setErrors({});
     let inputErrors = {};
 
-    if (!title) inputErrors['title'] = 'El titulo es obligatorio';
-    if (!description) inputErrors['description'] = 'La descripcion es obligatoria';
-    if (!price) inputErrors['price'] = 'El precio es obligatorio';
+    if (!title){
+        inputErrors['title'] = 'El titulo es obligatorio'
+    }else if(!validateTextAndNumbers(title)){
+        inputErrors['title'] = 'Titulo demasiado largo max. 100 caracteres'
+    }
+    if (!description){ 
+        inputErrors['description'] = 'La descripcion es obligatorio'
+    }else if(!validateTextAndNumbersLong(description)){
+        inputErrors['description'] = 'Descripcion muy larga max. 200 caracteres'
+    }
+    if (!price){
+        inputErrors['price'] = 'El precio es obligatorio'
+    }else if(!validatePhoneNumber(price)){
+        inputErrors['price'] = 'Precio no valido'
+    }
+
     if (!category) inputErrors['category'] = 'La categoria es obligatoria';
     if (!file && !portait) inputErrors['file'] = 'El archivo es obligatorio';
     setErrors(inputErrors);

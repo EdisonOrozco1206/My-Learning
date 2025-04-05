@@ -10,7 +10,7 @@ const AdminUsers = async () => {
     const users = await prisma.user.findMany();
 
     return <>
-        <UsersClient users={users} admin={true}></UsersClient>
+        <UsersClient users={users} admin={true} />
     </>
 }
 

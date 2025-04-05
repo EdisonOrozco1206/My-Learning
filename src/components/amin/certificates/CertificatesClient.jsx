@@ -23,6 +23,7 @@ const CertificatesClient = ({certificates, role}) => {
         e.preventDefault()
         let res = await fetch("/api/certificates/searchByUserId/"+searchQuery);
         let data = await res.json();
+        console.log(data);
         setSearchInfo(data)
     }
 
@@ -36,7 +37,7 @@ const CertificatesClient = ({certificates, role}) => {
                             Buscar certificaciones
                         </h2>
                         <form action="" className='border flex justify-center'>
-                            <input onChange={e => setSearchQuery(e.target.value)} value={searchQuery || ''} type="number" name="searchQuery" placeholder='Buscar por ID certificado' className='w-5/6 mx-auto my-8 p-2 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' />
+                            <input onChange={e => setSearchQuery(e.target.value)} value={searchQuery || ''} type="number" name="searchQuery" placeholder='Buscar por # documento usuario' className='w-5/6 mx-auto my-8 p-2 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' />
                             <input onClick={(e) => fetchSearchData(e)} type="submit" value="Buscar" className='mx-auto cursor-pointer bg-slate-800 text-white my-8 px-3 hover:bg-slate-600'/>
                         </form>
                         {searchInfo ? (

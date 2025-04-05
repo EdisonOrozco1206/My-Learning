@@ -23,13 +23,22 @@ const Page = async () => {
   })
 
   return <>
-    <div className="bg-slate-800 text-white dynamic-text flex items-center justify-center text-center mt-10 h-32 overflow-hidden relative">
-      <p className="text-1 text-2xl">
-        ¡Bienvenido a My Learning c:!
-        <span className="block text-sm">
-          Donde el conocimiento empieza
-        </span>
-      </p>
+    <div className="bg-slate-800 text-white flex items-center justify-center text-center mt-10 h-32 overflow-hidden relative">
+      {session?.userData ? (
+        <p className="text-1 text-2xl">
+          <span>¡Bienvenido! {session.userData.name} {session.userData.lastname}</span>
+          <span className="block text-sm">
+            Empecemos a aprender
+          </span>
+        </p>
+      ) : (
+        <p className="text-1 text-2xl">
+          ¡Bienvenido a My Learning c:!
+          <span className="block text-sm">
+            Donde el conocimiento empieza
+          </span>
+        </p>
+      )}
     </div>
 
     <Carousel></Carousel>

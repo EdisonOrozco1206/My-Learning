@@ -49,9 +49,9 @@ const AdminCoursesPage = () => {
     
       const fetchSearchData = async (e) => {
         e.preventDefault()
-        let res = await fetch("/api/courses/"+searchQuery);
+        let res = await fetch("/api/courses/perName?search="+searchQuery);
         let data = await res.json();
-        setSearchInfo([data.courses])
+        setSearchInfo(data)
       }
 
     return <>
@@ -65,7 +65,7 @@ const AdminCoursesPage = () => {
                         Buscar curso
                     </h2>
                     <form action="" className='border flex justify-center'>
-                        <input onChange={e => setSearchQuery(e.target.value)} value={searchQuery || ''} type="number" name="searchQuery" placeholder='Buscar ID' className='w-5/6 mx-auto my-8 p-2 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' />
+                        <input onChange={e => setSearchQuery(e.target.value)} value={searchQuery || ''} type="text" name="searchQuery" placeholder='Buscar por nombre o descripción' className='w-5/6 mx-auto my-8 p-2 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' />
                         <input onClick={(e) => fetchSearchData(e)} type="submit" value="Buscar" className='mx-auto cursor-pointer bg-slate-800 text-white my-8 px-3 hover:bg-slate-600'/>
                     </form>
                     {searchInfo ? (

@@ -30,6 +30,22 @@ export async function PUT(request, {params}){
 
 export async function DELETE(request, {params}) {
     try {
+        await prisma.certificates.deleteMany({
+            where:{
+                course: {
+                    category: Number(params.id)
+                }
+            }
+        });
+
+        await prisma.transaction.deleteMany({
+            where:{
+                course: {
+                    category: Number(params.id)
+                }
+            }
+        });
+
         await prisma.comment.deleteMany({
             where: {
                 lection: {

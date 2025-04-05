@@ -42,12 +42,31 @@ const Page = ({ params }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    const validatePhoneNumber = (phoneNumber) => {
+      const phoneRegex = /^\+?\d{1,15}$/;
+      return phoneRegex.test(phoneNumber);
+    };
+    const validateTextAndNumbers = (text) => {
+      const textRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s]{1,100}$/;
+      return textRegex.test(text);
+    };
+
     setErrors([]);
     let inputErrors = [];
 
     if (!lection) return;
-    if(!position) inputErrors['position'] = "La posición es requerida";
-    if(!title) inputErrors['title'] = "El título es requerido";
+    if(!position){
+      inputErrors["position"] = "Posición es obligatoria.";
+    }else if(!validatePhoneNumber(position)){
+      inputErrors["position"] = "Posición no valida.";
+    }
+
+    if(!title) {
+      inputErrors["title"] = "Titulo es obligatorio.";
+    }else if(!validateTextAndNumbers(title)){
+      inputErrors["title"] = "Titulo demasiado largo max. 100 caracteres.";
+    }
     setErrors(inputErrors)
 
     const checkPositionQuery = await fetch(`/api/lections/checkPosition/${lection.course_id}/${lection.position}`);

@@ -28,8 +28,28 @@ const LoginPage = () => {
 
   const loginUser = async () => {
     let inputErrors = []
-    if(!email) inputErrors["email"] = "Correo es obligatorio."
-    if(!password) inputErrors["password"] = "Contraseña es obligatoria."
+
+    const validateEmail = (email) => {
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return emailRegex.test(email);
+    }
+  
+    const validatePassword = (password) => {
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+      return passwordRegex.test(password);
+    }
+
+    if (!email) {
+      inputErrors.email = "Correo es obligatorio.";
+    } else if (!validateEmail(email)) {
+      inputErrors.email = "Correo no es válido.";
+    }
+
+    if (!password) {
+      inputErrors.password = "Contraseña es obligatoria.";
+    } else if (!validatePassword(password)) {
+      inputErrors.password = "La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.";
+    }
     setErrors(inputErrors)
   
     if(!errors || Object.keys(errors).length == 0){
@@ -43,7 +63,7 @@ const LoginPage = () => {
       } finally {
         setLoading(false);
         document.body.style.cursor = "default";
-    }
+      }
     }
   }
 

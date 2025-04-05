@@ -15,11 +15,14 @@ const page = () => {
             setUsers(Array.from(users.users))
         }
         fetchData()
-    })
+    }, [])
 
     return (
-        // <p>Hola</p>
-        <UsersClient users={users} admin={false} ></UsersClient>
+        <div>
+            {users != [] ? ( 
+                <UsersClient users={users} admin={false} ></UsersClient>
+            ) : (<p className="text-center block mx-auto">Cargando contenido...</p>)}
+        </div>
     )
 }
 

@@ -102,8 +102,8 @@ const TransactionsTable = ({transactions}) => {
                                                     </button>
                                                 </td>
                                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r border-gray-300">
-                                                    <Link href={"/course/details/"+t.course_id}  title="Ver detalles del curso" className="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 block mx-auto text-center">
-                                                        {t.course_id}
+                                                    <Link href={"/course/details/"+t.course_id}  title="Ver detalles del curso" className="hover:underline bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 block mx-auto text-center">
+                                                        {t.course.title.slice(0, 40)}...
                                                     </Link>
                                                 </td>
                                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r border-gray-300">
@@ -111,13 +111,13 @@ const TransactionsTable = ({transactions}) => {
                                                 </td>
                                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r border-gray-300">
                                                     {t.status == "success" && (
-                                                        <p className="bg-green-500 text-white text-center py-2 text-md">{t.status}</p>
+                                                        <p className="block w-full bg-green-500 text-white text-center py-2 text-md">Aprobado</p>
                                                     )}
-                                                    {t.status == "failute" && (
-                                                        <p className="bg-red-500 text-white text-center py-2 text-md">{t.status}</p>
+                                                    {t.status == "failure" && (
+                                                        <p className="block w-full bg-red-500 text-white text-center py-2 text-md">Fallído</p>
                                                     )}
                                                     {t.status == "pending" && (
-                                                        <p className="bg-yellow-500 text-white text-center py-2 text-md">{t.status}</p>
+                                                        <p className="block w-full bg-yellow-500 text-white text-center py-2 text-md">Pendiente</p>
                                                     )}
                                                 </td>
                                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r border-gray-300">

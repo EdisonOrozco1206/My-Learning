@@ -7,7 +7,7 @@ import Link from "next/link"
 const Page = ({params}) => {
     const router = useRouter()
     const [loading, setLoading] = useState(false);
-    const [user_id, setUser] = useState(null)
+    const [user, setUser] = useState(null)
     const [course_id, setCourse]  = useState(null)
     const [errors, setErrors] = useState([])
 
@@ -17,7 +17,7 @@ const Page = ({params}) => {
             .then(res => res.json())
             .then(data => {
                 setCourse(data.certificate.course_id)
-                setUser(data.certificate.user_id)
+                setUser(data.certificate.user.document)
             })
         }else{
             router.push("/")
@@ -28,7 +28,7 @@ const Page = ({params}) => {
         e.preventDefault()
         setErrors([])
         let inputErrors = []
-        if(!user_id) inputErrors["user"] = "ID de usuario es obligatorio."
+        if(!user) inputErrors["user"] = "# documento de usuario es obligatorio."
         if(!course_id) inputErrors["course"] = "ID de curso es obligatorio."
         setErrors(inputErrors)
 
@@ -38,7 +38,7 @@ const Page = ({params}) => {
                 document.body.style.cursor = "wait";
                 const res = await fetch("/api/certificates/"+params.id, {
                     method: "PUT",
-                    body: JSON.stringify({user_id, course_id}),
+                    body: JSON.stringify({document: user, course_id}),
                     headers: {"Content-Type": "application/json"}
                 })
                 if(res.ok){
@@ -61,8 +61,8 @@ const Page = ({params}) => {
             <h2 className="text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800">Modificar Certificación</h2>
 
             <form action="" className='border p-6 pb-12 w-full lg:w-1/2 mx-auto mt-10' onSubmit={onSubmit}>
-                <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='ID de usuario' type="number" name='user'
-                    onChange={(e) => { setUser(parseInt(e.target.value.trim())) }} value={user_id}/>
+                <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='# documento de usuario' type="number" name='user'
+                    onChange={(e) => { setUser(parseInt(e.target.value.trim())) }} value={user}/>
                 {errors.user && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.user}</p>}
                 <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='ID del curso' type="number" name='course'
                     onChange={(e) => { setCourse(parseInt(e.target.value.trim())) }} value={course_id} />

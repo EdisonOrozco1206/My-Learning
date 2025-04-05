@@ -24,7 +24,7 @@ const CoursDetails = async ({params}) => {
     const courseLections = await lectionsquery.json();
 
     return (
-        <CourseView course={course} courseLections={courseLections} user={user} viewedClasses={viewedClasses} isBought={isBought}/>
+        <CourseView course={course} courseLections={courseLections} user={user} viewedClasses={viewedClasses} isBought={isBought} />
     )
 }
 
