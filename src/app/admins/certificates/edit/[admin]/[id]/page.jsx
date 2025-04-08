@@ -3,12 +3,14 @@
 import { useRouter } from "next/navigation"
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { getSession } from "@/libs/libs"
 
 const Page = ({params}) => {
     const router = useRouter()
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState(null)
     const [course_id, setCourse]  = useState(null)
+    const [courses, setCourses] = useState(null)
     const [errors, setErrors] = useState([])
 
     useEffect(()=>{
@@ -24,12 +26,29 @@ const Page = ({params}) => {
         }
     }, [params.id])
 
+    useEffect(() => {
+        async function fetchCourses() {
+            let session = await getSession()
+            let userData = session.userData;
+            let data = ''
+            if(params.admin == 1){
+                let res = await fetch("/api/courses/")
+                data = await res.json()
+            }else if(params.admin == 0){
+                let res = await fetch("/api/courses/perInstructor/"+userData.id)
+                data = await res.json()
+            }
+            setCourses(data.courses)
+        }
+        fetchCourses()
+    }, [])
+
     const onSubmit = async (e) => {
         e.preventDefault()
         setErrors([])
         let inputErrors = []
         if(!user) inputErrors["user"] = "# documento de usuario es obligatorio."
-        if(!course_id) inputErrors["course"] = "ID de curso es obligatorio."
+        if(!course_id) inputErrors["course"] = "Selección del curso es obligatorio."
         setErrors(inputErrors)
 
         if(Object.keys(inputErrors).length == 0){
@@ -64,8 +83,18 @@ const Page = ({params}) => {
                 <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='# documento de usuario' type="number" name='user'
                     onChange={(e) => { setUser(parseInt(e.target.value.trim())) }} value={user}/>
                 {errors.user && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.user}</p>}
-                <input className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' placeholder='ID del curso' type="number" name='course'
-                    onChange={(e) => { setCourse(parseInt(e.target.value.trim())) }} value={course_id} />
+                <select className='w-5/6 mx-auto my-8 p-4 outline-none focus:border focus:border-slate-8 p-600 block border-b border-slate-800' name="course" onChange={(e) => { setCourse(parseInt(e.target.value.trim())) }}>
+                    <option value="">Seleccionar curso</option>
+                    {courses && (
+                        courses.map(c => (
+                            course_id == c.id ? (
+                                <option selected value={c.id}>{c.title}</option>
+                            ) : (
+                                <option value={c.id}>{c.title}</option>
+                            )
+                        ))
+                    )}
+                </select>
                 {errors.course && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.course}</p>}
 
                 {errors.general && <p className='text-red-500 w-5/6 block mx-auto text-sm'>{errors.general}</p>}

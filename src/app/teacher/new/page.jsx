@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 
 const Page = () => {
   return (
@@ -34,19 +35,37 @@ const Page = () => {
             <h2 className="text-center text-2xl">Nuestra metodología de trabajo</h2>
             <p className='text-center text-sm'>¡Fácil!</p>
             
-            <div className='grid grid-cols-3 gap-4 mt-4'>
-                <div className='col-span-3 lg:col-span-1 bg-white w-full py-4'>
-                    <h3 className='text-xl text-center'>Planifica e innova con tu curso</h3>
-                    <img src="" alt="My Learning instructor setting up a course" className='block mx-auto w-5/6 mt-4' />
-                </div>
-                <div className='col-span-3 lg:col-span-1 bg-white w-full py-4'>
-                    <h3 className='text-xl text-center'>Prepara el material para sus lecciones</h3>
-                    <img src="" alt="My Learning instructor preparing videos" className='block mx-auto w-5/6 mt-4' />
-                </div>
-                <div className='col-span-3 lg:col-span-1 bg-white w-full py-4'>
-                    <h3 className='text-xl text-center'>Ya estás listo para dar lo mejor de ti</h3>
-                    <img src="" alt="My Learning happy instructor" className='block mx-auto w-5/6 mt-4' />
-                </div>
+            <div className="flex flex-col md:flex-row gap-4 mt-4">
+                {[
+                    {
+                    title: "Planifica e innova con tu curso",
+                    src: "/static/new_1.jpg",
+                    alt: "My Learning instructor setting up a course",
+                    },
+                    {
+                    title: "Prepara el material para sus lecciones",
+                    src: "/static/new_2.jpg",
+                    alt: "My Learning instructor preparing videos",
+                    },
+                    {
+                    title: "Ya estás listo para dar lo mejor de ti",
+                    src: "/static/new_3.jpg",
+                    alt: "My Learning happy instructor",
+                    },
+                ].map((item, index) => (
+                    <div key={index} className="w-full md:w-1/3 bg-white p-4 flex flex-col items-center">
+                    <h3 className="text-center mb-4">{item.title}</h3>
+                    <div className="w-full h-64 overflow-hidden">
+                        <Image
+                        width={500}
+                        height={500}
+                        src={item.src}
+                        alt={item.alt}
+                        className="object-cover w-full h-full"
+                        />
+                    </div>
+                    </div>
+                ))}
             </div>
         </div>
     </div>

@@ -61,15 +61,18 @@ const AdminDashboard = async () => {
     ],
   };
 
-  transactions.transactions.map(t => {
-    let date = new Date()
-    let jsDate = date.toISOString("es-co")
-    let now = jsDate.slice(0, 10)
-    
-    if(now == t.date.slice(0, 10)){
-      total += t.amount
+  transactions.transactions.forEach(t => {
+    const today = new Date();
+    const transactionDate = new Date(t.date);
+  
+    const sameDay = today.getFullYear() === transactionDate.getFullYear() &&
+                    today.getMonth() === transactionDate.getMonth() &&
+                    today.getDate() === transactionDate.getDate();
+  
+    if (sameDay) {
+      total += t.amount;
     }
-  })
+  });
 
   return (
     <div className="bg-slate-300 p-4 lg:w-4/5 mx-auto mt-10">
@@ -101,7 +104,7 @@ const AdminDashboard = async () => {
       <div>
         <h2 className="text-center text-2xl mt-4">Últimas transacciones</h2>
         <div className="flex w-full lg:w-2/6 mx-auto justify-center gap-4 whitespace-nowrap">
-          <p className="bg-slate-800 text-white w-fit my-2 px-4 py-2">Total hoy: ${total}</p>
+          <p className="bg-slate-800 text-white w-fit my-2 px-4 py-2">Total hoy: $ {total}</p>
           <DownloadTransactionsReport all={false}/>
         </div>
         <TransactionsTable transactions={transactions.transactions}></TransactionsTable>

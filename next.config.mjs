@@ -34,11 +34,17 @@ const nextConfig = {
                     //       ? `default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://code.jquery.com https://sdk.mercadopago.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; frame-ancestors 'self' https://www.mercadopago.com; connect-src 'self' https://api.mercadopago.com; form-action 'self' https://www.mercadopago.com;`
                     //       : `default-src 'self'; script-src 'self' https://code.jquery.com https://sdk.mercadopago.com https://www.google-analytics.com https://vercel.live 'nonce-${nonce}'; style-src 'self' 'nonce-${nonce}'; frame-ancestors 'self' https://www.mercadopago.com; connect-src 'self' https://api.mercadopago.com; form-action 'self' https://www.mercadopago.com;`
                     // },
+                    // {
+                    //     key: "Content-Security-Policy",
+                    //     value: isDev
+                    //         ? `default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://code.jquery.com https://sdk.mercadopago.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; frame-ancestors 'self' https://www.mercadopago.com; connect-src 'self' https://api.mercadopago.com; form-action 'self' https://www.mercadopago.com;`
+                    //         : `default-src 'self'; script-src 'self' https://code.jquery.com https://sdk.mercadopago.com https://www.google-analytics.com https://vercel.live 'nonce-${nonce}' 'unsafe-eval'; style-src 'self' 'nonce-${nonce}'; frame-ancestors 'self' https://www.mercadopago.com; connect-src 'self' https://api.mercadopago.com; form-action 'self' https://www.mercadopago.com;`
+                    // },
                     {
                         key: "Content-Security-Policy",
                         value: isDev
-                            ? `default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://code.jquery.com https://sdk.mercadopago.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; frame-ancestors 'self' https://www.mercadopago.com; connect-src 'self' https://api.mercadopago.com; form-action 'self' https://www.mercadopago.com;`
-                            : `default-src 'self'; script-src 'self' https://code.jquery.com https://sdk.mercadopago.com https://www.google-analytics.com https://vercel.live 'nonce-${nonce}' 'unsafe-eval'; style-src 'self' 'nonce-${nonce}'; frame-ancestors 'self' https://www.mercadopago.com; connect-src 'self' https://api.mercadopago.com; form-action 'self' https://www.mercadopago.com;`
+                          ? `default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://code.jquery.com https://sdk.mercadopago.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline'; frame-src 'self' https://www.google.com https://www.google.com/maps https://www.mercadopago.com; connect-src 'self' https://api.mercadopago.com; form-action 'self' https://www.mercadopago.com;`
+                          : `default-src 'self'; script-src 'self' https://code.jquery.com https://sdk.mercadopago.com https://www.google-analytics.com https://vercel.live 'nonce-${nonce}' 'unsafe-eval'; style-src 'self' 'nonce-${nonce}'; frame-src 'self' https://www.google.com https://www.google.com/maps https://www.mercadopago.com; connect-src 'self' https://api.mercadopago.com; form-action 'self' https://www.mercadopago.com;`
                     },
                     { key: "X-Frame-Options", value: "SAMEORIGIN" },
                     { key: "X-Content-Type-Options", value: "nosniff" },

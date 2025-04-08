@@ -11,7 +11,7 @@ const Page = async () => {
                 {coursesData.categories.length > 0 ? coursesData.categories.map(element => (
                     <div key={element.id || element.name} className="bg-white my-4">
                         <h2 className="text-xl text-center py-4 border-b border-slate-300">
-                            Cursos de - {element.name}
+                            Cursos de {element.name}
                         </h2>
                         <CourseCard courses={element.courses} />
                     </div>

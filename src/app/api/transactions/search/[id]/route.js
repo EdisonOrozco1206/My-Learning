@@ -5,7 +5,9 @@ export async function GET(request, {params}){
 
     const transaction = await prisma.transaction.findMany({
         where: {
-            id: Number(params.id)
+            user: {
+                document: Number(params.id)
+            }
         },
         orderBy: {
             id: "desc"

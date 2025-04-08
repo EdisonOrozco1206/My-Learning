@@ -46,6 +46,7 @@ const Page = async () => {
     <Suspense>
       <div className="bg-slate-300 mt-10 lg:w-4/5 mx-auto p-5">
         <h2 className="text-3xl pb-4 text-slate-800 font-bold border-b text-center border-slate-800">ÚLTIMOS CURSOS</h2>
+        <Link href={"/course"} className="block mt-2 py-2 w-full text-center text-xl bg-slate-800 hover:bg-slate-700 text-white">Ver todos los cursos</Link>
         <CourseCard courses={courses}></CourseCard>
       </div>
     </Suspense>

@@ -98,7 +98,7 @@ const TransactionsTable = ({transactions}) => {
                                                 </td>
                                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r border-gray-300">
                                                     <button onClick={() => {toggleUserModal(t.user)}} className="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 block mx-auto text-center">
-                                                        Ver info
+                                                        {t.user.document}
                                                     </button>
                                                 </td>
                                                 <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r border-gray-300">
