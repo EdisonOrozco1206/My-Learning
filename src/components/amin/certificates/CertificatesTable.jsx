@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, Suspense } from "react"
+import { useState, Suspense, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
@@ -10,6 +10,15 @@ const CertificatesTable = ({certificates, role}) => {
     const [certificate, setCertificate] = useState(null)
     const [userModal, setUserModal] = useState(null)
     const [user, setUser] = useState([])
+    const [isAdmin, setIsAdmin] = useState(null)
+
+    useEffect(() => {
+        if(role == "admin"){
+            setIsAdmin(1)
+        }else if(role == "teacher"){
+            setIsAdmin(0)
+        }
+    }, [])
 
     const toggleUserModal = async (userInfo) => {
         if(!userModal){
@@ -139,7 +148,7 @@ const CertificatesTable = ({certificates, role}) => {
                                             </td>
                                             <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r border-gray-300">
                                                 <button onClick={() => {toggleUserModal(c.user)}} className="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 block mx-auto text-center">
-                                                    Ver info
+                                                    {c.user.document}
                                                 </button>
                                             </td>
                                             <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap border-r border-gray-300">
@@ -151,7 +160,7 @@ const CertificatesTable = ({certificates, role}) => {
                                                 {c.validated_at}
                                             </td>
                                             <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap flex justify-evenly border-r border-gray-300">
-                                                <Link href={`/admins/certificates/edit/${c.id}`} className="cursor-pointer mx-2 px-4 py-2 border border-sky-500 rounded-sm bg-sky-500 text-white hover:bg-sky-600">
+                                                <Link href={`/admins/certificates/edit/${isAdmin}/${c.id}`} className="cursor-pointer mx-2 px-4 py-2 border border-sky-500 rounded-sm bg-sky-500 text-white hover:bg-sky-600">
                                                     Editar
                                                 </Link>
                                                 {role == "admin" ? (

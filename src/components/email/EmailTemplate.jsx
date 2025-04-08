@@ -16,7 +16,7 @@ export const EmailTemplate = ({ id, cart, date, userName }) => (
                 <div>
                     {cart.map(c => <>
                         <div key={c.id}>
-                            <img src={"/uploads/"+c.portait} alt="Imagen de portada del curso" />
+                            <img src={c.portait} alt="Imagen de portada del curso" />
                             <h3>{c.title}</h3>
                             <p>{c.description}</p>
                             <p>$ {c.price}</p>

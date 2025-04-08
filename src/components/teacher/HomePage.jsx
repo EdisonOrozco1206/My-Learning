@@ -37,7 +37,7 @@ const HomePage = ({courses, userData}) => {
                 return (
                     <div className="col-span-12 md:col-span-6 lg:col-span-4 bg-white flex flex-col justify-between" key={course.id}>
                         <Link href={"/course/details/"+course.id} className="max-h-44 flex justify-center">
-                            <Image quality={100} className="w-full" src={course.portait} height={100} width={100} alt={"Portada del curso "+course.title} />
+                            <Image quality={100} layout="instrinsic" className="w-full" src={course.portait} height={400} width={300} alt={"Portada del curso "+course.title} />
                         </Link>
                         <div className="flex-col justify-between">
                             <div className="mt-2">

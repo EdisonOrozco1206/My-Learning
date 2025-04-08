@@ -69,7 +69,7 @@ const CourseView = ({course, user, viewedClasses, courseLections, isBought}) => 
     return (
         <div className="bg-slate-300 p-4 w-full lg:w-5/6 mx-auto mt-10 grid grid-cols-3">
             <div className="max-h-96 overflow-hidden hover:opacity-65 col-span-3 lg:col-span-2">
-                <Image src={course.portait} priority  quality={100} alt={"Portada curso "+course.title} className="w-full" width={100} height={100} />
+                <Image src={course.portait} priority  quality={100} alt={"Portada curso "+course.title} className="w-full" width={300} height={400} />
             </div>
             <div className="mt-4 lg:mt-0 lg:p-4 flex flex-col col-span-3 lg:col-span-1">
                 <h1 className="text-2xl border-b border-slate-900 pb-2">{course.title}</h1>
@@ -78,9 +78,14 @@ const CourseView = ({course, user, viewedClasses, courseLections, isBought}) => 
                 <button onClick={goBack} className="w-full bg-slate-800 text-white py-2 px-4 mt-2">Regresar</button>
                     {!isBought && (
                         <div className="flex flex-row mt-4 items-center justify-between">
-                            <button onClick={() => handleCartAndRedirect(course)} className="bg-slate-800 text-white py-2 px-4 w-fit text-center border border-slate-800">$ {course.price}</button>
+                            {user.id == course.instructor_id && (
+                                <button className="bg-slate-800 text-white py-2 px-4 text-center border border-slate-800 w-full">$ {course.price}</button>
+                            )}
                             {user.id != course.instructor_id &&
-                                <button onClick={() => handleCartAndRedirect(course)} className="border border-slate-800 hover:bg-slate-400 hover:text-slate-900 py-2 px-4 cursor-pointer" title="Agregar al carrito">Agregar al carrito</button>
+                                <div className="w-full flex flex-row justify-between">
+                                    <button onClick={() => handleCartAndRedirect(course)} className="bg-slate-800 text-white py-2 px-4 w-fit text-center border border-slate-800">$ {course.price}</button>
+                                    <button onClick={() => handleCartAndRedirect(course)} className="border border-slate-800 hover:bg-slate-400 hover:text-slate-900 py-2 px-4 cursor-pointer" title="Agregar al carrito">Agregar al carrito</button>
+                                </div>
                             }
                         </div>
                     )}

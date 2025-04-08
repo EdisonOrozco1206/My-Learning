@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import CertificatesTable from "./CertificatesTable"
 import Link from "next/link"
 
@@ -8,6 +8,15 @@ const CertificatesClient = ({certificates, role}) => {
     const [searchModal, setSearchModal] = useState(false)
     const [searchQuery, setSearchQuery] = useState(null)
     const [searchInfo, setSearchInfo] = useState(null)
+    const [isAdmin, setIsAdmin] = useState(null)
+
+    useEffect(() => {
+        if(role == "admin"){
+            setIsAdmin(1)
+        }else if(role == "teacher"){
+            setIsAdmin(0)
+        }
+    }, [])
 
     const toggleSearchModal = () => {
         if(!searchModal){
@@ -67,7 +76,7 @@ const CertificatesClient = ({certificates, role}) => {
                         Regresar
                     </Link>
                 )}
-                <Link href="/admins/certificates/new" className='col-span-4 lg:col-span-3 mt-2 flex items-center justify-center w-full bg-green-500 text-center text-white p-4 hover:bg-green-600'>
+                <Link href={`/admins/certificates/new/${isAdmin}`} className='col-span-4 lg:col-span-3 mt-2 flex items-center justify-center w-full bg-green-500 text-center text-white p-4 hover:bg-green-600'>
                     Habilitar usuario
                 </Link>
                 <button onClick={toggleSearchModal} className='col-span-8 lg:col-span-2 mt-2 flex items-center justify-center w-full bg-slate-800 text-center text-white p-4 hover:bg-slate-900'>
